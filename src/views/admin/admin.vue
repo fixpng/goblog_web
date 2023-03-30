@@ -1,7 +1,9 @@
 <template>
   <div class="gvb_admin">
     <aside>
-
+      <div>
+        <i class="iconfont icon-shezhi"></i>
+      </div>
     </aside>
     <div class="main">
       <header></header>
@@ -22,7 +24,7 @@
   aside {
     width: 240px;
     height: 100vh;
-    background-color: #2b3539;
+    background-color: #49514c;
   }
 
   .main {
