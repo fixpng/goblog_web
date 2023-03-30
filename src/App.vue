@@ -9,5 +9,10 @@
   margin: 0;
   box-sizing: border-box;
 }
-@import "assets/css/iconfont.css"
+
+:root{
+ --active: #8344db;
+  --text: #555;
+}
+
 </style>
