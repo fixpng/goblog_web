@@ -1,7 +1,11 @@
 :root{
-    --bg:#f0eeee;
+    --bg: #f0eeee;
+    --order: #e0e0e0;
+    --slide: #2b3539;
 }
 
 .dark{
-    --bg: #1f1f1f
+    --bg: #1a1a1a;
+    --order: #2c2c2c;
+    --slide: #131313;
 }

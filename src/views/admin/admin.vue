@@ -17,8 +17,9 @@
         <div class="right">
           <div class="icon_actions">
             <i class="fa fa-home"></i>
-            <i v-if="theme" class="fa fa-sun-o" @click="setTheme"></i>
-            <i v-else class="fa fa-moon-o" @click="setTheme"></i>
+<GVBTheme>
+
+</GVBTheme>
             <i class="fa fa-arrows-alt"></i>
           </div>
           <div class="avatar">
@@ -57,6 +58,7 @@
 </template>
 
 <script setup>
+import GVBTheme from "@/components/gvb_theme.vue";
 import {useRouter} from "vue-router"
 import {ref} from "vue";
 
@@ -72,18 +74,6 @@ function menuClick({key}) {
   })
 }
 
-const theme = ref(true) // true代表白天 false代表黑夜
-
-function setTheme(){
-  theme.value = !theme.value
-  if (theme.value){
-    // 白天
-    document.documentElement.classList.remove("dark")
-  }else {
-    // 黑夜
-    document.documentElement.classList.add("dark")
-  }
-}
 
 </script>
 
@@ -95,7 +85,7 @@ function setTheme(){
   aside {
     width: 240px;
     height: 100vh;
-    background-color: #49514c;
+    background-color: var(--slide);
   }
 
   .main {
@@ -103,7 +93,6 @@ function setTheme(){
 
     header {
       height: 60px;
-      background-color: white;
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
@@ -144,15 +133,13 @@ function setTheme(){
 
     .tabs {
       height: 30px;
-      border: 1px solid #f0eeee;
+      border: 1px solid var(--order);
     }
 
     main {
       background-color: var(--bg);
       height: calc(100vh - 90px);
     }
-
   }
 }
-
 </style>

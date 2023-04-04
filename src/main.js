@@ -7,6 +7,7 @@ import 'ant-design-vue/dist/antd.css';
 import './assets/css/iconfont.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './assets/css/theme.css';
+import './assets/css/antdv.css';
 
 const app = createApp(App)
 
