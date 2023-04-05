@@ -1,10 +1,6 @@
 <template>
   <div class="gvb_admin">
-    <aside>
-      <div>
-
-      </div>
-    </aside>
+    <GVBAside></GVBAside>
     <div class="main">
       <header>
         <div class="left">
@@ -17,10 +13,8 @@
         <div class="right">
           <div class="icon_actions">
             <i class="fa fa-home"></i>
-<GVBTheme>
-
-</GVBTheme>
-            <i class="fa fa-arrows-alt"></i>
+            <GVBTheme></GVBTheme>
+            <GVBFullScreen></GVBFullScreen>
           </div>
           <div class="avatar">
             <img src="https://inews.gtimg.com/newsapp_bt/0/9680744080/641" alt="">
@@ -59,8 +53,10 @@
 
 <script setup>
 import GVBTheme from "@/components/gvb_theme.vue";
+import GVBAside from "@/components/admin/gvb_aside.vue";
+import GVBFullScreen from "@/components/gvb_full_screen.vue";
 import {useRouter} from "vue-router"
-import {ref} from "vue";
+// import {ref} from "vue";
 
 const router = useRouter()
 
@@ -74,7 +70,6 @@ function menuClick({key}) {
   })
 }
 
-
 </script>
 
 <style lang="scss">
@@ -82,11 +77,6 @@ function menuClick({key}) {
   width: 100%;
   display: flex;
 
-  aside {
-    width: 240px;
-    height: 100vh;
-    background-color: var(--slide);
-  }
 
   .main {
     width: calc(100% - 240px);
