@@ -16,7 +16,7 @@
             <GVBTheme></GVBTheme>
             <GVBFullScreen></GVBFullScreen>
           </div>
-          <GVBUserInfo></GVBUserInfo>
+          <GVBUserInfo :is-avatar="true"></GVBUserInfo>
         </div>
       </header>
       <div class="tabs"></div>

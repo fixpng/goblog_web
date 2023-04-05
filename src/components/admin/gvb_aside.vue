@@ -7,12 +7,13 @@
       <div class="gvb_aside_title flex">FixPng后台系统</div>
     </div>
     <div class="gvb_aside_body">
-
+      <GVBAsideMenu></GVBAsideMenu>
     </div>
   </aside>
 </template>
 
 <script setup>
+import GVBAsideMenu from "./gvb_aside_menu.vue"
 </script>
 
 <style lang="scss">
@@ -39,4 +40,5 @@
   font-size: 20px;
   color: #d1cfdb;
 }
+
 </style>
