@@ -16,33 +16,7 @@
             <GVBTheme></GVBTheme>
             <GVBFullScreen></GVBFullScreen>
           </div>
-          <div class="avatar">
-            <img src="https://inews.gtimg.com/newsapp_bt/0/9680744080/641" alt="">
-          </div>
-          <div class="drop_menu">
-            <a-dropdown :placement="bottomRight">
-              <a class="ant-dropdown-link" @click.prevent>
-                茜茜bb
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <template #overlay>
-                <a-menu @click="menuClick">
-                  <a-menu-item key="user_center">
-                    <a href="javascript:;">个人中心</a>
-                  </a-menu-item>
-                  <a-menu-item key="my_messages">
-                    <a href="javascript:;">我的消息</a>
-                  </a-menu-item>
-                  <a-menu-item key="article_list">
-                    <a href="javascript:;">文章列表</a>
-                  </a-menu-item>
-                  <a-menu-item key="logout">
-                    <a href="javascript:;">注销退出</a>
-                  </a-menu-item>
-                </a-menu>
-              </template>
-            </a-dropdown>
-          </div>
+          <GVBUserInfo></GVBUserInfo>
         </div>
       </header>
       <div class="tabs"></div>
@@ -54,21 +28,9 @@
 <script setup>
 import GVBTheme from "@/components/gvb_theme.vue";
 import GVBAside from "@/components/admin/gvb_aside.vue";
+import GVBUserInfo from "@/components/gvb_user_info.vue";
 import GVBFullScreen from "@/components/gvb_full_screen.vue";
-import {useRouter} from "vue-router"
-// import {ref} from "vue";
 
-const router = useRouter()
-
-function menuClick({key}) {
-  if (key === "logout") {
-    console.log("logout")
-    return
-  }
-  router.push({
-    name: key
-  })
-}
 
 </script>
 
