@@ -4,7 +4,7 @@
       <img src="https://inews.gtimg.com/newsapp_bt/0/9680744080/641" alt="">
     </div>
     <div class="drop_menu">
-      <a-dropdown :placement="bottomRight">
+      <a-dropdown placement="bottomRight">
         <a class="ant-dropdown-link" @click.prevent>
           倪半仙
           <i class="fa fa-angle-down"></i>

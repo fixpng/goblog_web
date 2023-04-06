@@ -7,7 +7,7 @@
           <a-breadcrumb>
             <a-breadcrumb-item>首页</a-breadcrumb-item>
             <a-breadcrumb-item><a href="#">个人中心</a></a-breadcrumb-item>
-            <a-breadcrumb-item><a href="#">用户列表</a></a-breadcrumb-item>
+            <a-breadcrumb-item>用户列表</a-breadcrumb-item>
           </a-breadcrumb>
         </div>
         <div class="right">
@@ -21,7 +21,9 @@
       </header>
       <div class="tabs"></div>
       <main>
+        <div class="gvb_view">
         <router-view></router-view>
+        </div>
       </main>
     </div>
   </div>
@@ -93,6 +95,9 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
     main {
       background-color: var(--bg);
       height: calc(100vh - 90px);
+      padding: 20px;
+      .gvb_view{
+      }
     }
   }
 }
