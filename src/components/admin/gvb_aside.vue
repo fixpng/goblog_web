@@ -36,10 +36,10 @@ import GVBAsideMenu from "./gvb_aside_menu.vue"
   }
 }
 
-.gvb_aside_title {
+  .gvb_aside_title {
   font-size: 20px;
   color: #d1cfdb;
-  //margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 </style>

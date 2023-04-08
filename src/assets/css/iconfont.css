@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3987869 */
-  src: url('//at.alicdn.com/t/c/font_3987869_3jucbe98kn.woff2?t=1680702054941') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3987869_3jucbe98kn.woff?t=1680702054941') format('woff'),
-       url('//at.alicdn.com/t/c/font_3987869_3jucbe98kn.ttf?t=1680702054941') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3987869_09w577v1i5lm.woff2?t=1680933710527') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3987869_09w577v1i5lm.woff?t=1680933710527') format('woff'),
+       url('//at.alicdn.com/t/c/font_3987869_09w577v1i5lm.ttf?t=1680933710527') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zhuce:before {
+  content: "\e683";
+}
+
+.icon-wenzhang:before {
+  content: "\e610";
+}
+
+.icon-sinandengluyonghu:before {
+  content: "\e635";
+}
+
+.icon-shuyi_qunliao:before {
+  content: "\e661";
+}
+
+.icon-yonghutongji:before {
+  content: "\e620";
 }
 
 .icon-ln_quanping:before {

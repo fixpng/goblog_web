@@ -1388,6 +1388,7 @@ html {
     -webkit-appearance: none
 }
 
+
 .dark ol, .dark ul, .dark dl {
     margin-top: 0;
     margin-bottom: 1em
@@ -62990,7 +62991,7 @@ ul.anticons-list li.copied:after {
 .drawer-left .drawer-handle, .drawer-left.drawer-open .drawer-content-wrapper {
     box-shadow: 2px 0 8px #00000026
 }
-
+/*
 .dark body, .dark div, .dark dl, .dark dt, .dark dd, .dark ul, .dark ol, .dark li, .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark pre, .dark code, .dark form, .dark fieldset, .dark legend, .dark input, .dark textarea, .dark p, .dark blockquote, .dark th, .dark td, .dark hr, .dark button, .dark article, .dark aside, .dark details, .dark figcaption, .dark figure, .dark footer, .dark header, .dark hgroup, .dark menu, .dark nav, .dark section {
     margin: 0;
     padding: 0
@@ -62999,7 +63000,7 @@ ul.anticons-list li.copied:after {
 .dark ul, .dark ol {
     list-style: none
 }
-
+*/
 .dark html.rtl {
     direction: rtl
 }

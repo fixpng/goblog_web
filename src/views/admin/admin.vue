@@ -89,7 +89,9 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
 
     .tabs {
       height: 30px;
-      border: 1px solid var(--order);
+      border-color: var(--order);
+      border-style: solid;
+      border-width: 1px 0 1px 0;
     }
 
     main {

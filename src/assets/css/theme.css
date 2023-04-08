@@ -2,10 +2,14 @@
     --bg: #f0eeee;
     --order: #e0e0e0;
     --slide: #242628;
+    --card_bg: white;
+    --card_boder: #e2e2e2;
 }
 
 .dark{
     --bg: #1a1a1a;
     --order: #2c2c2c;
     --slide: #131313;
+    --card_bg: black;
+    --card_boder: #393939;
 }
