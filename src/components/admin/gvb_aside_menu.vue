@@ -2,7 +2,6 @@
   <a-menu
       v-model:selectedKeys="selectedKeys"
       mode="inline"
-      theme="dark"
       :inline-collapsed="false"
       @click="goto"
   >
@@ -85,5 +84,24 @@ function goto(event) {
 </script>
 
 <style>
+.ant-menu {
+  background-color: transparent;
+  color: white;
+}
+
+.ant-menu-submenu-arrow {
+  color: white;
+}
+
+.ant-menu-sub.ant-menu-inline {
+  background-color: var(--slide_sub_bg);
+}
+
+/*.ant-menu-inline .ant-menu-item{*/
+/*  margin-top: 0;*/
+/*  margin-bottom: 0;*/
+/*}*/
+
+
 
 </style>

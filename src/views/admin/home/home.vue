@@ -66,16 +66,16 @@ const data = reactive({
 .preview_item {
   display: flex;
   background-color: var(--card_bg);
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid var(--card_boder);
   padding: 20px;
 
 
   .icon {
-    width: 60%;
+    width: 50%;
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-left: 30px;
 
 
     i {
@@ -90,6 +90,7 @@ const data = reactive({
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 30px;
       color: var(--text);
 
     .data_sum {

@@ -4,6 +4,7 @@
     --slide: #242628;
     --card_bg: white;
     --card_boder: #e2e2e2;
+    --slide_sub_bg: #393d3f;
 }
 
 .dark{
@@ -12,4 +13,5 @@
     --slide: #131313;
     --card_bg: black;
     --card_boder: #393939;
+    --slide_sub_bg: #2f2f2f2f;
 }
