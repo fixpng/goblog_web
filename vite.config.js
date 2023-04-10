@@ -1,11 +1,14 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
+import {defineConfig, loadEnv} from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
-// 重定向到代理地址
-export default defineConfig({
+export default ({mode})=>{
+  const env = loadEnv(mode,process.cwd())
+  const baseUrl = env.VITE_API
+  console.log(env)
+  return defineConfig({
+  envPrefix:["VITE_"],
   plugins: [vue()],
   resolve: {
     alias: {
@@ -15,8 +18,13 @@ export default defineConfig({
   server:{
     proxy:{
       "/uploads":{
-        target:"http://127.0.0.1:8080"
+        target: baseUrl
       }
     }
   }
 })
+}
+
+// https://vitejs.dev/config/
+// 重定向到代理地址
+

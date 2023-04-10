@@ -49,6 +49,7 @@ const page = reactive({
   limit: 10
 })
 
+console.log("user_list",import.meta.env)
 
 const data = reactive({
   columns: [
