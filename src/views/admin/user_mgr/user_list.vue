@@ -7,12 +7,16 @@
       />
     </div>
     <div class="gvb_actions">
-      <a-button type="primary">Primary Button</a-button>
-      <a-button>Default Button</a-button>
+      <a-button type="primary">添加</a-button>
+      <a-button type="danger" @click="removeBatch" v-if="data.selectedRowKeys.length">批量删除</a-button>
     </div>
     <div class="gvb_tables">
 
-      <a-table :columns="data.columns" :pagination="false" :data-source="data.list">
+      <a-table :columns="data.columns"
+               :row-selection="{ selectedRowKeys: data.selectedRowKeys, onChange: onSelectChange }"
+               :pagination="false"
+               :row-key="id"
+               :data-source="data.list">
 
       </a-table>
 
@@ -33,37 +37,64 @@
 import {reactive} from "vue";
 
 const page = reactive({
-  page:1,
-  limit:10
+  page: 1,
+  limit: 10
 })
 
 
 const data = reactive({
   columns: [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Data',
-      dataIndex: 'data',
-      key: 'data',
-    }
+    {title: 'id',dataIndex: 'id',key: 'id'},
+    {title: '昵称',dataIndex: 'nick_name',key: 'nick_name'},
+    {title: '头像',dataIndex: 'avatar',key: 'avatar'},
+    {title: '邮箱',dataIndex: 'email',key: 'email'},
+    {title: '角色',dataIndex: 'role',key: 'role'},
+    {title: '注册来源',dataIndex: 'sign_status',key: 'sign_status'},
+    {title: 'ip',dataIndex: 'ip',key: 'ip'},
+    {title: '地址',dataIndex: 'addr',key: 'addr'},
+    {title: '注册时间',dataIndex: 'created_at',key: 'created_at'},
   ],
   list: [
     {
-      name: "茜茜",
-      age: 18,
-      data: "2023-04-09 04-09-00"
+      "id": 2,
+      "created_at": "2023-03-18T23:10:24.725+08:00",
+      "nick_name": "李四",
+      "user_name": "lisi",
+      "avatar": "/uploads/avatar/default.jpg",
+      "email": "321",
+      "tel": "87607857",
+      "addr": "内网地址",
+      "token": "",
+      "ip": "127.0.0.1",
+      "role": "普通登陆人",
+      "sign_status": "邮箱"
+    },
+    {
+      "id": 1,
+      "created_at": "2023-03-18T23:09:14.19+08:00",
+      "nick_name": "张三三",
+      "user_name": "zhangsan",
+      "avatar": "/uploads/avatar/default.jpg",
+      "email": "Congee1997@outlook.com",
+      "tel": "18925086371",
+      "addr": "内网地址",
+      "token": "",
+      "ip": "127.0.0.1",
+      "role": "管理员",
+      "sign_status": "邮箱"
     }
-  ]
+  ],
+  selectedRowKeys:[],
 })
+// 选择用户id
+function onSelectChange(selectedKeys){
+  data.selectedRowKeys=selectedKeys
+}
+
+function removeBatch() {
+  console.log(data.selectedKeys)
+}
+
 </script>
 
 <style lang="scss">
@@ -86,8 +117,9 @@ const data = reactive({
   .gvb_tables {
     padding: 10px;
   }
-  .gvb_pages{
-display:flex;
+
+  .gvb_pages {
+    display: flex;
     justify-content: center;
     padding: 10px;
     margin-bottom: 10px;
