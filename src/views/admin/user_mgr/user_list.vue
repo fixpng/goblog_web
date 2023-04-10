@@ -17,7 +17,14 @@
                :pagination="false"
                :row-key="id"
                :data-source="data.list">
-
+        <template #bodyCell="{ column,record }">
+          <template v-if="column.key === 'avatar'">
+            <img class="gvb_table_avatar" :src="record.avatar" alt="">
+          </template>
+          <template v-if="column.key === 'created_at'">
+            <span>{{ getFormatDate(record.created_at) }}</span>
+          </template>
+        </template>
       </a-table>
 
     </div>
@@ -35,6 +42,7 @@
 
 <script setup>
 import {reactive} from "vue";
+import {getFormatDate} from "@/utils/date";
 
 const page = reactive({
   page: 1,
@@ -44,15 +52,15 @@ const page = reactive({
 
 const data = reactive({
   columns: [
-    {title: 'id',dataIndex: 'id',key: 'id'},
-    {title: '昵称',dataIndex: 'nick_name',key: 'nick_name'},
-    {title: '头像',dataIndex: 'avatar',key: 'avatar'},
-    {title: '邮箱',dataIndex: 'email',key: 'email'},
-    {title: '角色',dataIndex: 'role',key: 'role'},
-    {title: '注册来源',dataIndex: 'sign_status',key: 'sign_status'},
-    {title: 'ip',dataIndex: 'ip',key: 'ip'},
-    {title: '地址',dataIndex: 'addr',key: 'addr'},
-    {title: '注册时间',dataIndex: 'created_at',key: 'created_at'},
+    {title: 'id', dataIndex: 'id', key: 'id'},
+    {title: '昵称', dataIndex: 'nick_name', key: 'nick_name'},
+    {title: '头像', dataIndex: 'avatar', key: 'avatar'},
+    {title: '邮箱', dataIndex: 'email', key: 'email'},
+    {title: '角色', dataIndex: 'role', key: 'role'},
+    {title: '注册来源', dataIndex: 'sign_status', key: 'sign_status'},
+    {title: 'ip', dataIndex: 'ip', key: 'ip'},
+    {title: '地址', dataIndex: 'addr', key: 'addr'},
+    {title: '注册时间', dataIndex: 'created_at', key: 'created_at'},
   ],
   list: [
     {
@@ -84,11 +92,12 @@ const data = reactive({
       "sign_status": "邮箱"
     }
   ],
-  selectedRowKeys:[],
+  selectedRowKeys: [],
 })
+
 // 选择用户id
-function onSelectChange(selectedKeys){
-  data.selectedRowKeys=selectedKeys
+function onSelectChange(selectedKeys) {
+  data.selectedRowKeys = selectedKeys
 }
 
 function removeBatch() {
@@ -123,6 +132,12 @@ function removeBatch() {
     justify-content: center;
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  .gvb_table_avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 
 }
