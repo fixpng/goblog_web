@@ -11,7 +11,7 @@
 }
 
 :root{
- --active: #8344db;
+ --active: #4480db;
   --text: #555;
 }
 
