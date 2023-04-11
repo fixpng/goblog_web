@@ -1,8 +1,9 @@
+<!--用户管理-用户列表-->
 <template>
   <div class="gvb_container">
     <div class="gvb_search">
       <a-input-search
-          placeholder="input search text"
+          placeholder="搜索用户昵称"
           style="width: 200px"
       />
     </div>
@@ -13,9 +14,11 @@
     <div class="gvb_tables">
 
       <a-table :columns="data.columns"
-               :row-selection="{ selectedRowKeys: data.selectedRowKeys, onChange: onSelectChange }"
+               :row-selection="{
+                selectedRowKeys: data.selectedRowKeys,
+                onChange: onSelectChange }"
                :pagination="false"
-               :row-key="id"
+               :row-key="data.id"
                :data-source="data.list">
         <template #bodyCell="{ column,record }">
           <template v-if="column.key === 'avatar'">
@@ -23,6 +26,10 @@
           </template>
           <template v-if="column.key === 'created_at'">
             <span>{{ getFormatDate(record.created_at) }}</span>
+          </template>
+          <template v-if="column.key === 'action'">
+            <a-button class="gvb_table_action update" type="primary">编辑</a-button>
+            <a-button class="gvb_table_action delete" type="danger">删除</a-button>
           </template>
         </template>
       </a-table>
@@ -49,7 +56,7 @@ const page = reactive({
   limit: 10
 })
 
-console.log("user_list",import.meta.env)
+console.log("user_list", import.meta.env)
 
 const data = reactive({
   columns: [
@@ -62,10 +69,12 @@ const data = reactive({
     {title: 'ip', dataIndex: 'ip', key: 'ip'},
     {title: '地址', dataIndex: 'addr', key: 'addr'},
     {title: '注册时间', dataIndex: 'created_at', key: 'created_at'},
+    {title: '操作', dataIndex: 'action', key: 'action'},
+
   ],
   list: [
     {
-      "id": 2,
+      "id": 1,
       "created_at": "2023-03-18T23:10:24.725+08:00",
       "nick_name": "李四",
       "user_name": "lisi",
@@ -79,7 +88,7 @@ const data = reactive({
       "sign_status": "邮箱"
     },
     {
-      "id": 1,
+      "id": 2,
       "created_at": "2023-03-18T23:09:14.19+08:00",
       "nick_name": "张三三",
       "user_name": "zhangsan",
@@ -139,6 +148,10 @@ function removeBatch() {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+  }
+
+  .gvb_table_action.update {
+    margin-right: 10px;
   }
 
 }
