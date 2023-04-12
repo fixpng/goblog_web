@@ -5,23 +5,21 @@
         <div class="gvb_login_head">用户登录</div>
         <div class="gvb_login_form">
           <div class="gvb_login_form_item">
-            <a-input placeholder="用户名">
+            <a-input placeholder="用户名" v-model:value="data.user_name">
               <template #prefix><i class="fa fa-user-o"></i></template>
             </a-input>
           </div>
           <div class="gvb_login_form_item">
-            <a-input type="password" placeholder="密码">
+            <a-input type="password" placeholder="密码" v-model:value="data.password">
               <template #prefix><i class="fa fa-key"></i></template>
             </a-input>
           </div>
           <div class="gvb_login_form_item">
-            <a-button type="primary">登录</a-button>
+            <a-button type="primary" @click="emailLogin">登录</a-button>
           </div>
         </div>
         <div class="gvb_login_other">第三方登录</div>
         <div class="gvb_login_other_icons">
-          <img src="src/assets/icon/qq_logo.png" class="gvb_login_other_icon" alt="">
-          <img src="src/assets/icon/qq_logo.png" class="gvb_login_other_icon" alt="">
           <img src="src/assets/icon/qq_logo.png" class="gvb_login_other_icon" alt="">
         </div>
       </div>
@@ -30,6 +28,41 @@
 </template>
 
 <script setup>
+
+import {reactive} from "vue";
+import {message} from "ant-design-vue";
+import {Service} from "@/services/service";
+import {emailLoginApi} from "@/api/user_api";
+import {ParseToken} from "@/utils/jwt";
+
+const data = reactive({
+  user_name: "",
+  password: "",
+})
+
+// 登录方法
+async function emailLogin() {
+  if (data.user_name.trim() === "") {
+    message.error("请输入用户名")
+    return
+  }
+  if (data.password.trim() === "") {
+    message.error("请输入密码")
+    return
+  }
+
+  let res = await emailLoginApi(data)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  // res.data就是jwt
+  message.success(res.msg)
+  let userInfo = ParseToken(res.data)
+  console.log(userInfo)
+  return
+}
+
 </script>
 
 <style lang="scss">
@@ -114,7 +147,7 @@
         cursor: pointer;
         margin-right: 10px;
 
-        &:last-child{
+        &:last-child {
           margin-right: 0;
         }
       }
