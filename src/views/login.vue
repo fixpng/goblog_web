@@ -60,7 +60,9 @@ async function emailLogin() {
   // res.data就是jwt
   message.success(res.msg)
   let userInfo = ParseToken(res.data)
+  userInfo.token = res.data
   store.serUserInfo(userInfo)
+  console.log(store.userInfo)
   return
 }
 
