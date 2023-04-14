@@ -2,6 +2,16 @@
   <router-view/>
 </template>
 
+<script setup>
+
+import {useStore} from "@/stores/store";
+
+// 初始化用户
+const store  = useStore()
+store.loadUserInfo()
+
+</script>
+
 <style lang="scss">
 
 * {

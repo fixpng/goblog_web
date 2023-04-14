@@ -31,15 +31,16 @@
 
 import {reactive} from "vue";
 import {message} from "ant-design-vue";
-import {Service} from "@/services/service";
 import {emailLoginApi} from "@/api/user_api";
 import {ParseToken} from "@/utils/jwt";
+import {useStore} from "@/stores/store";
 
+const store = useStore()
 const data = reactive({
   user_name: "",
   password: "",
 })
-
+console.log(store.userInfo)
 // 登录方法
 async function emailLogin() {
   if (data.user_name.trim() === "") {
@@ -59,7 +60,7 @@ async function emailLogin() {
   // res.data就是jwt
   message.success(res.msg)
   let userInfo = ParseToken(res.data)
-  console.log(userInfo)
+  store.serUserInfo(userInfo)
   return
 }
 
