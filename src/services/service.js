@@ -1,5 +1,5 @@
 import axios from "axios";
-import {userStore} from "@/stores/store"
+import {useStore} from "@/stores/store"
 
 // 响应中间件
 export const Service = axios.create({
@@ -13,7 +13,7 @@ export const Service = axios.create({
 // 请求中间件
 Service.interceptors.request.use(request => {
     // 一般用于添加用户的token
-    const store = userStore()
+    const store = useStore()
     request.headers["token"] = store.userInfo.token
     return request
 })

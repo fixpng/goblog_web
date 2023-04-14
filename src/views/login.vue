@@ -34,13 +34,17 @@ import {message} from "ant-design-vue";
 import {emailLoginApi} from "@/api/user_api";
 import {ParseToken} from "@/utils/jwt";
 import {useStore} from "@/stores/store";
+import {useRoute,useRouter} from "vue-router";
 
+const route = useRoute()
+const router = useRouter()
 const store = useStore()
 const data = reactive({
   user_name: "",
   password: "",
 })
 console.log(store.userInfo)
+
 // 登录方法
 async function emailLogin() {
   if (data.user_name.trim() === "") {
@@ -62,9 +66,23 @@ async function emailLogin() {
   let userInfo = ParseToken(res.data)
   userInfo.token = res.data
   store.serUserInfo(userInfo)
-  console.log(store.userInfo)
+
+  // 登录成功进行页面跳转
+  const redirect_url = route.query.redirect_url
+  // 1.直接跳转至一个指定页面
+  if (redirect_url === undefined) {
+    setTimeout(() => {
+      router.push({name: "home"})
+    }, 1000)
+    return
+  }
+  // 2.跳转到原网页
+  setTimeout(() => {
+    router.push({path: redirect_url})
+  }, 1000)
   return
 }
+
 
 </script>
 
