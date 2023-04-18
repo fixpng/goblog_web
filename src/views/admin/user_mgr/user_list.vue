@@ -1,6 +1,43 @@
 <!--用户管理-用户列表-->
 <template>
   <div class="gvb_container">
+    <a-modal v-model:visible="data.modalVisible" title="添加用户" @ok="handleOk">
+      <a-form
+          :model="formState"
+          name="basic"
+          ref="formRef"
+          :label-col="{ span: 4 }"
+          :wrapper-col="{ span: 18 }"
+          autocomplete="off"
+      >
+        <a-form-item label="用户名" name="user_name" :rules="[{ required: true, message: '请输入用户名' }]">
+          <a-input v-model:value="formState.user_name" placeholder="用户名"/>
+        </a-form-item>
+
+        <a-form-item label="昵称" name="nick_name" :rules="[{ required: true, message: '请输入昵称' }]">
+          <a-input v-model:value="formState.nick_name" placeholder="昵称"/>
+        </a-form-item>
+
+        <a-form-item label="密码" name="password" :rules="[{ required: true, message: '请输入密码' }]">
+          <a-input-password v-model:value="formState.password" placeholder="密码"/>
+        </a-form-item>
+
+        <a-form-item label="确认密码" name="re_password" :rules="[{ required: true, message: '请再次确认密码' }]">
+          <a-input-password v-model:value="formState.re_password" placeholder="确认密码"/>
+        </a-form-item>
+
+        <a-form-item label="权限" name="role" :rules="[{ required: true, message: '请选择权限' }]">
+          <a-select
+              v-model:value="formState.role"
+              style="width: 200px"
+              :options="roleOptions"
+          ></a-select>
+        </a-form-item>
+
+
+      </a-form>
+    </a-modal>
+
     <div class="gvb_search">
       <a-input-search
           placeholder="搜索用户昵称"
@@ -8,7 +45,7 @@
       />
     </div>
     <div class="gvb_actions">
-      <a-button type="primary">添加</a-button>
+      <a-button type="primary" @click="data.modalVisible = true">添加</a-button>
       <a-button type="danger" @click="removeBatch" v-if="data.selectedRowKeys.length">批量删除</a-button>
     </div>
     <div class="gvb_tables">
@@ -40,7 +77,7 @@
           show-less-items
           v-model:current="page.page"
           v-model:page-size="page.limit"
-          :total="85"
+          :total="data.count"
           :show-total="total => `共 ${total} 条`"
       />
     </div>
@@ -48,12 +85,34 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {getFormatDate} from "@/utils/date";
+import {userListApi} from "@/api/user_api"
 
 const page = reactive({
   page: 1,
   limit: 10
+})
+
+const formRef = ref(null)
+
+const roleOptions = [{
+  value: 1,
+  label: "管理员"
+}, {
+  value: 2,
+  label: "用户"
+}, {
+  value: 3,
+  label: "游客"
+}]
+
+const formState = reactive({
+  user_name: "",
+  nick_name: "",
+  password: "",
+  re_password: "",
+  role: undefined
 })
 
 console.log("user_list", import.meta.env)
@@ -70,39 +129,11 @@ const data = reactive({
     {title: '地址', dataIndex: 'addr', key: 'addr'},
     {title: '注册时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
-
   ],
-  list: [
-    {
-      "id": 1,
-      "created_at": "2023-03-18T23:10:24.725+08:00",
-      "nick_name": "李四",
-      "user_name": "lisi",
-      "avatar": "/uploads/avatar/default.jpg",
-      "email": "321",
-      "tel": "87607857",
-      "addr": "内网地址",
-      "token": "",
-      "ip": "127.0.0.1",
-      "role": "普通登陆人",
-      "sign_status": "邮箱"
-    },
-    {
-      "id": 2,
-      "created_at": "2023-03-18T23:09:14.19+08:00",
-      "nick_name": "张三三",
-      "user_name": "zhangsan",
-      "avatar": "/uploads/avatar/default.jpg",
-      "email": "Congee1997@outlook.com",
-      "tel": "18925086371",
-      "addr": "内网地址",
-      "token": "",
-      "ip": "127.0.0.1",
-      "role": "管理员",
-      "sign_status": "邮箱"
-    }
-  ],
+  list: [],
   selectedRowKeys: [],
+  count: 0,
+  modalVisible: false,
 })
 
 // 选择用户id
@@ -113,6 +144,23 @@ function onSelectChange(selectedKeys) {
 function removeBatch() {
   console.log(data.selectedKeys)
 }
+
+// 获取用户列表
+async function getData() {
+  let res = await userListApi({})
+  data.list = res.data.list
+  data.count = res.data.count
+}
+
+async function handleOk() {
+  try {
+    await formRef.value.validate()
+    console.log(formState)
+  } catch (e) {
+  }
+}
+
+getData()
 
 </script>
 
