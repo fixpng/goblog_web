@@ -11,6 +11,6 @@ export function userListApi(params){
 }
 
 // 添加用户
-export function userCreateApi(params){
-    return Service.get("/api/users",{params})
+export function userCreateApi(data){
+    return Service.post("/api/users",data)
 }

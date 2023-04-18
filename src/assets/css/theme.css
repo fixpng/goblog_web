@@ -11,7 +11,7 @@
     --bg: #1a1a1a;
     --order: #2c2c2c;
     --slide: #131313;
-    --card_bg: black;
+    --card_bg: rgb(21, 21, 21);
     --card_boder: #393939;
     --slide_sub_bg: #2f2f2f2f;
 }

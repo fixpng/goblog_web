@@ -10,11 +10,13 @@
           :wrapper-col="{ span: 18 }"
           autocomplete="off"
       >
-        <a-form-item label="用户名" name="user_name" has-feedback :rules="[{ required: true, message: '请输入用户名' ,trigger:'blur'}]">
+        <a-form-item label="用户名" name="user_name" has-feedback
+                     :rules="[{ required: true, message: '请输入用户名' ,trigger:'blur'}]">
           <a-input v-model:value="formState.user_name" placeholder="用户名"/>
         </a-form-item>
 
-        <a-form-item label="昵称" name="nick_name" has-feedback :rules="[{ required: true, message: '请输入昵称' ,trigger:'blur'}]">
+        <a-form-item label="昵称" name="nick_name" has-feedback
+                     :rules="[{ required: true, message: '请输入昵称' ,trigger:'blur'}]">
           <a-input v-model:value="formState.nick_name" placeholder="昵称"/>
         </a-form-item>
 
@@ -51,7 +53,6 @@
       <a-button type="danger" @click="removeBatch" v-if="data.selectedRowKeys.length">批量删除</a-button>
     </div>
     <div class="gvb_tables">
-
       <a-table :columns="data.columns"
                :row-selection="{
                 selectedRowKeys: data.selectedRowKeys,
@@ -79,6 +80,7 @@
           show-less-items
           v-model:current="page.page"
           v-model:page-size="page.limit"
+          @change="pageChange"
           :total="data.count"
           :show-total="total => `共 ${total} 条`"
       />
@@ -89,11 +91,12 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {getFormatDate} from "@/utils/date";
-import {userListApi} from "@/api/user_api"
+import {userListApi, userCreateApi} from "@/api/user_api"
+import {message} from "ant-design-vue";
 
 const page = reactive({
   page: 1,
-  limit: 10
+  limit: 5
 })
 
 const formRef = ref(null)
@@ -121,12 +124,20 @@ let validateRePassword = async (_rule, value) => {
   }
 };
 
-const formState = reactive({
+const _formState = {
   user_name: "",
-  nick_name: "",
   password: "",
   re_password: "",
-  role: undefined
+  nick_name: "",
+  role: 2,
+}
+
+const formState = reactive({
+  user_name: "",
+  password: "",
+  re_password: "",
+  nick_name: "",
+  role: 2,
 })
 
 console.log("user_list", import.meta.env)
@@ -144,11 +155,25 @@ const data = reactive({
     {title: '注册时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
   ],
-  list: [],
+  list: [{
+    "id": 1,
+    "created_at": "2023-03-18T23:10:24.725+08:00",
+    "nick_name": "李四",
+    "user_name": "lisi",
+    "avatar": "/uploads/avatar/default.jpg",
+    "email": "321",
+    "tel": "87607857",
+    "addr": "内网地址",
+    "token": "",
+    "ip": "127.0.0.1",
+    "role": "普通登陆人",
+    "sign_status": "邮箱"
+  }],
   selectedRowKeys: [],
   count: 0,
   modalVisible: false,
 })
+
 
 // 选择用户id
 function onSelectChange(selectedKeys) {
@@ -161,7 +186,7 @@ function removeBatch() {
 
 // 获取用户列表
 async function getData() {
-  let res = await userListApi({})
+  let res = await userListApi(page)
   data.list = res.data.list
   data.count = res.data.count
 }
@@ -171,8 +196,22 @@ async function handleOk() {
     await formRef.value.validate()
     // 发登录请求
     console.log(formState)
+    let res = await userCreateApi(formState)
+    if (res.code) {
+      message.error(res.msg)
+      return
+    }
+    message.success(res.msg)
+    data.modalVisible = false
+    Object.assign(formState, _formState)
+    formRef.value.clearValidate()
+    getData()
   } catch (e) {
   }
+}
+
+function pageChange(page, limit) {
+  getData()
 }
 
 getData()
@@ -181,7 +220,7 @@ getData()
 
 <style lang="scss">
 .gvb_container {
-  background-color: white;
+  background-color: var(--card_bg);
 
   .gvb_search {
     padding: 10px;

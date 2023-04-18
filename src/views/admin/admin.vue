@@ -46,13 +46,16 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
 
   .main {
     width: calc(100% - 240px);
-
+    height: 100vh;
+    overflow-y: auto;
+      background-color: var(--bg);
     header {
       height: 60px;
       padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background-color: var(--card_bg);
 
       .right {
         display: flex;
@@ -92,11 +95,10 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
       border-color: var(--order);
       border-style: solid;
       border-width: 1px 0 1px 0;
+      background-color: var(--card_bg);
     }
 
     main {
-      background-color: var(--bg);
-      height: calc(100vh - 90px);
       padding: 20px;
       .gvb_view{
       }
