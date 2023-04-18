@@ -10,23 +10,25 @@
           :wrapper-col="{ span: 18 }"
           autocomplete="off"
       >
-        <a-form-item label="用户名" name="user_name" :rules="[{ required: true, message: '请输入用户名' }]">
+        <a-form-item label="用户名" name="user_name" has-feedback :rules="[{ required: true, message: '请输入用户名' ,trigger:'blur'}]">
           <a-input v-model:value="formState.user_name" placeholder="用户名"/>
         </a-form-item>
 
-        <a-form-item label="昵称" name="nick_name" :rules="[{ required: true, message: '请输入昵称' }]">
+        <a-form-item label="昵称" name="nick_name" has-feedback :rules="[{ required: true, message: '请输入昵称' ,trigger:'blur'}]">
           <a-input v-model:value="formState.nick_name" placeholder="昵称"/>
         </a-form-item>
 
-        <a-form-item label="密码" name="password" :rules="[{ required: true, message: '请输入密码' }]">
+        <a-form-item label="密码" name="password" has-feedback
+                     :rules="[{ required: true, message: '请输入密码' ,trigger:'blur'}]">
           <a-input-password v-model:value="formState.password" placeholder="密码"/>
         </a-form-item>
 
-        <a-form-item label="确认密码" name="re_password" :rules="[{ required: true, message: '请再次确认密码' }]">
+        <a-form-item label="确认密码" name="re_password" has-feedback
+                     :rules="[{ required: true, message: '请再次确认密码' },{validator:validateRePassword,message: '两次密码不一致',trigger:'blur'}]">
           <a-input-password v-model:value="formState.re_password" placeholder="确认密码"/>
         </a-form-item>
 
-        <a-form-item label="权限" name="role" :rules="[{ required: true, message: '请选择权限' }]">
+        <a-form-item label="权限" name="role" :rules="[{ required: true, message: '请选择权限' ,trigger:'blur'}]">
           <a-select
               v-model:value="formState.role"
               style="width: 200px"
@@ -107,6 +109,18 @@ const roleOptions = [{
   label: "游客"
 }]
 
+// 二次密码校验
+let validateRePassword = async (_rule, value) => {
+  console.log(value)
+  if (value === '') {
+    return Promise.reject('Please input the password again');
+  } else if (value !== formState.password) {
+    return Promise.reject("Two inputs don't match!");
+  } else {
+    return Promise.resolve();
+  }
+};
+
 const formState = reactive({
   user_name: "",
   nick_name: "",
@@ -155,6 +169,7 @@ async function getData() {
 async function handleOk() {
   try {
     await formRef.value.validate()
+    // 发登录请求
     console.log(formState)
   } catch (e) {
   }
