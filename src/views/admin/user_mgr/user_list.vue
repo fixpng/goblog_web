@@ -58,7 +58,7 @@
                 selectedRowKeys: data.selectedRowKeys,
                 onChange: onSelectChange }"
                :pagination="false"
-               :row-key="data.id"
+               row-key="id"
                :data-source="data.list">
         <template #bodyCell="{ column,record }">
           <template v-if="column.key === 'avatar'">
@@ -69,7 +69,14 @@
           </template>
           <template v-if="column.key === 'action'">
             <a-button class="gvb_table_action update" type="primary">编辑</a-button>
-            <a-button class="gvb_table_action delete" type="danger">删除</a-button>
+            <a-popconfirm
+                title="是否确定删除?"
+                ok-text="删除"
+                cancel-text="取消"
+                @confirm="userRemove(record.id)"
+            >
+              <a-button class="gvb_table_action delete" type="danger" >删除</a-button>
+            </a-popconfirm>
           </template>
         </template>
       </a-table>
@@ -91,7 +98,7 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {getFormatDate} from "@/utils/date";
-import {userListApi, userCreateApi} from "@/api/user_api"
+import {userListApi, userCreateApi, userRemoveBatchApi} from "@/api/user_api"
 import {message} from "ant-design-vue";
 
 const page = reactive({
@@ -180,8 +187,14 @@ function onSelectChange(selectedKeys) {
   data.selectedRowKeys = selectedKeys
 }
 
-function removeBatch() {
-  console.log(data.selectedKeys)
+async function removeBatch() {
+  let res = await userRemoveBatchApi(data.selectedRowKeys)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  getData()
 }
 
 // 获取用户列表
@@ -211,6 +224,17 @@ async function handleOk() {
 }
 
 function pageChange(page, limit) {
+  getData()
+}
+
+// 删除用户
+async function userRemove(user_id) {
+  let res = await userRemoveBatchApi([user_id])
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
   getData()
 }
 
