@@ -1,7 +1,7 @@
 <!--用户管理-用户列表-->
 <template>
   <div class="gvb_container">
-    <a-modal v-model:visible="data.modalVisible" title="添加用户" @ok="handleOk">
+    <a-modal v-model:visible="data.modalVisible" :title="添加用户" @ok="handleOk">
       <a-form
           :model="formState"
           name="basic"
@@ -41,6 +41,33 @@
 
       </a-form>
     </a-modal>
+    <a-modal v-model:visible="data.modalUpdateVisible" :title="编辑用户" @ok="update">
+      <a-form
+          :model="formUpdateState"
+          name="basic"
+          ref="formRef"
+          :label-col="{ span: 4 }"
+          :wrapper-col="{ span: 18 }"
+          autocomplete="off"
+      >
+
+        <a-form-item label="昵称" name="nick_name" has-feedback
+                     :rules="[{ required: true, message: '请输入昵称' ,trigger:'blur'}]">
+          <a-input v-model:value="formUpdateState.nick_name" placeholder="昵称"/>
+        </a-form-item>
+
+
+        <a-form-item label="权限" name="role" :rules="[{ required: true, message: '请选择权限' ,trigger:'blur'}]">
+          <a-select
+              v-model:value="formUpdateState.role"
+              style="width: 200px"
+              :options="roleOptions"
+          ></a-select>
+        </a-form-item>
+
+
+      </a-form>
+    </a-modal>
 
     <div class="gvb_search">
       <a-input-search
@@ -49,7 +76,7 @@
       />
     </div>
     <div class="gvb_actions">
-      <a-button type="primary" @click="data.modalVisible = true">添加</a-button>
+      <a-button type="primary" @click="addModal">添加</a-button>
       <a-button type="danger" @click="removeBatch" v-if="data.selectedRowKeys.length">批量删除</a-button>
     </div>
     <div class="gvb_tables">
@@ -68,14 +95,14 @@
             <span>{{ getFormatDate(record.created_at) }}</span>
           </template>
           <template v-if="column.key === 'action'">
-            <a-button class="gvb_table_action update" type="primary">编辑</a-button>
+            <a-button class="gvb_table_action update" @click="updateModel(record)" type="primary">编辑</a-button>
             <a-popconfirm
                 title="是否确定删除?"
                 ok-text="删除"
                 cancel-text="取消"
                 @confirm="userRemove(record.id)"
             >
-              <a-button class="gvb_table_action delete" type="danger" >删除</a-button>
+              <a-button class="gvb_table_action delete" type="danger">删除</a-button>
             </a-popconfirm>
           </template>
         </template>
@@ -98,7 +125,7 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {getFormatDate} from "@/utils/date";
-import {userListApi, userCreateApi, userRemoveBatchApi} from "@/api/user_api"
+import {userListApi, userCreateApi, userRemoveBatchApi, userUpdateUserRoleApi} from "@/api/user_api"
 import {message} from "ant-design-vue";
 
 const page = reactive({
@@ -107,7 +134,6 @@ const page = reactive({
 })
 
 const formRef = ref(null)
-
 const roleOptions = [{
   value: 1,
   label: "管理员"
@@ -118,19 +144,6 @@ const roleOptions = [{
   value: 3,
   label: "游客"
 }]
-
-// 二次密码校验
-let validateRePassword = async (_rule, value) => {
-  console.log(value)
-  if (value === '') {
-    return Promise.reject('Please input the password again');
-  } else if (value !== formState.password) {
-    return Promise.reject("Two inputs don't match!");
-  } else {
-    return Promise.resolve();
-  }
-};
-
 const _formState = {
   user_name: "",
   password: "",
@@ -138,7 +151,6 @@ const _formState = {
   nick_name: "",
   role: 2,
 }
-
 const formState = reactive({
   user_name: "",
   password: "",
@@ -146,9 +158,13 @@ const formState = reactive({
   nick_name: "",
   role: 2,
 })
+const formUpdateState = reactive({
+  nick_name: "",
+  role: undefined,
+  user_id: 0,
+})
 
-console.log("user_list", import.meta.env)
-
+//默认参数
 const data = reactive({
   columns: [
     {title: 'id', dataIndex: 'id', key: 'id'},
@@ -179,12 +195,30 @@ const data = reactive({
   selectedRowKeys: [],
   count: 0,
   modalVisible: false,
+  modalUpdateVisible: false,
 })
 
+console.log("user_list", import.meta.env)
+
+// 二次密码校验
+let validateRePassword = async (_rule, value) => {
+  console.log(value)
+  if (value === '') {
+    return Promise.reject('Please input the password again');
+  } else if (value !== formState.password) {
+    return Promise.reject("Two inputs don't match!");
+  } else {
+    return Promise.resolve();
+  }
+};
 
 // 选择用户id
 function onSelectChange(selectedKeys) {
   data.selectedRowKeys = selectedKeys
+}
+
+function addModal() {
+  data.modalVisible = true
 }
 
 async function removeBatch() {
@@ -237,6 +271,25 @@ async function userRemove(user_id) {
   message.success(res.msg)
   getData()
 }
+
+// 编辑用户
+function updateModel(record) {
+  data.modalUpdateVisible = true
+  formUpdateState.user_id = record.id
+  formUpdateState.nick_name = record.nick_name
+  formUpdateState.role = record.role
+}
+
+async function update() {
+  let res = await userUpdateUserRoleApi(formUpdateState)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  getData()
+}
+
 
 getData()
 

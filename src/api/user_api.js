@@ -19,3 +19,8 @@ export function userCreateApi(data){
 export function userRemoveBatchApi(id_list){
     return Service.delete("/api/users", {data:{id_list}})
 }
+
+// 修改用户权限和昵称
+export function userUpdateUserRoleApi(data){
+    return Service.put("/api/user_role", data)
+}
