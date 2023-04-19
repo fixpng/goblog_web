@@ -107,7 +107,6 @@
           </template>
         </template>
       </a-table>
-
     </div>
     <div class="gvb_pages">
       <a-pagination
@@ -128,12 +127,14 @@ import {getFormatDate} from "@/utils/date";
 import {userListApi, userCreateApi, userRemoveBatchApi, userUpdateUserRoleApi} from "@/api/user_api"
 import {message} from "ant-design-vue";
 
+// 分页
 const page = reactive({
   page: 1,
   limit: 5
 })
-
+// 表单ref
 const formRef = ref(null)
+// 用户权限映射
 const roleOptions = [{
   value: 1,
   label: "管理员"
@@ -177,7 +178,7 @@ const data = reactive({
     {title: '地址', dataIndex: 'addr', key: 'addr'},
     {title: '注册时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
-  ],
+  ], // 列参数
   list: [{
     "id": 1,
     "created_at": "2023-03-18T23:10:24.725+08:00",
@@ -191,16 +192,15 @@ const data = reactive({
     "ip": "127.0.0.1",
     "role": "普通登陆人",
     "sign_status": "邮箱"
-  }],
-  selectedRowKeys: [],
-  count: 0,
-  modalVisible: false,
-  modalUpdateVisible: false,
+  }], // 数据
+  selectedRowKeys: [], // 选择的id列表
+  count: 0, // 总数
+  modalVisible: false, // 创建用户的modal
+  modalUpdateVisible: false,// 编辑用户的modal
 })
+// console.log("user_list", import.meta.env)
 
-console.log("user_list", import.meta.env)
-
-// 二次密码校验
+// 验证密码和确认密码是否一致
 let validateRePassword = async (_rule, value) => {
   console.log(value)
   if (value === '') {
@@ -212,15 +212,18 @@ let validateRePassword = async (_rule, value) => {
   }
 };
 
-// 选择用户id
-function onSelectChange(selectedKeys) {
-  data.selectedRowKeys = selectedKeys
-}
-
+// 添加用户的modal
 function addModal() {
   data.modalVisible = true
 }
 
+// 选择复选框
+function onSelectChange(selectedKeys) {
+  data.selectedRowKeys = selectedKeys
+}
+
+
+// 批量删除
 async function removeBatch() {
   let res = await userRemoveBatchApi(data.selectedRowKeys)
   if (res.code) {
@@ -238,6 +241,7 @@ async function getData() {
   data.count = res.data.count
 }
 
+// 创建用户
 async function handleOk() {
   try {
     await formRef.value.validate()
@@ -257,11 +261,12 @@ async function handleOk() {
   }
 }
 
+// 分页
 function pageChange(page, limit) {
   getData()
 }
 
-// 删除用户
+// 删除单个用户
 async function userRemove(user_id) {
   let res = await userRemoveBatchApi([user_id])
   if (res.code) {
@@ -272,15 +277,18 @@ async function userRemove(user_id) {
   getData()
 }
 
-// 编辑用户
+// 更新用户的模态框函数
 function updateModel(record) {
   data.modalUpdateVisible = true
+  // 将用户的信息赋值
   formUpdateState.user_id = record.id
   formUpdateState.nick_name = record.nick_name
   formUpdateState.role = record.role
 }
 
+// 更新用户
 async function update() {
+  console.log(formUpdateState)
   let res = await userUpdateUserRoleApi(formUpdateState)
   if (res.code) {
     message.error(res.msg)
@@ -289,7 +297,6 @@ async function update() {
   message.success(res.msg)
   getData()
 }
-
 
 getData()
 
