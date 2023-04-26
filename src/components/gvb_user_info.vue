@@ -40,7 +40,6 @@ import {useRoute,useRouter} from "vue-router"
 const router = useRouter()
 const route = useRoute()
 
-console.log(route.path)
 const props = defineProps({
   // 是否显示头像部分
   isAvatar: {
@@ -54,7 +53,7 @@ function menuClick({key}) {
     console.log("logout")
     return
   }
-  console.log(route.path)
+
   if (key === "login"){
     router.push({
       name:key,
