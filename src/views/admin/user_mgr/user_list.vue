@@ -74,12 +74,18 @@
           placeholder="搜索用户昵称"
           style="width: 200px"
       />
+      <div class="gvb_refresh">
+        <a-button title="刷新本页" @click="refresh"><i class="fa fa-refresh"></i></a-button>
+      </div>
     </div>
     <div class="gvb_actions">
       <a-button type="primary" @click="addModal">添加</a-button>
       <a-button type="danger" @click="removeBatch" v-if="data.selectedRowKeys.length">批量删除</a-button>
     </div>
+
+
     <div class="gvb_tables">
+        <a-spin :spinning="data.spinning" tip="加载中..." :delay="300">
       <a-table :columns="data.columns"
                :row-selection="{
                 selectedRowKeys: data.selectedRowKeys,
@@ -107,6 +113,7 @@
           </template>
         </template>
       </a-table>
+           </a-spin>
     </div>
     <div class="gvb_pages">
       <a-pagination
@@ -197,6 +204,7 @@ const data = reactive({
   count: 0, // 总数
   modalVisible: false, // 创建用户的modal
   modalUpdateVisible: false,// 编辑用户的modal
+  spinning:true, // 默认是在加载中
 })
 // console.log("user_list", import.meta.env)
 
@@ -236,9 +244,11 @@ async function removeBatch() {
 
 // 获取用户列表
 async function getData() {
+  data.spinning = true
   let res = await userListApi(page)
   data.list = res.data.list
   data.count = res.data.count
+  data.spinning = false
 }
 
 // 创建用户
@@ -298,8 +308,15 @@ async function update() {
   getData()
 }
 
-getData()
+// 刷新
+function refresh() {
+  message.success("刷新成功")
+  // location.reload()
+  getData()
+}
 
+// 重新加载
+getData()
 </script>
 
 <style lang="scss">
@@ -309,6 +326,17 @@ getData()
   .gvb_search {
     padding: 10px;
     border-bottom: 1px solid var(--bg);
+    position: relative;
+
+    .gvb_refresh {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+
+      i {
+        color: var(--text);
+      }
+    }
   }
 
   .gvb_actions {
