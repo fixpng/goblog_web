@@ -30,6 +30,7 @@
       </slot>
     </div>
 
+
     <div class="gvb_tables">
       <a-spin :spinning="data.spinning" tip="加载中..." :delay="300">
         <a-table :columns="props.columns"
@@ -118,11 +119,13 @@ const roleOptions = [{
 
 //默认参数
 const data = reactive({
+
   list: [], // 数据
   selectedRowKeys: [], // 选择的id列表
   count: 0, // 总数
   spinning: true, // 默认是在加载中
 })
+
 
 // 添加用户的modal
 function addModal() {
