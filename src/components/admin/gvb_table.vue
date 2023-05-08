@@ -3,20 +3,15 @@
   <div class="gvb_container">
     <div class="gvb_search">
       <a-input-search
-          placeholder="搜索用户昵称"
+          :placeholder="props.likeTitle"
           v-model:value="page.key"
           style="width: 200px"
           @search="onSearch"
       />
-      <a-select
-          class="gvb_select"
-          v-model:value="page.role"
-          style="width: 200px"
-          allowClear
-          @change="onSearch"
-          :options="roleOptions"
-          placeholder="选择权限"
-      ></a-select>
+      <slot name="filters">
+
+      </slot>
+
       <div class="gvb_refresh">
         <a-button title="刷新本页" @click="refresh"><i class="fa fa-refresh"></i></a-button>
       </div>
@@ -41,28 +36,27 @@
                  row-key="id"
                  :data-source="data.list">
           <template #bodyCell="{ column,record }">
-            <template v-if="column.key === 'avatar'">
-              <img class="gvb_table_avatar" :src="record.avatar" alt="">
-            </template>
-            <template v-if="column.key === 'created_at'">
-              <span>{{ getFormatDate(record.created_at) }}</span>
-            </template>
-            <template v-if="column.key === 'action'">
-              <slot name="edit" v-bind="{column,record }">
-                <a-button class="gvb_table_action update" @click="updateModel(record)" type="primary">编辑</a-button>
-              </slot>
-              <slot name="delete" v-bind="{column,record }">
-                 <a-popconfirm
-                  title="是否确定删除?"
-                  ok-text="删除"
-                  cancel-text="取消"
-                  @confirm="userRemove(record.id)"
-              >
-                <a-button class="gvb_table_action delete" type="danger">删除</a-button>
-              </a-popconfirm>
-              </slot>
-
-            </template>
+            <slot name="cell" v-bind="{ column,record }">
+              <template v-if="column.key === 'created_at'">
+                <span>{{ getFormatDate(record.created_at) }}</span>
+              </template>
+              <template v-if="column.key === 'action'">
+                <slot name="edit" v-bind="{column,record }">
+                  <a-button type="primary" v-if="isEdit">编辑</a-button>
+                </slot>
+                <slot name="delete" v-bind="{column,record }">
+                  <a-popconfirm
+                      title="是否确定删除?"
+                      ok-text="删除"
+                      cancel-text="取消"
+                      @confirm="userRemove(record.id)"
+                      v-if="props.isDelete"
+                  >
+                    <a-button class="gvb_table_action delete" type="danger">删除</a-button>
+                  </a-popconfirm>
+                </slot>
+              </template>
+            </slot>
           </template>
         </a-table>
       </a-spin>
@@ -89,37 +83,47 @@ import {baseListApi} from "@/api/base_api";
 //删除功能渲染
 const emits = defineEmits(["delete"])
 const props = defineProps({
-  columns:{
-    type:Array
+  columns: {
+    type: Array
   },
-  baseUrl:{
-    type:String
+  baseUrl: {
+    type: String
+  },
+  isAdd: {
+    type: Boolean,
+    default: false
+  },
+  isEdit: {
+    type: Boolean,
+    default: false
+  },
+  isDelete: {
+    type: Boolean,
+    default: true
+  },
+  filters: {
+    type: Array,
+  },
+  pageSize:{
+    type:Number,
+    default:10,
+  },
+  likeTitle:{
+    type:String,
+    default:"模糊搜索"
   }
 })
 
 // 分页
 const page = reactive({
   page: 1,
-  limit: 5,
+  limit: props.pageSize,
   key: "",
-  role: undefined
 })
-// 用户权限映射
-const roleOptions = [{
-  value: 1,
-  label: "管理员"
-}, {
-  value: 2,
-  label: "用户"
-}, {
-  value: 3,
-  label: "游客"
-}]
 
 
 //默认参数
 const data = reactive({
-
   list: [], // 数据
   selectedRowKeys: [], // 选择的id列表
   count: 0, // 总数
@@ -138,9 +142,9 @@ function onSelectChange(selectedKeys) {
 }
 
 // 获取列表页数据
-async function getData() {
+async function getData(params) {
   data.spinning = true
-  let res = await baseListApi(props.baseUrl,page)
+  let res = await baseListApi(props.baseUrl, params)
   data.list = res.data.list
   data.count = res.data.count
   data.spinning = false
@@ -148,12 +152,7 @@ async function getData() {
 
 // 分页
 function pageChange(page, limit) {
-  getData()
-}
-
-// 更新用户的模态框函数
-function updateModel(record) {
-  data.modalUpdateVisible = true
+  getData({page})
 }
 
 // 删除单个用户
@@ -169,18 +168,28 @@ async function removeBatch() {
 // 刷新
 function refresh() {
   message.success("刷新成功")
-  // location.reload()
-  getData()
+  getData(page)
 }
 
 function onSearch() {
   page.key = page.key.trim()
   page.page = 1
-  getData()
+  getData(page)
+}
+
+function ExportList(params) {
+  page.page = 1
+  Object.assign(page, params)
+  getData(page)
 }
 
 // 重新加载
-getData()
+getData(page)
+
+defineExpose({
+  ExportList
+})
+
 </script>
 
 <style lang="scss">

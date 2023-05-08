@@ -37,8 +37,6 @@
               :options="roleOptions"
           ></a-select>
         </a-form-item>
-
-
       </a-form>
     </a-modal>
     <a-modal v-model:visible="data.modalUpdateVisible" title="编辑用户" @ok="update">
@@ -69,13 +67,31 @@
         @delete="userDelete"
         :columns="data.columns"
         base-url="/api/users"
+        like-title="搜索用户昵称"
+        ref="gvbTable"
+        :page-size="5"
     >
       <template #add>
         <a-button type="primary" @click="data.modalVisible =true">添加</a-button>
       </template>
       <template #edit="{record}">
         <a-button class="gvb_table_action update" @click="updateModel(record)" type="primary">编辑</a-button>
-
+      </template>
+      <template #cell="{column,record}">
+        <template v-if="column.key === 'avatar'">
+          <img class="gvb_table_avatar" :src="record.avatar" alt="">
+        </template>
+      </template>
+      <template #filters>
+        <a-select
+            class="gvb_select"
+            v-model:value="filter"
+            style="width: 200px"
+            allowClear
+            @change="onFilter"
+            :options="roleOptions"
+            placeholder="选择权限"
+        ></a-select>
       </template>
     </GVBTable>
   </div>
@@ -89,6 +105,7 @@ import {reactive, ref} from "vue";
 
 // 表单ref
 const formRef = ref(null)
+const gvbTable = ref(null)
 // 用户权限映射
 const roleOptions = [{
   value: 1,
@@ -119,6 +136,13 @@ const formUpdateState = reactive({
   role: undefined,
   user_id: 0,
 })
+
+const filter = ref(undefined)
+function onFilter() {
+  console.log(filter.value)
+  gvbTable.value.ExportList({role:filter.value})
+}
+
 // 验证密码和确认密码是否一致
 let validateRePassword = async (_rule, value) => {
   if (value === '') {
@@ -191,6 +215,7 @@ async function update() {
   message.success(res.msg)
   // getData()
 }
+
 
 </script>
 
