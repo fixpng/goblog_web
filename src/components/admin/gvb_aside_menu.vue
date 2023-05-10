@@ -59,11 +59,24 @@ const data = reactive({
     },
     {
       id: 4,
+      icon: "fa-user-circle-o", // icon的图片，统一用 fa
+      title: "图片管理", // 菜单名称
+      name: "", // 路由名称
+      children: [{
+        id: 5,
+        icon: "fa-users", // icon的图片，统一用 fa
+        title: "图片列表", // 菜单名称
+        name: "image_list", // 路由名称
+      }
+      ]
+    },
+    {
+      id: 6,
       icon: "fa-cog", // icon的图片，统一用 fa
       title: "系统管理", // 菜单名称
       name: "", // 路由名称
       children: [{
-        id: 5,
+        id: 7,
         icon: "fa-cog", // icon的图片，统一用 fa
         title: "系统配置", // 菜单名称
         name: "system_list", // 路由名称

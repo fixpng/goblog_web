@@ -91,11 +91,11 @@ const props = defineProps({
   },
   isAdd: {
     type: Boolean,
-    default: false
+    default: true
   },
   isEdit: {
     type: Boolean,
-    default: false
+    default: true
   },
   isDelete: {
     type: Boolean,
@@ -104,13 +104,13 @@ const props = defineProps({
   filters: {
     type: Array,
   },
-  pageSize:{
-    type:Number,
-    default:10,
+  pageSize: {
+    type: Number,
+    default: 10,
   },
-  likeTitle:{
-    type:String,
-    default:"模糊搜索"
+  likeTitle: {
+    type: String,
+    default: "模糊搜索"
   }
 })
 
@@ -178,6 +178,9 @@ function onSearch() {
 }
 
 function ExportList(params) {
+  if (params === undefined) {
+    params = {}
+  }
   page.page = 1
   Object.assign(page, params)
   getData(page)
@@ -226,6 +229,10 @@ defineExpose({
 
   .gvb_tables {
     padding: 0 10px 10px 10px;
+
+    .ant-btn {
+      margin-right: 10px;
+    }
   }
 
   .gvb_pages {
