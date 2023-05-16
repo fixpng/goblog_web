@@ -116,6 +116,9 @@ const roleOptions = [{
 }, {
   value: 3,
   label: "游客"
+}, {
+  value: 4,
+  label: "黑名单"
 }]
 const _formState = {
   user_name: "",
@@ -138,9 +141,10 @@ const formUpdateState = reactive({
 })
 
 const filter = ref(undefined)
+
 function onFilter() {
   console.log(filter.value)
-  gvbTable.value.ExportList({role:filter.value})
+  gvbTable.value.ExportList({role: filter.value})
 }
 
 // 验证密码和确认密码是否一致
@@ -199,21 +203,21 @@ async function handleOk() {
     data.modalVisible = false
     Object.assign(formState, _formState)
     formRef.value.clearValidate()
-    // getData()
+    gvbTable.value.ExportList() // 更新完成刷新列表页
   } catch (e) {
   }
 }
 
 // 更新用户
 async function update() {
-  // console.log(formUpdateState)
+  console.log(formUpdateState)
   let res = await userUpdateUserRoleApi(formUpdateState)
   if (res.code) {
     message.error(res.msg)
     return
   }
   message.success(res.msg)
-  // getData()
+  gvbTable.value.ExportList() // 更新完成刷新列表页
 }
 
 

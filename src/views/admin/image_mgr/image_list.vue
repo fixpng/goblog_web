@@ -1,17 +1,31 @@
-<!--用户管理-用户列表-->
 <template>
   <div>
+
+    <a-modal title="上传图片" v-model:visible="data.visible" @ok="uploadComplete">
+      <a-upload
+          v-model:file-list="data.fileList"
+          action="/api/images"
+          list-type="picture-card"
+          name="images"
+          multiple
+          :headers="{token: store.userInfo.token}"
+      >
+        <i class="fa fa-cloud-upload"></i>
+        <div style="margin-left: 5px">上传图片</div>
+      </a-upload>
+    </a-modal>
+
     <a-modal title="编辑图片" v-model:visible="data.modalVisible" @ok="update">
       <a-form
           :model="updateState"
           name="basic"
           ref="formRef"
           :label-col="{ span: 4 }"
-          :wrapper-col="{ span: 18 }"
+          :wrapper-col="{ span: 20 }"
           autocomplete="off"
       >
         <a-form-item label="文件名称" name="name" has-feedback
-                     :rules="[{ required: true, message: '请输入文件名' ,trigger:'blur'}]">
+                     :rules="[{ required: true, message: '请输入文件名' ,trigger: 'blur'}]">
           <a-input v-model:value="updateState.name" placeholder="用户名"/>
         </a-form-item>
         <a-form-item label="图片预览">
@@ -21,52 +35,52 @@
     </a-modal>
 
     <GVBTable
-        @delete="Delete"
         :columns="data.columns"
         base-url="/api/images"
         like-title="搜索图片名称"
         ref="gvbTable"
-        :page-size="5"
+        default-delete
     >
       <template #add>
-
+        <a-button type="primary" @click="data.visible = true">添加</a-button>
       </template>
       <template #edit="{record}">
-        <a-button type="primary" @click="updateModel(record)">编辑</a-button>
+        <a-button type="primary" @click="updateModal(record)">编辑</a-button>
       </template>
-      <template #cell="{column,record}">
+      <template #cell="{column, record}">
         <template v-if="column.key === 'path'">
-          <img :src="record.path" alt="" height="60" stype="border-radius: 5px">
+          <img :src="record.path" alt="" height="60" style="border-radius: 5px">
         </template>
       </template>
     </GVBTable>
+
   </div>
 
 </template>
 
 <script setup>
-import GVBTable from "@/components/admin/gvb_table.vue";
+import GVBTable from "@/components/admin/gvb_table.vue"
 import {reactive, ref} from "vue";
 import {imageRenameApi} from "@/api/image_api";
+import {message} from "ant-design-vue";
+import {useStore} from "@/stores/store";
 
+const store = useStore()
 const gvbTable = ref(null)
 const formRef = ref(null)
-
-//默认参数
 const data = reactive({
   columns: [
     {title: 'id', dataIndex: 'id', key: 'id'},
     {title: '图片名称', dataIndex: 'name', key: 'name'},
-    {title: '路径', dataIndex: 'path', key: 'path'},
+    {title: '图片预览', dataIndex: 'path', key: 'path'},
     {title: '类型', dataIndex: 'image_type', key: 'image_type'},
     {title: '上传时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
-  ], // 列参数
-  modalVisible: false
+  ],
+  visible: false,
+  modalVisible: false,
+  fileList: []
 })
-
-function Delete(idList) {
-}
 
 const updateState = reactive({
   id: 0,
@@ -74,27 +88,35 @@ const updateState = reactive({
   path: ""
 })
 
-function updateModel(record) {
+// 打开模态框的操作
+function updateModal(record) {
   data.modalVisible = true
   updateState.id = record.id
   updateState.name = record.name
   updateState.path = record.path
 }
 
+// 修改图片的名称
 async function update() {
   try {
     await formRef.value.validate()
     let res = await imageRenameApi(updateState)
-    if (res.code){
+    if (res.code) {
       message.error(res.msg)
       return
     }
     message.success(res.msg)
-    data.modalVisible =false
-    gvbTable.value.ExportList() // 更新完成刷新列表页
+    data.modalVisible = false
+    gvbTable.value.ExportList()
+
   } catch (e) {
 
   }
 }
 
+function uploadComplete(){
+  data.visible = false
+  gvbTable.value.ExportList()
+  data.fileList = []
+}
 </script>
