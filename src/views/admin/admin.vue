@@ -22,7 +22,11 @@
       <div class="tabs"></div>
       <main>
         <div class="gvb_view">
-        <router-view></router-view>
+          <router-view v-slot="{Component}">
+            <transition name="fade" mode="out-in">
+              <component :is="Component"></component>
+            </transition>
+          </router-view>
         </div>
       </main>
     </div>
@@ -48,7 +52,9 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
     width: calc(100% - 240px);
     height: 100vh;
     overflow-y: auto;
-      background-color: var(--bg);
+    background-color: var(--bg);
+    overflow-x: hidden;
+
     header {
       height: 60px;
       padding: 0 20px;
@@ -100,9 +106,32 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
 
     main {
       padding: 20px;
-      .gvb_view{
+
+      .gvb_view {
       }
     }
   }
+}
+</style>
+
+<!--组件过度-->
+<style>
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.fade-enter-active {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+.fade-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.fade-leave-active, .fade-enter-active {
+  transition: all 0.15s ease-out;
 }
 </style>
