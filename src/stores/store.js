@@ -7,13 +7,19 @@ export const useStore = defineStore('gvb', {
         return {
             theme: true,
             userInfo: {
-                token:"",
+                token: "",
                 nick_name: '',
                 role: 0,
                 user_id: 0,
                 avatar: '',
                 exp: 1681486573.287638
-            }
+            },
+            tabList: [
+                {
+                    title: "首页",
+                    name: "home"
+                }
+            ]
         }
     },
     actions: {
@@ -42,17 +48,17 @@ export const useStore = defineStore('gvb', {
         },
 
         // 修改userInfo
-        serUserInfo(info){
+        serUserInfo(info) {
             this.$patch({
                 userInfo: info
             })
             // 登录信息持久化
-            localStorage.setItem("userInfo",JSON.stringify(info))
+            localStorage.setItem("userInfo", JSON.stringify(info))
         },
         // 初始化
-        loadUserInfo(){
+        loadUserInfo() {
             let info = localStorage.getItem("userInfo")
-            if (info === null){
+            if (info === null) {
                 return
             }
             // JSON解析
@@ -61,12 +67,22 @@ export const useStore = defineStore('gvb', {
             // 判断时间是否失效
             let exp = userInfo.exp
             let nowTime = new Date().getTime()
-            if (((exp * 1000)-nowTime)<0 ){
+            if (((exp * 1000) - nowTime) < 0) {
                 // 过期了
                 message.warn("当前登录已失效")
                 return;
             }
             this.serUserInfo(userInfo)
+        },
+
+
+        addTab(tab) {
+            // 已经存在，就不添加
+            // 不存在的时候进行添加
+            if (this.tabList.findIndex((item) => item.name === tab.name) === -1) {
+                this.tabList.push({name: tab.name,title: tab.title})
+            }
+
         }
     }
 })

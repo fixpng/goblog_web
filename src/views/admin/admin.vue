@@ -19,7 +19,7 @@
           <GVBUserInfo :is-avatar="true"></GVBUserInfo>
         </div>
       </header>
-      <div class="tabs"></div>
+      <GVBTabs></GVBTabs>
       <main>
         <div class="gvb_view">
           <router-view v-slot="{Component}">
@@ -38,6 +38,7 @@ import GVBTheme from "@/components/gvb_theme.vue";
 import GVBAside from "@/components/admin/gvb_aside.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
 import GVBFullScreen from "@/components/gvb_full_screen.vue";
+import GVBTabs from "@/components/admin/gvb_tabs.vue";
 
 
 </script>
@@ -96,13 +97,6 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
       }
     }
 
-    .tabs {
-      height: 30px;
-      border-color: var(--order);
-      border-style: solid;
-      border-width: 1px 0 1px 0;
-      background-color: var(--card_bg);
-    }
 
     main {
       padding: 20px;
