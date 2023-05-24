@@ -33,6 +33,11 @@ const router = createRouter({
                     component: () => import("../views/admin/image_mgr/image_list.vue")
                 },
                 {
+                    path: "advert_list",
+                    name: "advert_list",
+                    component: () => import("../views/admin/advert_mgr/advert_list.vue")
+                },
+                {
                     path: "system_list",
                     name: "system_list",
                     component: () => import("../views/admin/system_mgr/system_list.vue")
