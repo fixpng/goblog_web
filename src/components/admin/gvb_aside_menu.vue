@@ -2,8 +2,11 @@
   <a-menu
       v-model:selectedKeys="selectedKeys"
       mode="inline"
+      multiple
       :inline-collapsed="false"
       @click="goto"
+      @openChange="onOpenChange"
+      :open-keys="data.openKeys"
   >
     <template v-for="menu in data.menuList" :key="menu.name">
       <a-menu-item :key="menu" v-if="menu.children.length === 0">
@@ -32,7 +35,7 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {useRouter} from "vue-router";
+import {useRouter, useRoute, onBeforeRouteUpdate} from "vue-router";
 import {useStore} from "@/stores/store";
 
 const store = useStore()
@@ -84,22 +87,56 @@ const data = reactive({
       }
       ]
     }
-
-  ]
+  ],
+  openKeys: []
 })
-const selectedKeys = ref(["1"])
+const selectedKeys = ref([])
 const router = useRouter()
+const route = useRoute()
 
-function goto({item,key,keyPath}) {
+function goto({item, key, keyPath}) {
   store.addTab({
-    name:key.name,
-    title:key.title
+    name: key.name,
+    title: key.title
   })
   // 加入到 tabs
   router.push({
     name: key.name
   })
 }
+// 菜单栏只展开一个
+function onOpenChange(openKeys) {
+  const latestOpenKey = openKeys.find(key => data.openKeys.indexOf(key) === -1);
+  data.openKeys = latestOpenKey ? [latestOpenKey] : [];
+}
+
+function loadRoute(name) {
+  if (name === undefined) {
+    name = route.name
+  }
+  for (const menu of data.menuList) {
+    if (menu.name === name) {
+      selectedKeys.value = [menu]
+      return
+    }
+    for (const subMenu of menu.children) {
+      if (subMenu.name === name) {
+        selectedKeys.value = [subMenu]
+        // 找到id，展开对应的菜单
+        data.openKeys=[menu.id]
+        return
+      }
+    }
+  }
+}
+
+onBeforeRouteUpdate((to, from, next) => {
+  loadRoute(to.name)
+  next()
+
+})
+loadRoute()
+
 </script>
 
 <style>
@@ -116,11 +153,14 @@ function goto({item,key,keyPath}) {
   background-color: var(--slide_sub_bg);
 }
 
+.ant-menu-submenu-selected{
+  color: inherit;
+}
+
 /*.ant-menu-inline .ant-menu-item{*/
 /*  margin-top: 0;*/
 /*  margin-bottom: 0;*/
 /*}*/
-
 
 
 </style>

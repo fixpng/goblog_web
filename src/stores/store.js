@@ -83,11 +83,11 @@ export const useStore = defineStore('gvb', {
                 this.tabList.push({name: tab.name,title: tab.title})
             }
         },
-        // 保存数据到本地
+        // tabs持久化保存数据到本地
         saveTabs(){
             localStorage.setItem("tabs",JSON.stringify(this.tabList))
         },
-        // 加载本地数据
+        // 加载组件
         loadTabs(){
             let tabs = localStorage.getItem("tabs")
             if (tabs ===null){
@@ -96,11 +96,13 @@ export const useStore = defineStore('gvb', {
             }
             this. tabList = JSON.parse(tabs)
         },
+        // 移除tab
         removeTab(tab){
             let index = this.tabList.findIndex((item) => item.name === tab.name)
             this.tabList.splice(index,1)
             return index
         },
+        // 移除全部tab
         removeTabAll(){
             this.tabList = [{title: "首页",name: "home"}]
         }
