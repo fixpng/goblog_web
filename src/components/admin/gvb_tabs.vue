@@ -6,10 +6,10 @@
          @click="checkTab(item)"
     >
       {{item.title}}
-      <span v-if="item.name !=='home'" class="gvb_tab_remove_icon">×</span>
+      <span @click.stop="removeTab(item)" v-if="item.name !=='home'" class="gvb_tab_remove_icon">×</span>
     </div>
 
-        <div class="gvb_tab_item remove_all">
+        <div class="gvb_tab_item remove_all" @click="removeTabAll">
       全部关闭
     </div>
   </div>
@@ -36,6 +36,35 @@ function checkTab(item) {
   router.push({
     name: item.name
   })
+}
+
+function removeTab(item) {
+  let index = store.removeTab(item)
+  // 如果删除的是当前所在的tab，应该向前走一步
+  if (item.name === route.name){
+    // 当前tab
+    // 前一个路由的路由索引
+    let beforeIndex = index - 1
+    // 找到前一个路由
+    let beforeName = store.tabList[beforeIndex].name
+    router.push({
+      name : beforeName
+    })
+  }
+}
+
+function removeTabAll() {
+  store.removeTabAll()
+  router.push({
+    name:"home"
+  })
+}
+
+store.loadTabs()
+window.onbeforeunload = function (){
+  // 保存
+  store.saveTabs()
+  return undefined
 }
 
 </script>

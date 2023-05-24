@@ -82,7 +82,27 @@ export const useStore = defineStore('gvb', {
             if (this.tabList.findIndex((item) => item.name === tab.name) === -1) {
                 this.tabList.push({name: tab.name,title: tab.title})
             }
-
+        },
+        // 保存数据到本地
+        saveTabs(){
+            localStorage.setItem("tabs",JSON.stringify(this.tabList))
+        },
+        // 加载本地数据
+        loadTabs(){
+            let tabs = localStorage.getItem("tabs")
+            if (tabs ===null){
+                this.tabList = [{title: "首页",name: "home"}]
+                return
+            }
+            this. tabList = JSON.parse(tabs)
+        },
+        removeTab(tab){
+            let index = this.tabList.findIndex((item) => item.name === tab.name)
+            this.tabList.splice(index,1)
+            return index
+        },
+        removeTabAll(){
+            this.tabList = [{title: "首页",name: "home"}]
         }
     }
 })
