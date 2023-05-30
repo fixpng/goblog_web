@@ -86,6 +86,19 @@ const data = reactive({
         name: "advert_list", // 路由名称
       }
       ]
+    },
+    {
+      id: 8,
+      icon: "fa-user-circle-o", // icon的图片，统一用 fa
+      title: "菜单管理", // 菜单名称
+      name: "", // 路由名称
+      children: [{
+        id: 9,
+        icon: "fa-users", // icon的图片，统一用 fa
+        title: "菜单列表", // 菜单名称
+        name: "menu_list", // 路由名称
+      }
+      ]
     }
   ],
   openKeys: []

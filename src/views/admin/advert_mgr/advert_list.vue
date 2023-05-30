@@ -110,6 +110,7 @@ const data = reactive({
 
 async function handleOK() {
   let res
+  console.log(editID)
   if (editID){
     res = await updateAdvertApi(editID.value, state)
   }else {
@@ -128,6 +129,7 @@ async function handleOK() {
 }
 
 function updateModal(record) {
+  console.log("update",state)
   editID.value = record.id
   state.title = record.title
   state.href = record.href
@@ -137,6 +139,7 @@ function updateModal(record) {
 }
 
 function addModal() {
+  console.log("add",state)
   data.visible = true
   editID.value = 0
   Object.assign(state, _state)

@@ -38,6 +38,11 @@ const router = createRouter({
                     component: () => import("../views/admin/advert_mgr/advert_list.vue")
                 },
                 {
+                    path: "menu_list",
+                    name: "menu_list",
+                    component: () => import("../views/admin/menu_mgr/menu_list.vue")
+                },
+                {
                     path: "system_list",
                     name: "system_list",
                     component: () => import("../views/admin/system_mgr/system_list.vue")
