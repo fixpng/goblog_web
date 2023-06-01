@@ -48,6 +48,16 @@ const router = createRouter({
                     component: () => import("../views/admin/log_mgr/log_list.vue")
                 },
                 {
+                    path: "chat_list",
+                    name: "chat_list",
+                    component: () => import("../views/admin/chat_list.vue")
+                },
+                {
+                    path: "message_list",
+                    name: "message_list",
+                    component: () => import("../views/admin/message_list.vue")
+                },
+                {
                     path: "system_list",
                     name: "system_list",
                     component: () => import("../views/admin/system_mgr/system_list.vue")
