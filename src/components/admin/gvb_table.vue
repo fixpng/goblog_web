@@ -34,7 +34,7 @@
           <template #bodyCell="{ column, record }">
             <slot name="cell" v-bind="{ column, record }">
               <template v-if="column.key === 'created_at'">
-                <span>{{ getFormatDate(record.created_at) }}</span>
+                <span>{{ getFormatDateTime(record.created_at) }}</span>
               </template>
               <template v-if="column.key === 'action'">
                 <slot name="edit" v-bind="{column, record}">
@@ -74,7 +74,7 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {getFormatDate} from "@/utils/date";
+import {getFormatDateTime} from "@/utils/date";
 import {message} from "ant-design-vue";
 import {baseDeleteApi, baseListApi} from "@/api/base_api";
 

@@ -1,5 +1,5 @@
 // 当前时间转化为标准格式
-export function getFormatDate(dateStr) {
+export function getFormatDateTime(dateStr) {
     let date = new Date(dateStr);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -14,5 +14,17 @@ export function getFormatDate(dateStr) {
     seconds = (seconds<10)? '0'+ seconds : seconds;
     let currentDate = year + "-" + month + "-" + day
             + " " + hour + ":" + minutes + ":" + seconds;
+    return currentDate;
+}
+
+
+export function getFormatDate(dateStr) {
+    let date = new Date(dateStr);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    month = (month<10)? '0'+ month : month;
+    day = (day<10)? '0'+ day : day;
+    let currentDate = year + "-" + month + "-" + day
     return currentDate;
 }
