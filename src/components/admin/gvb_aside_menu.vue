@@ -113,6 +113,19 @@ const data = reactive({
       name: "tag_list", // 路由名称
       children: []
     }
+    ,
+    {
+      id: 15,
+      icon: "fa-users", // icon的图片，统一用 fa
+      title: "系统管理", // 菜单名称
+      name: "", // 路由名称
+      children: [{
+        id: 16,
+      icon: "fa-users", // icon的图片，统一用 fa
+      title: "网站设置", // 菜单名称
+      name: "system_site", // 路由名称
+      }]
+    }
   ],
   openKeys: []
 })
