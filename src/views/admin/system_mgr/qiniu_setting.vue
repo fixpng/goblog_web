@@ -13,37 +13,41 @@
           :wrapper-col="{ span: 21 }"
           autocomplete="off"
       >
-        <a-form-item label="邮箱域名" name="host" has-feedback
-                     :rules="[{ required: true, message: '请输入邮箱域名' ,trigger: 'blur'}]">
-          <a-input v-model:value="state.host" placeholder="邮箱域名"/>
+        <a-form-item label="access_key" name="access_key" has-feedback
+                     :rules="[{ required: true, message: '请输入access_key' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.access_key" placeholder="access_key"/>
         </a-form-item>
-        <a-form-item label="邮箱端口" name="port" has-feedback
-                     :rules="[{ required: true, message: '请输入邮箱端口' ,trigger: 'blur'}]">
-          <a-input v-model:value="state.port" placeholder="邮箱端口"/>
+        <a-form-item label="secret_key" name="secret_key" has-feedback
+                     :rules="[{ required: true, message: '请输入secret_key' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.secret_key" placeholder="secret_key"/>
         </a-form-item>
-        <a-form-item label="邮箱" name="user" has-feedback
-                     :rules="[{ required: true, message: '请输入邮箱' ,trigger: 'blur'}]">
-          <a-input v-model:value="state.user" placeholder="邮箱"/>
+        <a-form-item label="存储桶" name="bucket" has-feedback
+                     :rules="[{ required: true, message: '请输入存储桶' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.bucket" type="password" placeholder="存储桶"/>
         </a-form-item>
-        <a-form-item label="密码" name="password" has-feedback
-                     :rules="[{ required: true, message: '请输入密码' ,trigger: 'blur'}]">
-          <a-input v-model:value="state.password" type="password" placeholder="密码"/>
+        <a-form-item label="访问链接" name="cdn" has-feedback
+                     :rules="[{ required: true, message: '请输入cdn' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.cdn" placeholder="cdn"/>
         </a-form-item>
-        <a-form-item label="默认名称" name="default_from_email" has-feedback
-                     :rules="[{ required: true, message: '请输入默认名称' ,trigger: 'blur'}]">
-          <a-input v-model:value="state.default_from_email" placeholder="默认名称"/>
+        <a-form-item label="地区" name="zone" has-feedback
+                     :rules="[{ required: true, message: '请输入zone' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.zone" placeholder="zone"/>
         </a-form-item>
-        <a-form-item label="ssl" name="use_ssl" >
-          <a-switch v-model:checked="state.use_ssl" placeholder="ssl"/>
+        <a-form-item label="前缀" name="prefix" has-feedback
+                     :rules="[{ required: true, message: '请输入prefix' ,trigger: 'blur'}]">
+          <a-input v-model:value="state.prefix" placeholder="prefix"/>
         </a-form-item>
-        <a-form-item label="tls" name="user_tls" >
-          <a-switch v-model:checked="state.user_tls" placeholder="tls"/>
+        <a-form-item label="大小限制" name="size" has-feedback
+                     :rules="[{ required: true, message: '请输入size' ,trigger: 'blur'}]">
+          <a-input-number v-model:value="state.size" placeholder="size"/>
+        </a-form-item>
+        <a-form-item label="是否启用" name="enable" >
+          <a-switch v-model:checked="state.enable"/>
         </a-form-item>
       </a-form>
     </div>
     <div class="gb_settings_btn">
       <a-button type="primary" @click="update">修改信息</a-button>
-
     </div>
   </div>
 </template>
@@ -51,23 +55,24 @@
 <script setup>
 import {reactive, ref} from "vue";
 import {message} from "ant-design-vue";
-import {getEmailInfoApi, updateEmailInfoApi} from "@/api/system_api"
+import {getQiniuInfoApi, updateQiniuInfoApi} from "@/api/system_api"
 
 
 const formRef = ref(null)
 
 const state = reactive({
-    host: "smtp.qq.com",
-    port: 465,
-    user: "",
-    password: "",
-    default_from_email: "",
-    use_ssl: false,
-    user_tls: false
+    enable: false,
+    access_key: "",
+    secret_key: "",
+    bucket: "",
+    cdn: "",
+    zone: "z2",
+    prefix: "",
+    size: 5
 })
 
 async function update() {
-  let res = await updateEmailInfoApi(state)
+  let res = await updateQiniuInfoApi(state)
   if (res.code) {
     message.error(res.msg)
     return
@@ -79,7 +84,7 @@ async function update() {
 
 //获取数据接口
 async function getData() {
-  let res = await getEmailInfoApi()
+  let res = await getQiniuInfoApi()
   Object.assign(state, res.data)
 
   try {

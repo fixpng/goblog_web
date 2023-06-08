@@ -16,3 +16,12 @@ export function getEmailInfoApi(){
 export function updateEmailInfoApi(data){
     return Service.put("/api/settings/email",data)
 }
+
+
+export function getQiniuInfoApi(){
+    return Service.get("/api/settings/qiniu")
+}
+
+export function updateQiniuInfoApi(data){
+    return Service.put("/api/settings/qiniu",data)
+}
