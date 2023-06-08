@@ -25,3 +25,19 @@ export function getQiniuInfoApi(){
 export function updateQiniuInfoApi(data){
     return Service.put("/api/settings/qiniu",data)
 }
+
+export function getQQInfoApi(){
+    return Service.get("/api/settings/qq")
+}
+
+export function updateQQInfoApi(data){
+    return Service.put("/api/settings/qq",data)
+}
+
+export function getJwtInfoApi(){
+    return Service.get("/api/settings/jwt")
+}
+
+export function updateJwtInfoApi(data){
+    return Service.put("/api/settings/jwt",data)
+}
