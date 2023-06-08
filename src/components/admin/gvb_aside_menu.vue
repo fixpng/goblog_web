@@ -119,12 +119,20 @@ const data = reactive({
       icon: "fa-users", // icon的图片，统一用 fa
       title: "系统管理", // 菜单名称
       name: "", // 路由名称
-      children: [{
+      children: [
+          {
         id: 16,
       icon: "fa-users", // icon的图片，统一用 fa
       title: "网站设置", // 菜单名称
       name: "system_site", // 路由名称
-      }]
+      },
+          {
+        id: 17,
+      icon: "fa-users", // icon的图片，统一用 fa
+      title: "邮箱设置", // 菜单名称
+      name: "system_email", // 路由名称
+      }
+      ]
     }
   ],
   openKeys: []

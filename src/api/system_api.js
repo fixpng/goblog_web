@@ -7,3 +7,12 @@ export function getSiteInfoApi(){
 export function updateSiteInfoApi(data){
     return Service.put("/api/settings/site",data)
 }
+
+
+export function getEmailInfoApi(){
+    return Service.get("/api/settings/email")
+}
+
+export function updateEmailInfoApi(data){
+    return Service.put("/api/settings/email",data)
+}

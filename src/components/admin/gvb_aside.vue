@@ -4,9 +4,9 @@
       <div class="gvb_aside_logo flex">
         <img src="/src/assets/images/checken_logo.png">
       </div>
-      <a-tag class="gvb_aside_title flex">FIXPNG个人网站后台</a-tag>
+      <div class="gvb_aside_title flex">FIXPNG个人网站后台</div>
     </div>
-    <div class="gvb_aside_body">
+    <div class="gvb_aside_body;margin-bottom: 20px">
       <GVBAsideMenu></GVBAsideMenu>
     </div>
   </aside>
@@ -37,9 +37,9 @@ import GVBAsideMenu from "./gvb_aside_menu.vue"
 }
 
 .gvb_aside_title {
-//  font-size: 20px;
-//  color: var(--card_boder);
-//  margin-bottom: 20px;
+  font-size: 20px;
+  color: var(--card_boder);
+  margin-bottom: 20px;
 }
 
 </style>

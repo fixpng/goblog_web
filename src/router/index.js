@@ -65,12 +65,18 @@ const router = createRouter({
                 {
                     path: "system",
                     name: "system",
+                    component:()=>import("@/views/admin/system_mgr/system_base.vue"),
                     children: [
                         {
                             path: "site",
                             name: "system_site",
                             component: () => import("../views/admin/system_mgr/site_setting.vue")
-                        }
+                        },
+                        {
+                            path: "email",
+                            name: "system_email",
+                            component: () => import("../views/admin/system_mgr/email_setting.vue")
+                        },
                     ]
                 }
             ]
