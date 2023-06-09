@@ -109,43 +109,51 @@ const data = reactive({
     {
       id: 14,
       icon: "fa-users",
-      title: "标签列表",
-      name: "tag_list",
+      title: "文章列表",
+      name: "article_list",
       children: []
     }
     ,
     {
       id: 15,
       icon: "fa-users",
+      title: "标签列表",
+      name: "tag_list",
+      children: []
+    }
+    ,
+    {
+      id: 16,
+      icon: "fa-users",
       title: "系统管理",
       name: "",
       children: [
         {
-          id: 16,
+          id: 17,
           icon: "fa-users",
           title: "网站设置",
           name: "system_site",
         },
         {
-          id: 17,
+          id: 18,
           icon: "fa-users",
           title: "邮箱设置",
           name: "system_email",
         },
         {
-          id: 18,
+          id: 19,
           icon: "fa-users",
           title: "七牛云设置",
           name: "system_qiniu",
         },
         {
-          id: 19,
+          id: 20,
           icon: "fa-users",
           title: "QQ设置",
           name: "system_qq",
         },
         {
-          id: 20,
+          id: 21,
           icon: "fa-users",
           title: "jwt设置",
           name: "system_jwt",
