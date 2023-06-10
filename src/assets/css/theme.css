@@ -1,17 +1,21 @@
 :root{
     --bg: #f0eeee;
+    --card_bg: white;
     --order: #e0e0e0;
     --slide: #242628;
-    --card_bg: white;
     --card_boder: #e2e2e2;
     --slide_sub_bg: #393d3f;
+    --slide_bg:#2e393d;
 }
 
 .dark{
     --bg: #1a1a1a;
     --order: #2c2c2c;
     --slide: #131313;
-    --card_bg: rgb(21, 21, 21);
+    --card_bg: #151515FF;
     --card_boder: #393939;
     --slide_sub_bg: #2f2f2f2f;
+    --slide_bg:#282828;
 }
+
+

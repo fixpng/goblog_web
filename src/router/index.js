@@ -68,6 +68,11 @@ const router = createRouter({
                     component: () => import("../views/admin/article_mgr/article_list.vue")
                 },
                 {
+                    path: "add_article",
+                    name: "add_article",
+                    component: () => import("../views/admin/article_mgr/add_article.vue")
+                },
+                {
                     path: "system",
                     name: "system",
                     component:()=>import("@/views/admin/system_mgr/system_base.vue"),

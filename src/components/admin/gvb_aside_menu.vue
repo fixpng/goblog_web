@@ -115,6 +115,14 @@ const data = reactive({
     }
     ,
     {
+      id: 22,
+      icon: "fa-users",
+      title: "添加文章",
+      name: "add_article",
+      children: []
+    }
+    ,
+    {
       id: 15,
       icon: "fa-users",
       title: "标签列表",

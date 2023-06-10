@@ -38,7 +38,7 @@ import GVBAsideMenu from "./gvb_aside_menu.vue"
 
 .gvb_aside_title {
   font-size: 20px;
-  color: var(--card_boder);
+  color: #d3d3d3;
   margin-bottom: 20px;
 }
 

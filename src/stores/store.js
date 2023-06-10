@@ -14,12 +14,7 @@ export const useStore = defineStore('gvb', {
                 avatar: '',
                 exp: 1681486573.287638
             },
-            tabList: [
-                {
-                    title: "首页",
-                    name: "home"
-                }
-            ]
+            tabList: []
         }
     },
     actions: {
