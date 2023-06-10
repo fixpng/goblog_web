@@ -18,6 +18,9 @@
         <template v-if="column.key === 'index'">
           <span>{{ index + 1 }}</span>
         </template>
+        <template v-if="column.key === 'title'">
+          <span class="gvb_article_title" v-html="record.title"></span>
+        </template>
         <template v-if="column.key === 'banner_url'">
           <img :src="'/'+record.banner_url" alt="" height="60" style="border-radius: 5px">
         </template>
@@ -41,14 +44,29 @@
           </div>
         </template>
       </template>
+
+      <template #filters>
+        <a-select
+            class="gvb_select"
+            v-model:value="tag"
+            style="width: 200px"
+            allowClear
+            @change="onFilter"
+            :options="data.tagOptions"
+            placeholder="筛选文章标签"
+        ></a-select>
+      </template>
     </GVBTable>
   </div>
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {reactive,ref} from "vue";
 import GVBTable from "@/components/admin/gvb_table.vue"
+import {getTagNameListApi} from "@/api/tag_api";
 
+const tag = ref(null)
+const gvbTable = ref(null)
 const data = reactive({
   list: [{
     "abstract": "这是一条a'a'aaaa请求",
@@ -91,7 +109,8 @@ const data = reactive({
     {title: '标签', dataIndex: 'tags', key: 'tags'},
     {title: '发布时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
-  ]
+  ],
+  tagOptions: [],
 })
 
 const colorList = ["red", "blue", "green", "purple", "cyan", "orange", "pink"]
@@ -101,12 +120,23 @@ function getColor(index) {
   return colorList[index]
 }
 
+function onFilter() {
+  gvbTable.value.ExportList({tag:tag.value})
+}
+
+async function getData(){
+ let res = await getTagNameListApi()
+  data.tagOptions = res.data
+}
+
+getData()
+
 </script>
 
 <style lang="scss">
 .gvb_article_data {
   span {
-    i{
+    i {
       margin-right: 3px;
     }
   }
@@ -121,11 +151,17 @@ function getColor(index) {
 }
 
 
-.gvb_article_tags{
+.gvb_article_tags {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   justify-items: self-start;
+}
+
+.gvb_article_title {
+  em {
+    color: #fc7a23;
+  }
 }
 </style>

@@ -15,7 +15,7 @@
           <a-tag :color="levelColor[record.level]">{{ record.level }}</a-tag>
         </template>
       </template>
-            <template #filters>
+      <template #filters>
         <a-select
             class="gvb_select"
             v-model:value="level"
@@ -44,17 +44,17 @@ const levelColor = {
 }
 
 const levelOptions = [
-  {label: "debug",value: 1},
-  {label: "info",value: 2},
-  {label: "warn",value: 3},
-  {label: "error",value: 4}
+  {label: "debug", value: 1},
+  {label: "info", value: 2},
+  {label: "warn", value: 3},
+  {label: "error", value: 4}
 ]
 
 const level = ref(undefined)
 const gvbTable = ref(null)
 
-function onFilter(){
-  gvbTable.value.ExportList({level:level.value})
+function onFilter() {
+  gvbTable.value.ExportList({level: level.value})
 }
 
 
