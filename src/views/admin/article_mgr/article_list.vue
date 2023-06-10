@@ -55,17 +55,28 @@
             :options="data.tagOptions"
             placeholder="筛选文章标签"
         ></a-select>
+        <a-select
+            class="gvb_select"
+            v-model:value="category"
+            style="width: 200px"
+            allowClear
+            @change="onFilter"
+            :options="data.categoryOptions"
+            placeholder="筛选文章分类"
+        ></a-select>
       </template>
     </GVBTable>
   </div>
 </template>
 
 <script setup>
-import {reactive,ref} from "vue";
+import {reactive, ref} from "vue";
+import {getCategoryListApi} from "@/api/article_api";
 import GVBTable from "@/components/admin/gvb_table.vue"
 import {getTagNameListApi} from "@/api/tag_api";
 
 const tag = ref(null)
+const category = ref(null)
 const gvbTable = ref(null)
 const data = reactive({
   list: [{
@@ -111,6 +122,7 @@ const data = reactive({
     {title: '操作', dataIndex: 'action', key: 'action'},
   ],
   tagOptions: [],
+  categoryOptions: [],
 })
 
 const colorList = ["red", "blue", "green", "purple", "cyan", "orange", "pink"]
@@ -121,12 +133,14 @@ function getColor(index) {
 }
 
 function onFilter() {
-  gvbTable.value.ExportList({tag:tag.value})
+  gvbTable.value.ExportList({tag: tag.value,key:category.value})
 }
 
-async function getData(){
- let res = await getTagNameListApi()
+async function getData() {
+  let res = await getTagNameListApi()
   data.tagOptions = res.data
+  let c = await getCategoryListApi()
+  data.categoryOptions = c.data
 }
 
 getData()

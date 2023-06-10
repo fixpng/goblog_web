@@ -213,8 +213,15 @@ function ExportList(params) {
     params = {}
   }
   page.page = 1
-  Object.assign(page, params)
-  getData(page)
+
+  // Object.assign(page,params)
+
+  let newPage = {
+  }
+ // 搜索的时候多项一起选会有bug，待优化
+  Object.assign(newPage, page)
+  Object.assign(newPage, params)
+  getData(newPage)
 }
 
 getData(page)
