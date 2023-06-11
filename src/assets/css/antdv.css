@@ -64282,7 +64282,7 @@ ul.anticons-list li.copied:after {
     border-radius: 2px
 }
 
-.dark code[class*=language-], .dark pre[class*=language-] {
+.dark pre[class*=language-] {
     color: #000;
     font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
     line-height: 1.5;
