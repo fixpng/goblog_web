@@ -61451,7 +61451,7 @@ pre code {
     padding: 16px 32px;
     color: #000000d9;
     font-size: 14px;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     line-height: 2;
     white-space: pre;
     background: white;
@@ -61461,7 +61461,7 @@ pre code {
 
 code[class*=language-], pre[class*=language-] {
     color: #000;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     line-height: 1.5;
     direction: ltr;
     white-space: pre;
@@ -61932,7 +61932,7 @@ ul.anticons-list li .anticon {
 
 ul.anticons-list li .anticon-class {
     display: block;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     white-space: nowrap;
     text-align: center;
     transform: scale(.83)
@@ -64274,7 +64274,7 @@ ul.anticons-list li.copied:after {
     padding: 16px 32px;
     color: #ffffffd9;
     font-size: 14px;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     line-height: 2;
     white-space: pre;
     background: white;
@@ -64284,7 +64284,7 @@ ul.anticons-list li.copied:after {
 
 .dark pre[class*=language-] {
     color: #000;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     line-height: 1.5;
     direction: ltr;
     white-space: pre;
@@ -64755,7 +64755,7 @@ ul.anticons-list li.copied:after {
 
 .dark ul.anticons-list li .anticon-class {
     display: block;
-    font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+    /* font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace; */
     white-space: nowrap;
     text-align: center;
     transform: scale(.83)

@@ -170,7 +170,6 @@ function bannerChange(idList) {
       sort: i
     })
   }
-
 }
 
 getData()
