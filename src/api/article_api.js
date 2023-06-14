@@ -7,3 +7,8 @@ export function getCategoryListApi(){
 export function createArticleApi(data){
     return Service.post("/api/articles",data)
 }
+
+export function updateArticleApi(id,data){
+    data.id=id
+    return Service.put("/api/articles",data)
+}

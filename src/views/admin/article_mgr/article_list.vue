@@ -1,5 +1,11 @@
 <template>
   <div>
+    <GVBArticleModal
+        v-if="data.editVisible"
+        v-model:visible="data.editVisible"
+        :state="data.state"
+        @ok="editArticleOK">
+    </GVBArticleModal>
     <GVBTable
         :columns="data.columns"
         base-url="/api/articles"
@@ -12,7 +18,7 @@
         <a-button type="primary" @click="addArticle">添加</a-button>
       </template>
       <template #edit="{record}">
-        <a-button type="primary">编辑</a-button>
+        <a-button type="primary" @click="showEditArticleModal(record)">编辑</a-button>
       </template>
       <template #cell="{column, record,index}">
         <template v-if="column.key === 'index'">
@@ -71,11 +77,13 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {getCategoryListApi} from "@/api/article_api";
+import {getCategoryListApi,updateArticleApi} from "@/api/article_api";
 import GVBTable from "@/components/admin/gvb_table.vue"
 import {getTagNameListApi} from "@/api/tag_api";
 import {useRouter} from "vue-router";
 import {useStore} from "@/stores/store";
+import {message} from "ant-design-vue";
+import GVBArticleModal from "@/components/admin/gvb_article_modal.vue";
 
 const store = useStore()
 const router = useRouter()
@@ -127,7 +135,30 @@ const data = reactive({
   ],
   tagOptions: [],
   categoryOptions: [],
+  editVisible: false,
+  state: {
+    title: "",
+    abstract: "",
+    banner_id: null,
+    category: "",
+    link: "",
+    source: "",
+    tags: [],
+  },
+  editID:"",
 })
+
+function showEditArticleModal(record) {
+  data.state.title = record.title
+  data.state.abstract = record.abstract
+  data.state.banner_id = record.banner_id
+  data.state.category = record.category
+  data.state.link = record.link
+  data.state.source = record.source
+  data.state.tags = record.tags
+  data.editID = record.id
+  data.editVisible = true
+}
 
 const colorList = ["red", "blue", "green", "purple", "cyan", "orange", "pink"]
 
@@ -136,13 +167,24 @@ function getColor(index) {
   return colorList[index]
 }
 
+async function editArticleOK(state) {
+  let res  = await updateArticleApi(data.editID,state)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  data.editVisible = false
+  gvbTable.value.ExportList()
+}
+
 function addArticle() {
   router.push({
     name: "add_article"
   })
   store.addTab({
-    "name":"add_article",
-    "title":"添加文章"
+    "name": "add_article",
+    "title": "添加文章"
   })
 }
 
@@ -188,6 +230,9 @@ getData()
 }
 
 .gvb_article_title {
+  max-width: 16rem;
+  display: inline-block;
+
   em {
     color: #fc7a23;
   }
