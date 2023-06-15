@@ -73,6 +73,11 @@ const router = createRouter({
                     component: () => import("../views/admin/article_mgr/add_article.vue")
                 },
                 {
+                    path: "edit_article/:id",
+                    name: "edit_article",
+                    component: () => import("../views/admin/article_mgr/edit_article.vue")
+                },
+                {
                     path: "system",
                     name: "system",
                     component:()=>import("@/views/admin/system_mgr/system_base.vue"),

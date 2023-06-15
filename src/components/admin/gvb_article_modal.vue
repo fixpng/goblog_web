@@ -86,6 +86,18 @@ const props = defineProps({
       source: "",
       tags: [],
     }
+  },
+  isEdit: {
+    type: Boolean,
+    default: false
+  },
+  initDataState: {
+    type: Object,
+    default: {
+      tagOption: [],
+      categoryOptions: [],
+      imageOptions: [],
+    }
   }
 })
 const data = reactive({
@@ -105,18 +117,26 @@ function getLabel(label) {
 }
 
 async function getData() {
-  let t1 = await getTagNameListApi()
-  initData.tagList = t1.data
-  let t2 = await getCategoryListApi()
-  initData.categoryList = t2.data
-  let t3 = await imageNameListApi()
-  const list = t3.data
-  initData.bannerList = list
-  //随机选一张图做封面，向下取整
-  const banner = list[Math.floor(Math.random() * list.length)]
-  data.banner_id = banner.id
-
-  Object.assign(data,props.state)
+  if (!props.isEdit) {
+    // 添加文章
+    let t1 = await getTagNameListApi()
+    initData.tagList = t1.data
+    let t2 = await getCategoryListApi()
+    initData.categoryList = t2.data
+    let t3 = await imageNameListApi()
+    const list = t3.data
+    initData.bannerList = list
+    // 随机选一张图做封面，向下取整
+    const banner = list[Math.floor(Math.random() * list.length)]
+    data.banner_id = banner.id
+  }
+  if (props.isEdit) {
+    // 编辑文章
+    initData.tagList = props.initDataState.tagOption
+    initData.categoryList = props.initDataState.categoryOptions
+    initData.bannerList = props.initDataState.imageOptions
+    Object.assign(data, props.state)
+  }
 }
 
 getData()

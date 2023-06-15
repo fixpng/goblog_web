@@ -4,6 +4,8 @@
         v-if="data.editVisible"
         v-model:visible="data.editVisible"
         :state="data.state"
+        :init-data-state="initData"
+        is-edit
         @ok="editArticleOK">
     </GVBArticleModal>
     <GVBTable
@@ -19,6 +21,7 @@
       </template>
       <template #edit="{record}">
         <a-button type="primary" @click="showEditArticleModal(record)">编辑</a-button>
+        <a-button type="primary" @click="showEditArticleContentModal(record)">正文编辑</a-button>
       </template>
       <template #cell="{column, record,index}">
         <template v-if="column.key === 'index'">
@@ -32,13 +35,10 @@
         </template>
         <template v-if="column.key === 'data'">
           <div class="gvb_article_data">
-            <span><i class="fa fa-eye"></i>{{ record.look_count }}</span>
-            <a-divider type="vertical"/>
-            <span><i class="fa fa-thumbs-o-up"></i>{{ record.digg_count }}</span>
-            <a-divider type="vertical"/>
-            <span><i class="fa fa-comment-o"></i>{{ record.comment_count }}</span>
-            <a-divider type="vertical"/>
-            <span><i class="fa fa-star-o"></i>{{ record.collects_count }}</span>
+            <a-tag class="fa fa-eye">{{ record.look_count }}</a-tag>
+            <a-tag class="fa fa-thumbs-o-up">{{ record.digg_count }}</a-tag>
+            <a-tag class="fa fa-comment-o">{{ record.comment_count }}</a-tag>
+            <a-tag class="fa fa-star-o">{{ record.collects_count }}</a-tag>
           </div>
         </template>
         <template v-if="column.key ==='abstract'">
@@ -58,7 +58,7 @@
             style="width: 200px"
             allowClear
             @change="onFilter"
-            :options="data.tagOptions"
+            :options="initData.tagOptions"
             placeholder="筛选文章标签"
         ></a-select>
         <a-select
@@ -67,7 +67,7 @@
             style="width: 200px"
             allowClear
             @change="onFilter"
-            :options="data.categoryOptions"
+            :options="initData.categoryOptions"
             placeholder="筛选文章分类"
         ></a-select>
       </template>
@@ -77,7 +77,8 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {getCategoryListApi,updateArticleApi} from "@/api/article_api";
+import {getCategoryListApi, updateArticleApi} from "@/api/article_api";
+import {imageNameListApi} from "@/api/image_api";
 import GVBTable from "@/components/admin/gvb_table.vue"
 import {getTagNameListApi} from "@/api/tag_api";
 import {useRouter} from "vue-router";
@@ -90,6 +91,11 @@ const router = useRouter()
 const tag = ref(null)
 const category = ref(null)
 const gvbTable = ref(null)
+const initData = reactive({
+  tagOptions: [],
+  categoryOptions: [],
+  imageOptions: [],
+})
 const data = reactive({
   list: [{
     "abstract": "这是一条a'a'aaaa请求",
@@ -133,8 +139,11 @@ const data = reactive({
     {title: '发布时间', dataIndex: 'created_at', key: 'created_at'},
     {title: '操作', dataIndex: 'action', key: 'action'},
   ],
+
   tagOptions: [],
   categoryOptions: [],
+  imageOptions: [],
+
   editVisible: false,
   state: {
     title: "",
@@ -145,7 +154,7 @@ const data = reactive({
     source: "",
     tags: [],
   },
-  editID:"",
+  editID: "",
 })
 
 function showEditArticleModal(record) {
@@ -160,6 +169,19 @@ function showEditArticleModal(record) {
   data.editVisible = true
 }
 
+function showEditArticleContentModal(record){
+router.push({
+  name:"edit_article",
+  params:{
+    id:record.id
+  }
+})
+  store.addTab({
+    "name":"edit_article",
+    "title":"编辑文章"
+  })
+}
+
 const colorList = ["red", "blue", "green", "purple", "cyan", "orange", "pink"]
 
 // 标签颜色函数
@@ -168,7 +190,7 @@ function getColor(index) {
 }
 
 async function editArticleOK(state) {
-  let res  = await updateArticleApi(data.editID,state)
+  let res = await updateArticleApi(data.editID, state)
   if (res.code) {
     message.error(res.msg)
     return
@@ -193,10 +215,12 @@ function onFilter() {
 }
 
 async function getData() {
-  let res = await getTagNameListApi()
-  data.tagOptions = res.data
-  let c = await getCategoryListApi()
-  data.categoryOptions = c.data
+  let t1 = await getTagNameListApi()
+  initData.tagOptions = t1.data
+  let t2 = await getCategoryListApi()
+  initData.categoryOptions = t2.data
+  let t3 = await imageNameListApi()
+  initData.imageOptions = t3.data
 }
 
 getData()
@@ -205,17 +229,15 @@ getData()
 
 <style lang="scss">
 .gvb_article_data {
-  span {
-    i {
-      margin-right: 3px;
-    }
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 0fr);
 }
 
 .gvb_article_abstract {
-  max-width: 12rem;
+  font-size: 10px;
+  max-width: 13rem;
   overflow-x: hidden;
-  display: inline-block;
+  //display: inline-block;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -224,13 +246,14 @@ getData()
 .gvb_article_tags {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 5px;
+  //grid-column-gap: 5px;
   grid-row-gap: 5px;
   justify-items: self-start;
 }
 
 .gvb_article_title {
-  max-width: 16rem;
+  font-size: 13px;
+  max-width: 14rem;
   display: inline-block;
 
   em {

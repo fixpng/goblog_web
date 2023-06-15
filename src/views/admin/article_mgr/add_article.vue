@@ -3,27 +3,24 @@
     <GVBArticleModal v-model:visible="visible" @ok="okHandler">
 
     </GVBArticleModal>
-    <MdEditor ref="editorRef" v-model="data.content" :theme="theme" @onUploadImg="onUploadImg" @on-save="onSave"/>
+  <GVBEditor v-model:content="data.content" @onSave="onSave"></GVBEditor>
   </div>
 </template>
 
 <script setup>
-import {reactive, ref, watch, onUnmounted, onMounted} from 'vue';
+import {reactive, ref,  onUnmounted} from 'vue';
 import {useStore} from "@/stores/store";
 import {useRouter} from "vue-router";
-import {MdEditor} from 'md-editor-v3';
-import {uploadImageApi} from "@/api/image_api";
 import 'md-editor-v3/lib/style.css';
 import {createArticleApi} from "@/api/article_api";
 import {message} from "ant-design-vue";
 import GVBArticleModal from "@/components/admin/gvb_article_modal.vue";
+import GVBEditor from "@/components/admin/gvb_editor.vue";
 
 
 const router = useRouter()
 const store = useStore()
-const theme = ref("dark")
 const visible = ref(false)
-const editorRef = ref(null)
 
 async function okHandler(state) {
   Object.assign(data, state)
@@ -46,9 +43,7 @@ async function okHandler(state) {
   return
 }
 
-onMounted(() => {
-  editorRef.value?.focus()
-})
+
 
 const _data = reactive({
   content: "",
@@ -72,19 +67,7 @@ const data = reactive({
   tags: [],
 })
 
-watch(() => store.theme, (themeVal) => {
-  theme.value = themeVal ? "" : "dark"
-}, {immediate: true}) // 初始化就执行回调
 
-const onUploadImg = async (files, callback) => {
-  const res = await Promise.all(
-      files.map((file) => {
-        return uploadImageApi(file)
-      })
-  );
-
-  callback(res.map((item) => item.data));
-};
 
 function ctrlSave(e) {
   if (e.ctrlKey && e.code == "KeyS") {
