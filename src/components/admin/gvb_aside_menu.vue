@@ -49,6 +49,20 @@ const data = reactive({
       children: []
     },
     {
+      id: 23,
+      icon: "fa-home",
+      title: "个人中心",
+      name: "user_center",
+      children: [
+        {
+          id: 24,
+          icon: "fa-home",
+          title: "我的信息",
+          name: "user_info",
+        }
+      ]
+    },
+    {
       id: 3,
       icon: "fa-users",
       title: "用户列表",

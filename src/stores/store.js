@@ -75,7 +75,7 @@ export const useStore = defineStore('gvb', {
             // 已经存在，就不添加
             // 不存在的时候进行添加
             if (this.tabList.findIndex((item) => item.name === tab.name) === -1) {
-                this.tabList.push({name: tab.name,title: tab.title})
+                this.tabList.push({name: tab.name,title: tab.title,params:tab.params,query:tab.query})
             }
         },
         // tabs持久化保存数据到本地

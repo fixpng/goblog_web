@@ -12,3 +12,8 @@ export function updateArticleApi(id,data){
     data.id=id
     return Service.put("/api/articles",data)
 }
+
+
+export function getArticleContentApi(id){
+    return Service.get("/api/articles/content/"+id)
+}

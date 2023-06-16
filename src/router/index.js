@@ -23,6 +23,19 @@ const router = createRouter({
                     component: () => import("../views/admin/home/home.vue")
                 },
                 {
+                    path: "user_center",
+                    name: "user_center",
+                    redirect: "/admin/user_center/user_info",
+                    component:()=>import("../views/admin/user_center/user_info.vue"),
+                    children: [
+                        {
+                            path: "user_info",
+                            name: "user_info",
+                            component: () => import("../views/admin/user_center/user_info.vue")
+                        }
+                    ]
+                },
+                {
                     path: "user_list",
                     name: "user_list",
                     component: () => import("../views/admin/user_mgr/user_list.vue")
@@ -80,7 +93,7 @@ const router = createRouter({
                 {
                     path: "system",
                     name: "system",
-                    component:()=>import("@/views/admin/system_mgr/system_base.vue"),
+                    component: () => import("@/views/admin/system_mgr/system_base.vue"),
                     children: [
                         {
                             path: "site",

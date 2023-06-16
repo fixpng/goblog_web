@@ -169,16 +169,25 @@ function showEditArticleModal(record) {
   data.editVisible = true
 }
 
-function showEditArticleContentModal(record){
-router.push({
-  name:"edit_article",
-  params:{
-    id:record.id
-  }
-})
+function showEditArticleContentModal(record) {
+  router.push({
+    name: "edit_article",
+    params: {
+      id: record.id
+    },
+    query:{
+      title:record.title
+    }
+  })
   store.addTab({
-    "name":"edit_article",
-    "title":"编辑文章"
+    "name": "edit_article",
+    "title": "编辑文章",
+    params: {
+      id: record.id
+    },
+    query:{
+      title:record.title
+    }
   })
 }
 

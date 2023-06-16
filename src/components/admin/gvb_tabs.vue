@@ -34,7 +34,9 @@ function isActive(item) {
 // 切换路由
 function checkTab(item) {
   router.push({
-    name: item.name
+    name: item.name,
+    params:item.params,
+    query:item.query,
   })
 }
 // 移除tab
