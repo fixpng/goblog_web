@@ -12,7 +12,13 @@ export function updateUserInfoApi(data){
 export function sendEmailCodeApi(email){
     return Service.post("/api/user_bind_email",{email})
 }
+
 // 绑定邮箱
 export function bindEmailCodeApi(data){
     return Service.post("/api/user_bind_email",data)
+}
+
+// 修改密码
+export  function updatePasswordApi(data){
+ return Service.put("/api/tags/user_password",data)
 }

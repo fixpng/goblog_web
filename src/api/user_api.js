@@ -5,6 +5,11 @@ export  function emailLoginApi(data){
     return  Service.post("/api/email_login",data)
 }
 
+// 用户注销退出,token失效
+export  function logoutApi(){
+ return Service.post("/api/logout")
+}
+
 // 用户列表
 export function userListApi(params){
     return Service.get("/api/users",{params})
