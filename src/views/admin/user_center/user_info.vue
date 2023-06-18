@@ -1,5 +1,49 @@
 <template>
   <div class="gvb_user_info_bg">
+    <a-modal title="绑定邮箱" v-model:visible="bindEmailVisible">
+      <div>
+        <a-steps :current="step">
+          <a-step v-for="item in steps" :key="item.title" :title="item.title">
+
+          </a-step>
+        </a-steps>
+        <a-form :model="formState"
+                name="basic"
+                ref="formRef"
+                style="margin-top: 30px"
+                :label-col="{ span: 4 }"
+                :wrapper-col="{ span: 18 }"
+                autocomplete="off">
+          <template v-if="step===0">
+            <a-form-item label="邮箱地址" name="email" has-feedback
+                     :rules="[{ required: true, message: '请输入邮箱' },{validator:validateEmail,message: '邮箱格式错误',trigger:'blur'}]">
+              <a-input v-model:value="formState.email" placeholder="请输入邮箱"></a-input>
+            </a-form-item>
+          </template>
+          <template v-if="step === 1">
+            <a-form-item label="密码">
+              <a-input v-model:value="formState.password" placeholder="请输入密码"></a-input>
+            </a-form-item>
+        <a-form-item label="确认密码" name="re_password" has-feedback
+                     :rules="[{ required: true, message: '请再次确认密码' },{validator:validateRePassword,message: '两次密码不一致',trigger:'blur'}]">
+          <a-input-password v-model:value="formState.re_password" placeholder="确认密码"/>
+        </a-form-item>
+            <a-form-item label="验证码">
+              <a-input v-model:value="formState.code" placeholder="请输入验证码"></a-input>
+            </a-form-item>
+          </template>
+        </a-form>
+      </div>
+      <template #footer>
+        <a-button @click="bindEmailCache">取消</a-button>
+        <a-button type="primary" v-if="step ===1" @click="step--">上一步</a-button>
+        <a-button type="primary" v-if="step ===0" @click="sendEmailCode">下一步</a-button>
+        <a-button type="primary" v-if="step ===1" @click="bindEmail">完成</a-button>
+      </template>
+
+    </a-modal>
+
+
     <div class="gvb_user_info_view">
       <div class="user_head">
         个人信息
@@ -89,7 +133,7 @@
         操作
       </div>
       <div class="body actions">
-        <a-button type="primary">绑定邮箱</a-button>
+        <a-button type="primary" @click="bindEmailVisible=true">绑定邮箱</a-button>
         <a-button type="primary">修改密码</a-button>
         <a-button type="danger">注销退出</a-button>
       </div>
@@ -101,8 +145,8 @@
 
 <script setup>
 
-import {reactive} from "vue";
-import {getUserInfoApi, updateUserInfoApi} from "@/api/user_center_api";
+import {reactive, ref} from "vue";
+import {getUserInfoApi, updateUserInfoApi,sendEmailCodeApi,bindEmailCodeApi} from "@/api/user_center_api";
 import {message} from "ant-design-vue";
 
 const userInfo = reactive({
@@ -123,6 +167,42 @@ const state = reactive({
   sign: "",
 })
 
+const formState = reactive({
+  email: "",
+  password: "",
+  code: ""
+})
+
+const steps = [
+  {
+    title: "请输入邮箱"
+  }, {
+    title: "请输入验证码"
+  }
+]
+const step = ref(0)
+
+const bindEmailVisible = ref(false)
+const updatePasswordVisible = ref(false)
+const formRef = ref(null)
+
+function bindEmailCache(){
+  step.value =0
+  bindEmailVisible.value=0
+  formState.email=""
+  formState.password=""
+  formState.code=""
+}
+
+
+
+// 验证密码和确认密码是否一致
+let validateEmail = async (_rule, value) => {
+   if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)){
+    return Promise.resolve();
+  }
+    return Promise.reject();
+};
 
 async function getData() {
   let res = await getUserInfoApi()
@@ -151,6 +231,32 @@ async function updateUserInfo(column) {
   message.success(res.msg)
   return
 }
+
+async function sendEmailCode(){
+  try {
+    await formRef.value.validate()
+  }catch (e) {
+    return
+  }
+ let res = await sendEmailCodeApi(formState.email)
+    if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  step.value ++
+}
+async function bindEmail(){
+ let res = await bindEmailCodeApi(formState)
+    if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  step.value = 0
+  bindEmailVisible =false
+}
+
 
 </script>
 
