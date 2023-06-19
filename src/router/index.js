@@ -36,6 +36,11 @@ const router = createRouter({
                             path: "user_article_list",
                             name: "user_article_list",
                             component: () => import("../views/admin/user_center/user_create_article_list.vue")
+                        },
+                        {
+                            path: "user_collects",
+                            name: "user_collects",
+                            component: () => import("../views/admin/user_center/user_collects.vue")
                         }
                     ]
                 },

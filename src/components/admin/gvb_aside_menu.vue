@@ -65,6 +65,12 @@ const data = reactive({
           icon: "fa-home",
           title: "我的发布",
           name: "user_article_list",
+        },
+        {
+          id: 26,
+          icon: "fa-home",
+          title: "我的收藏",
+          name: "user_collects",
         }
       ]
     },
