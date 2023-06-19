@@ -26,12 +26,16 @@ const router = createRouter({
                     path: "user_center",
                     name: "user_center",
                     redirect: "/admin/user_center/user_info",
-                    component:()=>import("../views/admin/user_center/user_info.vue"),
                     children: [
                         {
                             path: "user_info",
                             name: "user_info",
                             component: () => import("../views/admin/user_center/user_info.vue")
+                        },
+                        {
+                            path: "user_article_list",
+                            name: "user_article_list",
+                            component: () => import("../views/admin/user_center/user_create_article_list.vue")
                         }
                     ]
                 },

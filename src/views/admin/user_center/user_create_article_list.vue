@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GVBArticleList></GVBArticleList>
+    <GVBArticleList base-url="/api/articles?is_user=true"></GVBArticleList>
   </div>
 </template>
 
