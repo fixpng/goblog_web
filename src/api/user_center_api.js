@@ -25,5 +25,10 @@ export  function updatePasswordApi(data){
 
 // 登陆人与用户的聊天记录
 export function getMessageRecordApi(user_id){
-    return Service.post("/api/messages_record",{user_id})
+    return Service.post("/api/messages_record", {user_id})
+}
+
+// 发送消息
+export function messageApi(data){
+    return Service.post("/api/messages", data)
 }
