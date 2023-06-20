@@ -41,6 +41,11 @@ const router = createRouter({
                             path: "user_collects",
                             name: "user_collects",
                             component: () => import("../views/admin/user_center/user_collects.vue")
+                        },
+                        {
+                            path: "user_messages",
+                            name: "user_messages",
+                            component: () => import("../views/admin/user_center/user_messages.vue")
                         }
                     ]
                 },

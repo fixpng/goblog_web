@@ -9,6 +9,7 @@
         :is-add="false"
         :is-edit="false"
         :is-delete="false"
+        :is-select="false"
         default-delete
     >
       <template #cell="{column, record}">

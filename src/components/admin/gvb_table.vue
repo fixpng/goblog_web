@@ -18,16 +18,16 @@
         <a-button type="primary" v-if="isAdd" @click="addModal">添加</a-button>
       </slot>
       <slot name="batchRemove">
-        <a-button type="danger" @click="removeBatch" v-if="isDelete && data.selectedRowKeys.length">批量删除</a-button>
+        <a-button  type="primary" danger @click="removeBatch" v-if="isDelete && data.selectedRowKeys.length">批量删除</a-button>
       </slot>
     </div>
     <div class="gvb_tables">
       <a-spin :spinning="data.spinning" tip="加载中..." :delay="300">
         <a-table
             :columns="props.columns"
-            :row-selection="{
+            :row-selection="props.isSelect ?{
             selectedRowKeys: data.selectedRowKeys,
-            onChange: onSelectChange }"
+            onChange: onSelectChange }:undefined"
             :pagination="false"
             row-key="id"
             :data-source="data.list">
@@ -48,7 +48,7 @@
                       @confirm="userRemove(record.id)"
                       v-if="props.isDelete"
                   >
-                    <a-button class="gvb_table_action delete" type="danger">删除</a-button>
+                    <a-button class="gvb_table_action delete" type="primary" danger>删除</a-button>
                   </a-popconfirm>
                 </slot>
               </template>
@@ -98,6 +98,10 @@ const props = defineProps({
     default: true
   },
   isDelete: {
+    type: Boolean,
+    default: true
+  },
+  isSelect:{
     type: Boolean,
     default: true
   },
@@ -171,9 +175,16 @@ async function getData(params) {
   }
   data.spinning = true
   let res = await baseListApi(props.baseUrl, params)
+  data.spinning = false
+
+  // 如果后端没做分页
+  if (res.data.list === undefined){
+    data.list = res.data
+    data.count = res.data.length
+    return
+  }
   data.list = res.data.list
   data.count = res.data.count
-  data.spinning = false
 }
 
 // 分页
