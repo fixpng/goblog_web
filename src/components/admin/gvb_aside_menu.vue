@@ -171,33 +171,9 @@ const data = reactive({
         {
           id: 17,
           icon: "fa-users",
-          title: "网站设置",
-          name: "system_site",
+          title: "项目配置",
+          name: "system",
         },
-        {
-          id: 18,
-          icon: "fa-users",
-          title: "邮箱设置",
-          name: "system_email",
-        },
-        {
-          id: 19,
-          icon: "fa-users",
-          title: "七牛云设置",
-          name: "system_qiniu",
-        },
-        {
-          id: 20,
-          icon: "fa-users",
-          title: "QQ设置",
-          name: "system_qq",
-        },
-        {
-          id: 21,
-          icon: "fa-users",
-          title: "jwt设置",
-          name: "system_jwt",
-        }
       ]
     }
   ],
