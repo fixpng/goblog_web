@@ -75,31 +75,34 @@ export const useStore = defineStore('gvb', {
             // 已经存在，就不添加
             // 不存在的时候进行添加
             if (this.tabList.findIndex((item) => item.name === tab.name) === -1) {
-                this.tabList.push({name: tab.name,title: tab.title,params:tab.params,query:tab.query})
+                this.tabList.push({name: tab.name, title: tab.title, params: tab.params, query: tab.query})
             }
         },
         // tabs持久化保存数据到本地
-        saveTabs(){
-            localStorage.setItem("tabs",JSON.stringify(this.tabList))
+        saveTabs() {
+            localStorage.setItem("tabs", JSON.stringify(this.tabList))
         },
         // 加载组件
-        loadTabs(){
+        loadTabs() {
             let tabs = localStorage.getItem("tabs")
-            if (tabs ===null){
-                this.tabList = [{title: "首页",name: "home"}]
+            if (tabs === null) {
+                this.tabList = [{title: "首页", name: "home"}]
                 return
             }
-            this. tabList = JSON.parse(tabs)
+            this.tabList = JSON.parse(tabs)
         },
         // 移除tab
-        removeTab(tab){
+        removeTab(tab) {
             let index = this.tabList.findIndex((item) => item.name === tab.name)
-            this.tabList.splice(index,1)
+            this.tabList.splice(index, 1)
             return index
         },
+        removeIndexTab(index) {
+            this.tabList.splice(index, 1)
+        },
         // 移除全部tab
-        removeTabAll(){
-            this.tabList = [{title: "首页",name: "home"}]
+        removeTabAll() {
+            this.tabList = [{title: "首页", name: "home"}]
         }
     }
 })

@@ -83,6 +83,7 @@ window.onbeforeunload = function (){
   justify-content: left;
   align-items: center;
   position: relative;
+  overflow-x: auto;
 
   .gvb_tab_item {
     background-color: var(--card_bg);

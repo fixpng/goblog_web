@@ -161,16 +161,14 @@ async function applyMessage() {
   overflow-y: auto;
   padding: 20px;
 
-  // 滚动条样式
+  // 滚动条样式优化
   &::-webkit-scrollbar {
     width: 8px
   }
-
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: #b6b1b2;
+    background-color: var(--slider_bg);
   }
-
   &::-webkit-scrollbar-button {
     background-color: transparent;
   }
@@ -196,7 +194,7 @@ async function applyMessage() {
           margin-top: 5px;
 
           .txt-message {
-            background-color: #d2d2d2;
+            background-color: var(--card_boder);
             padding: 10px;
             position: relative;
             width: fit-content;
@@ -213,7 +211,7 @@ async function applyMessage() {
             top: 6px;
             border-width: 10px 20px;
             border-style: solid;
-            border-color: transparent #d2d2d2 transparent transparent;
+            border-color: transparent var(--card_boder) transparent transparent;
           }
 
 
@@ -234,7 +232,7 @@ async function applyMessage() {
             top: 6px;
             border-width: 10px 20px;
             border-style: solid;
-            border-color: transparent transparent transparent #d2d2d2;
+            border-color: transparent transparent transparent var(--card_boder);
           }
         }
       }
