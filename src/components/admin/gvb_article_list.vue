@@ -94,7 +94,7 @@ const gvbTable = ref(null)
 const props = defineProps({
   baseUrl:{
     type:String,
-    default:"/api/article",
+    default:"/api/articles",
   }
 })
 const initData = reactive({

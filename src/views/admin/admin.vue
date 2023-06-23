@@ -4,11 +4,7 @@
     <div class="main">
       <header>
         <div class="left">
-          <a-breadcrumb>
-            <a-breadcrumb-item>首页</a-breadcrumb-item>
-            <a-breadcrumb-item><a href="#">个人中心</a></a-breadcrumb-item>
-            <a-breadcrumb-item>用户列表</a-breadcrumb-item>
-          </a-breadcrumb>
+          <GVBBreadCrumb></GVBBreadCrumb>
         </div>
         <div class="right">
           <div class="icon_actions">
@@ -39,7 +35,12 @@ import GVBAside from "@/components/admin/gvb_aside.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
 import GVBFullScreen from "@/components/gvb_full_screen.vue";
 import GVBTabs from "@/components/admin/gvb_tabs.vue";
+import GVBBreadCrumb from "@/components/admin/gvb_bread_crumb.vue"
+import {useStore} from "@/stores/store";
 
+const store = useStore()
+// 加载路由
+store.loadTabs()
 
 </script>
 

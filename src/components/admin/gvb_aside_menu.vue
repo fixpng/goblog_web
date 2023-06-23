@@ -17,7 +17,7 @@
           <i :class="'fa '+menu.icon"></i>
         </template>
         <template #title>{{ menu.title }}</template>
-        <a-menu-item v-for="sub_menu in menu.children" @click="goto(sub_menu)" :key="sub_menu.name">
+        <a-menu-item v-for="sub_menu in menu.children" @click="goto(sub_menu,menu)" :key="sub_menu.name">
           <template #icon>
             <i :class="'fa '+sub_menu.icon"></i>
           </template>
@@ -185,23 +185,15 @@ const selectedKeys = ref([])
 const router = useRouter()
 const route = useRoute()
 
-function goto(item) {
-  // 判断是否要删除第二个
-  // 总长度
-  let allLen = document.querySelector(".gvb_tabs").offsetWidth
-  // 使用的长度
-  let useLen = 0
-  let gvbItems = document.querySelectorAll(".gvb_tab_item")
-  for (const gvbItem of gvbItems) {
-    useLen += gvbItem.offsetWidth + 10
-  }
-  if (allLen - useLen < 130) {
-    store.removeIndexTab(1)
+function goto(item,parentItem) {
+  if (parentItem !== undefined){
+    store.setCrumb([parentItem.title,item.title])
   }
 
   store.addTab({
     name: item.name,
-    title: item.title
+    title: item.title,
+    parentTitle:parentItem?.title // 一级菜单的名称，如果未undefined，那么这个tab就是一级菜单
   })
   // 加入到 tabs
   router.push({

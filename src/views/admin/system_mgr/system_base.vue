@@ -1,11 +1,11 @@
 <template>
   <div class="gvb_settings_bg">
     <div class="gvb_sub_menu">
-      <a :class="{active: active==='system_site'}" href="javascript:void (0)" @click="goto('system_site', '网站设置')">网站设置</a>
-      <a :class="{active: active==='system_email'}" href="javascript:void (0)" @click="goto('system_email', '邮箱设置')">邮箱设置</a>
-      <a :class="{active: active==='system_qiniu'}" href="javascript:void (0)" @click="goto('system_qiniu', '七牛云设置')">七牛云设置</a>
-      <a :class="{active: active==='system_qq'}" href="javascript:void (0)" @click="goto('system_qq', 'qq设置')">qq设置</a>
-      <a :class="{active: active==='system_jwt'}" href="javascript:void (0)" @click="goto('system_jwt', 'jwt设置')">jwt设置</a>
+      <a :class="{active: active==='system_site'}" href="javascript:void (0)" @click="goto('system_site', '网站配置')">网站配置</a>
+      <a :class="{active: active==='system_email'}" href="javascript:void (0)" @click="goto('system_email', '邮箱配置')">邮箱配置</a>
+      <a :class="{active: active==='system_qiniu'}" href="javascript:void (0)" @click="goto('system_qiniu', '七牛云配置')">七牛云配置</a>
+      <a :class="{active: active==='system_qq'}" href="javascript:void (0)" @click="goto('system_qq', 'qq配置')">qq配置</a>
+      <a :class="{active: active==='system_jwt'}" href="javascript:void (0)" @click="goto('system_jwt', 'jwt配置')">jwt配置</a>
     </div>
     <router-view v-slot="{Component}">
       <transition name="fade" mode="out-in">

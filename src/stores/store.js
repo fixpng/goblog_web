@@ -14,7 +14,8 @@ export const useStore = defineStore('gvb', {
                 avatar: '',
                 exp: 1681486573.287638
             },
-            tabList: []
+            tabList: [],
+            bread_crumb_list: []
         }
     },
     actions: {
@@ -72,10 +73,22 @@ export const useStore = defineStore('gvb', {
 
 
         addTab(tab) {
+            // 判断是否要删除第二个
+            // 总长度
+            let allLen = document.querySelector(".gvb_tabs").offsetWidth
+            // 使用的长度
+            let useLen = 0
+            let gvbItems = document.querySelectorAll(".gvb_tab_item")
+            for (const gvbItem of gvbItems) {
+                useLen += gvbItem.offsetWidth + 10
+            }
+            if (allLen - useLen < 130) {
+                this.removeIndexTab(1)
+            }
             // 已经存在，就不添加
             // 不存在的时候进行添加
             if (this.tabList.findIndex((item) => item.name === tab.name) === -1) {
-                this.tabList.push({name: tab.name, title: tab.title, params: tab.params, query: tab.query})
+                this.tabList.push({name: tab.name, title: tab.title, params: tab.params, query: tab.query,parentTitle:tab.parentTitle})
             }
         },
         // tabs持久化保存数据到本地
@@ -103,6 +116,10 @@ export const useStore = defineStore('gvb', {
         // 移除全部tab
         removeTabAll() {
             this.tabList = [{title: "首页", name: "home"}]
+        },
+
+        setCrumb(list) {
+            this.bread_crumb_list = list
         }
     }
 })
