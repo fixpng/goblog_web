@@ -19,6 +19,9 @@ const store = useStore()
 
 function loadData(){
   let name =route.name
+  if (name === 'home'){
+    return
+  }
     for (const tab of store.tabList) {
    if (name === tab.name){
      store.setCrumb([tab.parentTitle,tab.title])
