@@ -95,6 +95,11 @@ const router = createRouter({
                     component: () => import("../views/admin/article_mgr/article_list.vue")
                 },
                 {
+                    path: "comment_list",
+                    name: "comment_list",
+                    component: () => import("../views/admin/article_mgr/comment_list.vue")
+                },
+                {
                     path: "add_article",
                     name: "add_article",
                     component: () => import("../views/admin/article_mgr/add_article.vue")
