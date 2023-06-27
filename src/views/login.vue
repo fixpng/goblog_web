@@ -112,17 +112,18 @@ async function qqLogin() {
   store.serUserInfo(userInfo)
 
   // 登录成功进行页面跳转
-  const redirect_url = route.query.redirect_url
-  // 1.直接跳转至一个指定页面
-  if (redirect_url === undefined) {
-    setTimeout(() => {
+  // 0.本地缓存的页面redirect_url
+  let redirect_url = localStorage.getItem("redirect_url")
+  // 1.为空则跳到home
+  if (redirect_url === null){
+        setTimeout(() => {
       router.push({name: "home"})
     }, 200)
-    return
   }
-  // 2.跳转到原网页
+  // 2.不为空则跳转到原网页，并清空本地缓存
   setTimeout(() => {
     router.push({path: redirect_url})
+    localStorage.removeItem("redirect_url")
   }, 200)
 
 }
