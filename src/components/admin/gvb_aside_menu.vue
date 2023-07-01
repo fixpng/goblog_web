@@ -181,19 +181,63 @@ const data = reactive({
   ],
   openKeys: []
 })
+
+// 判断用户权限为普通用户（暂不开启）
+/*
+if (store.userInfo.role === 2) {
+  data.menuList = [
+    {
+      id: 1,
+      icon: "fa-home",
+      title: "首页",
+      name: "home",
+      children: []
+    },
+    {
+      id: 2,
+      icon: "fa-user-circle-o",
+      title: "个人中心",
+      name: "user_center",
+      children: [
+        {
+          id: 21,
+          icon: "fa-vcard",
+          title: "我的信息",
+          name: "user_info",
+          children: []
+        },
+        {
+          id: 23,
+          icon: "fa-heart",
+          title: "我的收藏",
+          name: "user_collects",
+          children: []
+        },
+        {
+          id: 24,
+          icon: "fa-desktop",
+          title: "我的消息",
+          name: "user_messages",
+          children: []
+        }
+      ]
+    },
+  ]
+}
+*/
 const selectedKeys = ref([])
 const router = useRouter()
 const route = useRoute()
 
-function goto(item,parentItem) {
-  if (parentItem !== undefined){
-    store.setCrumb([parentItem.title,item.title])
+function goto(item, parentItem) {
+  if (parentItem !== undefined) {
+    store.setCrumb([parentItem.title, item.title])
   }
 
   store.addTab({
     name: item.name,
     title: item.title,
-    parentTitle:parentItem?.title // 一级菜单的名称，如果未undefined，那么这个tab就是一级菜单
+    parentTitle: parentItem?.title // 一级菜单的名称，如果未undefined，那么这个tab就是一级菜单
   })
   // 加入到 tabs
   router.push({

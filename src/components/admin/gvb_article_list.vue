@@ -17,7 +17,7 @@
         default-delete
     >
       <template #add>
-        <a-button type="primary" @click="addArticle">添加</a-button>
+        <a-button type="primary" v-if="store.userInfo.role !== 2" @click="addArticle">添加</a-button>
       </template>
       <template #edit="{record}">
         <a-button type="primary" @click="showEditArticleModal(record)">编辑</a-button>

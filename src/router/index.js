@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import {useStore} from "@/stores/store";
+import {message} from "ant-design-vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -158,7 +159,7 @@ router.beforeEach((to,from,next)=>{
     const store = useStore()
     // 也可以请求后端权限api
     if (to.meta.is_login && store.userInfo.role === 0){
-        messsge.warn("请登录后访问")
+        message.warn("请登录后访问")
         router.push({name:"login"})
         return
     }

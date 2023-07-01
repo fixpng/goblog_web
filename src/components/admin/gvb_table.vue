@@ -15,7 +15,7 @@
     </div>
     <div class="gvb_actions">
       <slot name="add">
-        <a-button type="primary" v-if="isAdd" @click="addModal">添加</a-button>
+<!--        <a-button type="primary" v-if="isAdd" @click="addModal">添加</a-button>-->
       </slot>
       <slot name="batchRemove">
         <a-button  type="primary" danger @click="removeBatch" v-if="isDelete && isBatchDelete && data.selectedRowKeys.length">批量删除</a-button>

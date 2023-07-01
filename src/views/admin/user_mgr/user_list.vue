@@ -64,7 +64,7 @@
       </a-form>
     </a-modal>
     <GVBTable
-        @delete="userDelete"
+        @delete="removeBatch"
         :columns="data.columns"
         base-url="/api/users"
         like-title="搜索用户昵称"
@@ -76,6 +76,9 @@
       </template>
       <template #edit="{record}">
         <a-button class="gvb_table_action update" @click="updateModel(record)" type="primary">编辑</a-button>
+      </template>
+      <template #delete="{record}">
+        <a-button class="gvb_table_action update" @click="userRemove(record)" type="danger">删除</a-button>
       </template>
       <template #cell="{column,record}">
         <template v-if="column.key === 'avatar'">
@@ -99,7 +102,7 @@
 
 <script setup>
 import GVBTable from "@/components/admin/gvb_table.vue";
-import {userCreateApi, userUpdateUserRoleApi} from "@/api/user_api";
+import {userCreateApi, userUpdateUserRoleApi,userRemoveBatchApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
 import {reactive, ref} from "vue";
 
@@ -143,7 +146,7 @@ const formUpdateState = reactive({
 const filter = ref(undefined)
 
 function onFilter() {
-  console.log(filter.value)
+  // console.log(filter.value)
   gvbTable.value.ExportList({role: filter.value})
 }
 
@@ -176,8 +179,28 @@ const data = reactive({
   ], // 列参数
 })
 
-function userDelete(userIdList) {
-  console.log(userIdList)
+// 批量删除
+async function removeBatch(userIdList) {
+    let res = await userRemoveBatchApi(userIdList)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  gvbTable.value.ExportList() // 更新完成刷新列表页
+}
+
+
+// 删除单个用户
+async function userRemove(record) {
+  let user_id = record.id
+  let res = await userRemoveBatchApi([user_id])
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  gvbTable.value.ExportList() // 更新完成刷新列表页
 }
 
 function updateModel(record) {
@@ -192,6 +215,10 @@ function updateModel(record) {
 async function handleOk() {
   try {
     await formRef.value.validate()
+  } catch (e) {
+    return
+  }
+
     // 发登录请求
     // console.log(formState)
     let res = await userCreateApi(formState)
@@ -203,9 +230,7 @@ async function handleOk() {
     data.modalVisible = false
     Object.assign(formState, _formState)
     formRef.value.clearValidate()
-    gvbTable.value.ExportList() // 更新完成刷新列表页
-  } catch (e) {
-  }
+  gvbTable.value.ExportList() // 更新完成刷新列表页
 }
 
 // 更新用户
