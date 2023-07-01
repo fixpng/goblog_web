@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import ArticleCalendarInner from "@/components/article_calendar_inner.vue";
+import ArticleCalendarInner from "@/components/charts/article_calendar_inner.vue";
 import {reactive, ref, watch} from "vue";
 import {useStore} from "@/stores/store";
 import {getArticleCalendarApi} from "@/api/article_api";
@@ -31,7 +31,3 @@ async function getData(){
 getData()
 
 </script>
-
-<style >
-
-</style>
