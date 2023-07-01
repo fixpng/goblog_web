@@ -2,6 +2,15 @@
 import {defineStore} from 'pinia'
 import {message} from "ant-design-vue";
 
+const data ={
+                token: "",
+                nick_name: '',
+                role: 0, // 1-管理员 2-普通用户 3-游客
+                user_id: 0,
+                avatar: '',
+                exp: 1681486573.287638
+            }
+
 export const useStore = defineStore('gvb', {
     state: () => {
         return {
@@ -9,7 +18,7 @@ export const useStore = defineStore('gvb', {
             userInfo: {
                 token: "",
                 nick_name: '',
-                role: 0,
+                role: 0, // 1-管理员 2-普通用户 3-游客
                 user_id: 0,
                 avatar: '',
                 exp: 1681486573.287638
@@ -120,6 +129,13 @@ export const useStore = defineStore('gvb', {
 
         setCrumb(list) {
             this.bread_crumb_list = list
+        },
+
+        clear(){
+            this.userInfo = data
+            this.tabList = []
+            this.bread_crumb_list = []
+            localStorage.clear()
         }
     }
 })

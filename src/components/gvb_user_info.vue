@@ -19,7 +19,7 @@
               <a-menu-divider v-else/>
             </template>
             <a-menu-divider/>
-            <a-menu-item @click="logout">
+            <a-menu-item @click="logoutUtil">
               <a href="javascript:;">注销退出</a>
             </a-menu-item>
           </a-menu>
@@ -31,10 +31,10 @@
 
 <script setup>
 import {useRoute, useRouter} from "vue-router"
-import {logoutApi} from "@/api/user_api";
-import {message} from "ant-design-vue";
 import {useStore} from "@/stores/store";
 import {reactive} from "vue";
+import {logoutUtil} from "@/utils/logout";
+
 
 const router = useRouter()
 const route = useRoute()
@@ -116,16 +116,7 @@ function goto(item) {
   })
 }
 
-async function logout() {
-  let res = await logoutApi()
-  if (res.code) {
-    message.error(res.msg)
-  } else {
-    message.success(res.msg)
-  }
-  await router.push({name: 'login'})
-  return
-}
+
 
 
 </script>

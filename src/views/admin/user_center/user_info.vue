@@ -156,7 +156,7 @@
     title="确定要注销退出🐎?"
     ok-text="确定"
     cancel-text="取消"
-    @confirm="logout"
+    @confirm="logoutUtil"
   >
         <a-button type="danger">注销退出</a-button>
   </a-popconfirm>
@@ -177,9 +177,9 @@ import {
   bindEmailCodeApi,
   updatePasswordApi
 } from "@/api/user_center_api";
-import {logoutApi} from "@/api/user_api";
 import {message} from "ant-design-vue";
 import {useRouter} from "vue-router";
+import {logoutUtil} from "@/utils/logout";
 
 const userInfo = reactive({
   addr: "",
@@ -322,15 +322,7 @@ async function updatePassword() {
   }, 500)
 }
 
-async function logout() {
-  let res = await logoutApi()
-  if (res.code) {
-    message.error(res.msg)
-    return
-  }
-  message.success(res.msg)
-  await router.push({name: "login"})
-}
+
 
 </script>
 
