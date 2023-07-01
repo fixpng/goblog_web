@@ -3,8 +3,10 @@
 </template>
 
 <script setup>
-
 import {useStore} from "@/stores/store";
+import { provide } from "vue";
+import * as echarts from "echarts";
+provide("echarts", echarts);
 
 // 初始化用户
 const store  = useStore()

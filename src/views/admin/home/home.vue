@@ -6,11 +6,22 @@
           <i :class="'iconfont '+ iconList[index]"></i>
         </div>
         <div class="text">
-          <div class="data_title">{{item.label}}</div>
-          <div class="data_sum">{{item.value}}</div>
+          <div class="data_title">{{ item.label }}</div>
+          <div class="data_sum">{{ item.value }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="gvb_data_charts">
+      <div class="left">
+        <div class="article_calendar">
+          <div class="title">
+            文章日历
+          </div>
+          <ArticleCalendar/>
         </div>
       </div>
 
+      <div class="right"></div>
     </div>
 
   </div>
@@ -19,8 +30,10 @@
 <script setup>
 
 import {reactive} from "vue";
+import ArticleCalendar from "@/components/article_calendar.vue";
+import {useStore} from "@/stores/store";
 
-
+const store = useStore()
 const iconList = [
   "icon-yonghutongji",
   "icon-wenzhang",
@@ -28,7 +41,6 @@ const iconList = [
   "icon-sinandengluyonghu",
   "icon-zhuce"
 ]
-
 const data = reactive({
   sum_data_list: [
     {
@@ -80,7 +92,7 @@ const data = reactive({
 
     i {
       font-size: 40px;
-      color :var(--active);
+      color: var(--active);
     }
   }
 
@@ -91,7 +103,7 @@ const data = reactive({
     flex-direction: column;
     align-items: center;
     margin-right: 30px;
-      color: var(--text);
+    color: var(--text);
 
     .data_sum {
       font-size: 18px;
@@ -101,6 +113,24 @@ const data = reactive({
     .data_title {
       font-weight: 550;
     }
+  }
+}
+
+
+.gvb_data_charts {
+  display: flex;
+  margin-top: 20px;
+
+  .left {
+    width: 780px;
+    margin-right: 20px;
+  }
+
+  .article_calendar {
+    background-color: var(--card_bg);
+    padding: 10px 20px;
+    border: 1px solid var(--card_boder);
+    border-radius: 5px;
   }
 }
 </style>
