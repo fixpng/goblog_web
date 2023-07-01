@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import {useStore} from "@/stores/store";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +12,9 @@ const router = createRouter({
             path: "/admin",
             name: "admin",
             component: () => import("../views/admin/admin.vue"),
+            meta:{
+                is_login:true
+            },
             children: [
                 {
                     path: "",
@@ -148,3 +152,16 @@ const router = createRouter({
 })
 
 export default router
+
+// 路由前置守卫，判断是否登录
+router.beforeEach((to,from,next)=>{
+    const store = useStore()
+    // 也可以请求后端权限api
+    if (to.meta.is_login && store.userInfo.role === 0){
+        messsge.warn("请登录后访问")
+        router.push({name:"login"})
+        return
+    }
+    // 放行
+    next()
+})

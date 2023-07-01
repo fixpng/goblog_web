@@ -5,7 +5,7 @@ import {message} from "ant-design-vue";
 const data ={
                 token: "",
                 nick_name: '',
-                role: 0, // 1-管理员 2-普通用户 3-游客
+                role: 0, // 0-未登录（默认） 1-管理员 2-普通用户 3-游客
                 user_id: 0,
                 avatar: '',
                 exp: 1681486573.287638
@@ -18,7 +18,7 @@ export const useStore = defineStore('gvb', {
             userInfo: {
                 token: "",
                 nick_name: '',
-                role: 0, // 1-管理员 2-普通用户 3-游客
+                role: 0, // 0-未登录（默认） 1-管理员 2-普通用户 3-游客
                 user_id: 0,
                 avatar: '',
                 exp: 1681486573.287638
