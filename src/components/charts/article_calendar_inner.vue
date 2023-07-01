@@ -1,13 +1,14 @@
 <template>
-  <div id="article_calendar" style="height: 156px">
+  <div id="article_calendar" :style="'height: '+props.height+'px'">
 
   </div>
 </template>
 
 <script setup>
 import * as echarts from "echarts"
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 
+const top = ref(60)
 
 const props = defineProps({
   theme: {
@@ -17,6 +18,14 @@ const props = defineProps({
   data_list: {
     type: Array,
     default: null
+  },
+  isTitle: {
+    type: Boolean,
+    default:true,
+  },
+  height:{
+    type:Number,
+    default:200,
   }
 })
 
@@ -28,9 +37,12 @@ async function articleCalendar() {
     "#1a792c", "#0f5e1e", "#0f491a", "#02340c"
   ]
   let borderColor = '#fff'
+  // 文字的颜色
+  let textColor = "#555555"
 
   if (!props.theme) {
     color = "#5a5a5a"
+    textColor = "#f0eeee"
     inRangeColor = [
       "#404148", "#c6e48b", "#7bc96f", "#32af4a",
       "#1a792c", "#0f5e1e", "#0f491a", "#02340c"
@@ -38,6 +50,18 @@ async function articleCalendar() {
     borderColor = "#222429"
   }
 
+  let title = null
+  if (props.isTitle) {
+    title = {
+      text: '文章日历',
+      textStyle: {
+        color: textColor
+      },
+      padding: [10, 5]
+    }
+  }else {
+    top.value = 25
+  }
 
   let chart = document.getElementById("article_calendar")
   if (!chart) {
@@ -60,6 +84,8 @@ async function articleCalendar() {
     ])
   }
   let myChart = echarts.init(chart, null, {locale: 'ZH'}), option = {
+    // 左上角文字
+    title: title,
     tooltip: {
       padding: 10,
       backgroundColor: "#555",
@@ -89,8 +115,9 @@ async function articleCalendar() {
       }
     },
     calendar: [{
-      top: 25,
-      left: "center",
+      top: top.value,
+      right: "center",
+      bottom: 30,
       range: article_change,  // 时间范围
       cellSize: [13, 13],
       splitLine: {show: !1},

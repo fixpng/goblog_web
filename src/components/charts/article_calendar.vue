@@ -1,5 +1,5 @@
 <template>
-  <ArticleCalendarInner :data_list="data.data_list" :theme="store.theme"  v-if="show && data.data_list.length"/>
+  <ArticleCalendarInner :height="height" :is-title="props.isTitle" :data_list="data.data_list" :theme="store.theme"  v-if="show && data.data_list.length"/>
 </template>
 
 <script setup>
@@ -8,6 +8,15 @@ import {reactive, ref, watch} from "vue";
 import {useStore} from "@/stores/store";
 import {getArticleCalendarApi} from "@/api/article_api";
 
+
+const props = defineProps({
+  isTitle: {
+    type: Boolean,
+    default:true,
+  }
+})
+
+const height = ref(200)
 const store = useStore()
 const show = ref(true)
 const data =reactive({
@@ -26,6 +35,10 @@ watch(() => store.theme, () => {
 async function getData(){
   let res = await getArticleCalendarApi()
   data.data_list =res.data
+
+  if (!props.isTitle){
+    height.value = 150
+  }
 }
 
 getData()
