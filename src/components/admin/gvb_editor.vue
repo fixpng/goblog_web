@@ -9,6 +9,7 @@ import 'md-editor-v3/lib/style.css';
 import {onMounted, ref, watch} from "vue";
 import {useStore} from "@/stores/store";
 import {uploadImageApi} from "@/api/image_api";
+import {message} from "ant-design-vue";
 
 const store = useStore()
 const theme = ref("dark")
@@ -20,40 +21,47 @@ const props = defineProps({
 const content = ref("")
 const editorRef = ref(null)
 
-function getData(){
-  content.value=props.content
+function getData() {
+  content.value = props.content
 }
+
 getData()
-const emit = defineEmits(['update:content',"onSave"])
+const emit = defineEmits(['update:content', "onSave"])
 
 // 监听，更新给父组件
 watch(content, () => {
   emit('update:content', content.value)
 })
 
-watch(()=>props.content,()=>{
+watch(() => props.content, () => {
   content.value = props.content
-},{immediate:true})
+}, {immediate: true})
 
 watch(() => store.theme, (themeVal) => {
   theme.value = themeVal ? "" : "dark"
 }, {immediate: true}) // 初始化就执行回调
 
-
+// 粘贴上传图片方法
 const onUploadImg = async (files, callback) => {
   const res = await Promise.all(
       files.map((file) => {
         return uploadImageApi(file)
       })
   );
-
-  callback(res.map((item) => item.data));
+  let resOne = res[0]
+  if (resOne.code) {
+    message.error(resOne.msg)
+    return
+  }
+  callback(res.map((item) => {
+    return item.data
+  }));
 };
 
 
 // ctrl s,  md是md原文,h是转换函数
 const onSave = (md, h) => {
-  emit("onSave",md)
+  emit("onSave", md)
 };
 
 onMounted(() => {
