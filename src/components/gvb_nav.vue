@@ -1,5 +1,8 @@
 <template>
-  <div class="gvb_nav show">
+  <div :class="{
+gvb_nav:true,
+show: data.is_show,
+  }">
     <div class="gvb_nav_container">
       <div class="logo">
         <div>FIXPNG</div>
@@ -16,9 +19,8 @@
       </div>
       <div class="right">
         <GVBTheme class="gvb_theme"></GVBTheme>
-        <span class="login_bin" v-if="store.userInfo.role === 0 ">
-          <a href="javascript:void (0)" @click="goLogin">登录</a>
-        </span>
+        <span class="login_btn" v-if="store.userInfo.role === 0"><router-link
+            :to="{name:'login', query: {redirect_url: $route.path}}">登录</router-link></span>
         <GVBUserInfo v-if="store.userInfo.role !== 0 "></GVBUserInfo>
       </div>
     </div>
@@ -28,23 +30,43 @@
 <script setup>
 import GVBTheme from "@/components/gvb_theme.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
-import {useRoute} from "vue-router";
-import {useRouter} from "vue-router";
 import {useStore} from "@/stores/store";
+import {reactive, ref} from "vue";
 
 const store = useStore()
-const router = useRouter()
-const route = useRoute()
+const props = defineProps({
+  is_show: {
+    type: Boolean,
+    default: false,
+  }
+})
 
-function goLogin() {
-  router.push({
-    name: "login",
-    query: {
-      redirect_url: route.path
-    }
-  })
-  localStorage.setItem("redirect_url", route.path)
+const data = reactive({
+  is_show: false,
+})
+
+// 顶栏是否一直显示
+async function getInit() {
+  if (props.is_show) {
+    data.is_show = true
+  } else {
+    window.addEventListener("scroll", scroll)
+  }
 }
+
+getInit()
+
+// 页面滚动监控
+function scroll() {
+  let top = document.documentElement.scrollTop
+  if (top >= 200) {
+    data.is_show = true
+  } else {
+    data.is_show = false
+  }
+}
+
+
 </script>
 
 <style lang="scss">
@@ -57,8 +79,8 @@ function goLogin() {
   //box-shadow: 1px 1px 5px #0003;
   display: flex;
   justify-content: center;
-  font-size: 14px;
-  z-index: 1000;
+  font-size: 16px;
+  z-index: 100;
   color: white;
 
   .gvb_nav_container {
@@ -68,11 +90,9 @@ function goLogin() {
     align-items: center;
   }
 
-
   .logo {
     width: 10%;
     transform: scale(0.7);
-    color: var(--text);
 
     div:first-child {
       font-size: 26px;
@@ -110,30 +130,24 @@ function goLogin() {
     justify-content: right;
     align-items: center;
 
-    .login_bin {
+    .login_btn {
       margin-right: 20px;
-
     }
 
     .gvb_theme {
       margin-right: 20px;
-      color: var(--text);
     }
   }
 }
+
 
 .gvb_nav.show {
   background-color: var(--card_bg);
   box-shadow: 1px 1px 5px #0003;
-  color: #2b3539;
+  color: var(--text);
 
   a {
     color: var(--text);
-
-    &:hover {
-      color: var(--text);
-    }
   }
 }
-
 </style>
