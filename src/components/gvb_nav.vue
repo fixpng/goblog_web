@@ -59,7 +59,7 @@ getInit()
 // 页面滚动监控
 function scroll() {
   let top = document.documentElement.scrollTop
-  if (top >= 200) {
+  if (top >= 400) {
     data.is_show = true
   } else {
     data.is_show = false
@@ -80,7 +80,7 @@ function scroll() {
   display: flex;
   justify-content: center;
   font-size: 16px;
-  z-index: 100;
+  z-index: 10;
   color: white;
 
   .gvb_nav_container {
