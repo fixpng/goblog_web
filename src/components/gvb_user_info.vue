@@ -1,6 +1,5 @@
 <template>
   <div class="gvb_user_info">
-    <a href="javascript:void (0)" @click="goLogin">登录</a>
     <div class="avatar" v-if="props.isAvatar">
       <img :src="store.userInfo.avatar" alt="">
     </div>
