@@ -12,15 +12,27 @@ const router = createRouter({
         },
         {
             path: "/",
-            name: "index",
-            component: () => import("../views/web/index.vue")
+            name: "index_base",
+            component: () => import("../views/web/web.vue"),
+            children: [
+                {
+                    path: "",
+                    name: "index",
+                    component: () => import("../views/web/index.vue"),
+                },
+                {
+                    path: "news",
+                    name: "news",
+                    component: () => import("../views/web/news.vue"),
+                },
+            ]
         },
         {
             path: "/admin",
             name: "admin",
             component: () => import("../views/admin/admin.vue"),
-            meta:{
-                is_login:true
+            meta: {
+                is_login: true
             },
             children: [
                 {
@@ -124,7 +136,7 @@ const router = createRouter({
                     path: "system",
                     name: "system",
                     component: () => import("@/views/admin/system_mgr/system_base.vue"),
-                    redirect:"/admin/system/site",
+                    redirect: "/admin/system/site",
                     children: [
                         {
                             path: "site",
@@ -161,12 +173,12 @@ const router = createRouter({
 export default router
 
 // 路由前置守卫，判断是否登录
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
     const store = useStore()
     // 也可以请求后端权限api
-    if (to.meta.is_login && store.userInfo.role === 0){
+    if (to.meta.is_login && store.userInfo.role === 0) {
         message.warn("请登录后访问")
-        router.push({name:"login"})
+        router.push({name: "login"})
         return
     }
     // 放行

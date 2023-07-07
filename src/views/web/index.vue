@@ -1,7 +1,9 @@
 <template>
   <div class="base_view index_view">
     <GVBNav></GVBNav>
-      <GVBBanner></GVBBanner>
+      <GVBBanner url="xxx" slogan="xxx" is-article abstract="1231241325" >
+
+      </GVBBanner>
     <div class="gvb_base_container">
       <div class="gvb_inner_container"></div>
     </div>

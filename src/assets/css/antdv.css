@@ -1360,9 +1360,9 @@ html {
 
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
     margin-top: 0;
-    margin-bottom: .5em;
+    /*margin-bottom: .5em;*/
     color: #ffffffd9;
-    font-weight: 500
+    /*font-weight: 500*/
 }
 
 .dark p {
@@ -36583,9 +36583,9 @@ textarea.ant-mentions {
     margin: 0;
     padding: 0;
     color: #ffffffa6;
-    font-size: 14px;
+    /*font-size: 14px;*/
     font-variant: tabular-nums;
-    line-height: 1.5715;
+    /*line-height: 1.5715;*/
     list-style: none;
     font-feature-settings: tnum
 }
@@ -36758,12 +36758,12 @@ textarea.ant-mentions {
 }
 
 .dark .ant-carousel .slick-dots-bottom {
-    bottom: 12px
+    /*bottom: 12px*/
 }
 
 .dark .ant-carousel .slick-dots-top {
-    top: 12px;
-    bottom: auto
+    /*top: 12px;*/
+    /*bottom: auto*/
 }
 
 .dark .ant-carousel .slick-dots li {

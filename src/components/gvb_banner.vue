@@ -1,23 +1,86 @@
 <template>
   <div class="gvb_banner">
     <div class="gvb_title">
-      <h1>众神眷恋的幻想乡</h1>
+      <h1>{{ data.slogan }}</h1>
       <div class="slogan">
-        <p>天寒地冻路远马亡又何妨</p>
+        <template v-if="props.isArticle">
+          <p>{{ props.abstract }}</p>
+        </template>
+        <template v-else>
+          <VueTyped
+              v-if="data.abstract.length"
+              :strings="data.abstract"
+              :loop="true"
+              :startDelay="300"
+              :typeSpeed="100"
+              :backSpeed="50">
+            <span class="typing"></span>
+          </VueTyped>
+        </template>
+
       </div>
     </div>
-    <a-carousel autoplay :autoplaySpeed="5000" class="gvb_banner_carousel">
-      <div class="dynamic_banner">
-        <img src="src/assets/images/login_bg_light.jpg">
-      </div>
-      <div class="dynamic_banner">
-        <img src="src/assets/images/login_bg_black.jpg">
+    <a-carousel autoplay :autoplaySpeed="data.banner_time * 1000" class="gvb_banner_carousel">
+      <div class="dynamic_banner" v-for="item in data.banners" :key="item.id">
+        <img :src="item.path" alt="">
       </div>
     </a-carousel>
   </div>
 </template>
 
 <script setup>
+import VueTyped from 'vue3typed/libs/typed/index.vue';
+import {reactive} from "vue";
+import {getMenuDetailApi} from "@/api/menu_api";
+import {useRoute} from "vue-router";
+
+const route = useRoute()
+const props = defineProps({
+  // 对应文章的背景图
+  url: {
+    type: String
+  },
+  // 对应文章标题
+  slogan: {
+    type: String,
+  },
+  // 对应文章简介
+  abstract: {
+    type: String,
+  },
+  isArticle: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const data = reactive({
+  slogan: "",
+  abstract: [],
+  abstract_time: 6,
+  banner_time: 6,
+  banners: [],
+})
+
+async function getData() {
+  if (!props.isArticle) {
+    let res = await getMenuDetailApi(route.path)
+    data.slogan = res.data.slogan
+    data.abstract = res.data.abstract
+    data.abstract_time = res.data.abstract_time
+    data.banner_time = res.data.banner_time
+    data.banners = res.data.banners
+    return
+  }
+  data.slogan = props.slogan
+  data.abstract = [props.abstract]
+  data.banners = [{
+    id: 1,
+    path: props.url,
+  }]
+}
+
+getData()
 
 
 </script>
@@ -46,7 +109,8 @@
       text-align: center;
       color: white;
     }
-    .slogan{
+
+    .slogan {
       font-size: 18px;
       text-align: center;
     }
@@ -60,7 +124,7 @@
 
       img {
         width: 100%;
-        height: 100%;
+        //height: 100%;
         object-fit: cover;
         display: block;
       }

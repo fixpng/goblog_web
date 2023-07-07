@@ -11,3 +11,8 @@ export function updateMenuApi(id,data){
 export function getMenuNameListApi(){
     return Service.get("/api/menus/detail")
 }
+
+// 菜单详情
+export function getMenuDetailApi(id){
+    return Service.get("/api/menus/" +id)
+}
