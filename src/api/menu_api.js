@@ -8,11 +8,12 @@ export function updateMenuApi(id,data){
     return Service.put("/api/menus/"+id,data)
 }
 
-export function getMenuNameListApi(){
-    return Service.get("/api/menus/detail")
+// 菜单详情
+export function getMenuDetailApi(path){
+    return Service.get("/api/menus/detail?path=" +path)
 }
 
-// 菜单详情
-export function getMenuDetailApi(id){
-    return Service.get("/api/menus/" +id)
+
+export function getMenuNameListApi(){
+    return Service.get("/api/menu_names")
 }

@@ -1,6 +1,7 @@
 // import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
 import {message} from "ant-design-vue";
+import {getMenuNameListApi} from "@/api/menu_api";
 
 const data = {
     token: "",
@@ -24,7 +25,8 @@ export const useStore = defineStore('gvb', {
                 exp: 1681486573.287638
             },
             tabList: [],
-            bread_crumb_list: []
+            bread_crumb_list: [],
+            navList: []
         }
     },
     actions: {
@@ -145,6 +147,17 @@ export const useStore = defineStore('gvb', {
             this.tabList = []
             this.bread_crumb_list = []
             localStorage.clear()
+        },
+
+        async loadNavList() {
+            let value = sessionStorage.getItem("navList")
+            if (value !== null){
+                this.navList = JSON.parse(value)
+                return
+            }
+            let res  = await getMenuNameListApi()
+            this.navList =res.data
+            sessionStorage.setItem("navList",JSON.stringify(res.data))
         }
     }
 })

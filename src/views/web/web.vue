@@ -2,7 +2,10 @@
   <router-view/>
 </template>
 
+<script setup>
+import {useStore} from "@/stores/store";
+const store = useStore()
 
-<style>
+store.loadNavList()
 
-</style>
+</script>

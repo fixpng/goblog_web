@@ -9,12 +9,9 @@ show: data.is_show,
         <div>DeepDarkFantasy</div>
       </div>
       <div class="left">
-        <span><a href="/" class="router-link-active">首页</a></span>
-        <span><a href="/news" class="">新闻</a></span>
-        <span><a href="/about" class="">关于</a></span>
-        <span><a href="/search" class="">文章搜索</a></span>
-        <span><a href="/chat" class="">聊天室</a></span>
-        <span><a href="http://docs.fengfengzhidao.com/">官方文档</a></span>
+        <span v-for="item in store.navList" :key="item.id">
+          <router-link :to="item.path">{{ item.title }}</router-link></span>
+
         <span class="search"><i class="fa fa-search"></i></span>
       </div>
       <div class="right">
@@ -32,6 +29,7 @@ import GVBTheme from "@/components/gvb_theme.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
 import {useStore} from "@/stores/store";
 import {reactive, ref} from "vue";
+
 
 const store = useStore()
 const props = defineProps({
@@ -54,7 +52,9 @@ async function getInit() {
   }
 }
 
+
 getInit()
+scroll()
 
 // 页面滚动监控
 function scroll() {
@@ -121,6 +121,10 @@ function scroll() {
 
     &:hover {
       color: var(--active);
+    }
+
+    &.router-link-exact-active {
+      color: var(--active)!important;
     }
   }
 

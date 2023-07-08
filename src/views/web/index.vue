@@ -1,8 +1,9 @@
 <template>
   <div class="base_view index_view">
     <GVBNav></GVBNav>
-      <GVBBanner url="xxx" slogan="xxx" is-article abstract="1231241325" >
-
+      <GVBBanner url="src/assets/images/login_bg_black.jpg"
+                 slogan="幻想乡"
+                 abstract="天寒地冻路远马亡又何妨" >
       </GVBBanner>
     <div class="gvb_base_container">
       <div class="gvb_inner_container"></div>
