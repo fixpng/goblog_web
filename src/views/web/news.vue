@@ -1,37 +1,38 @@
 <template>
-  <GVBCCard title="今日热搜" class="news_card" link_name="查看更多" link="/news">
-    <span class="index">1</span>
-    <a href="https://s.weibo.com/weibo?q=枫枫知道"
-       target="_blank">枫枫知道</a>
-    <span class="num">68.7万</span>
-  </GVBCCard>
+  <div class="base_view index_view">
+    <GVBNav></GVBNav>
+    <GVBBanner></GVBBanner>
+    <div class="gvb_base_container">
+      <div class="gvb_inner_container">
+      </div>
+    </div>
+    <div class="gvb_footer"></div>
+  </div>
 </template>
 
 <script setup>
-import GVBCCard from "@/components/gvb_card.vue"
+import GVBNav from "@/components/gvb_nav.vue";
+import GVBBanner from "@/components/gvb_banner.vue";
 
 </script>
 
+
 <style lang="scss">
-.news_card {
-  .body {
+
+
+.base_view {
+  background-color: var(--bg);
+
+  .gvb_base_container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 
-    .index {
-      width: 5%;
+    .gvb_inner_container {
+      //background-color: var(--card_bg);
+      min-height: 1000px;
+      width: 1200px;
+      margin-top: 20px;
     }
-
-    a {
-      width: 85%;
-    }
-
-    .num {
-      width: 10%;
-      text-align: right;
-    }
-
   }
 
 
