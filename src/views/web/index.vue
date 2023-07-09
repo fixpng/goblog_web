@@ -5,11 +5,11 @@
     <div class="gvb_base_container">
       <div class="gvb_inner_container gvb_index_main">
         <div class="left">
-<GVBNews></GVBNews>
+          <GVBNews></GVBNews>
           <GVBArticleCalendar style="margin-top: 20px"></GVBArticleCalendar>
         </div>
         <div class="right">
-          22
+          <GVBTagCard></GVBTagCard>
         </div>
       </div>
     </div>
@@ -22,6 +22,7 @@ import GVBNav from "@/components/gvb_nav.vue";
 import GVBBanner from "@/components/gvb_banner.vue";
 import GVBNews from "@/components/index/gvb_news.vue";
 import GVBArticleCalendar from "@/components/index/gvb_article_calendar.vue";
+import GVBTagCard from "@/components/index/gvb_tag_card.vue";
 
 </script>
 
