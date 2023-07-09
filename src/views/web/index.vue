@@ -12,10 +12,11 @@
           <GVBTagCard></GVBTagCard>
           <GVBSiteCard style="margin-top: 20px"></GVBSiteCard>
           <GVBFadeBackCard style="margin-top: 20px"></GVBFadeBackCard>
+          <GVBMyCard style="margin-top: 20px"></GVBMyCard>
         </div>
       </div>
     </div>
-    <div class="gvb_footer"></div>
+    <GVBFooter></GVBFooter>
   </div>
 </template>
 
@@ -27,6 +28,8 @@ import GVBArticleCalendar from "@/components/index/gvb_article_calendar.vue";
 import GVBTagCard from "@/components/index/gvb_tag_card.vue";
 import GVBSiteCard from "@/components/index/gvb_site_card.vue";
 import GVBFadeBackCard from "@/components/index/gvb_fade_back_card.vue";
+import GVBMyCard from "@/components/index/gvb_my_card.vue";
+import GVBFooter from "@/components/gvb_footer.vue";
 
 </script>
 
