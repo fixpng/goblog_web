@@ -2,7 +2,11 @@
 
   <GVBCCard title="标签云" top20 class="tags_cloud_card">
     <ul class="tags_cloud_ul">
-      <li v-for="(item, index) in data.tag_list" :key="index">
+      <li
+          :class="{active: item.tag === store.tag}"
+          @click="checkTag(item.tag)"
+          v-for="(item, index) in data.tag_list"
+          :key="index">
         <span>{{ item.tag }}</span>
         <i>{{ item.count }}</i>
       </li>
@@ -14,25 +18,28 @@
 <script setup>
 import GVBCCard from "@/components/gvb_card.vue"
 import {reactive} from "vue";
+import {getTagArticleListApi} from "@/api/tag_api";
+import {useStore} from "@/stores/store";
 
+const store = useStore()
 const data = reactive({
   tag_list: [
-    {"tag": "后台", "count": 8},
-    {"tag": "前端", "count": 2},
-    {"tag": "后台", "count": 15},
-    {"tag": "后台", "count": 28},
-    {"tag": "python", "count": 63},
-    {"tag": "后台", "count": 8},
-    {"tag": "后台", "count": 8},
-    {"tag": "后台", "count": 8},
-    {"tag": "后台", "count": 8},
-    {"tag": "后台", "count": 8},
-    {"tag": "后台", "count": 8},
     {"tag": "后台", "count": 8},
   ]
 })
 
 
+async function getData() {
+  let res = await getTagArticleListApi()
+  data.tag_list = res.data.list
+}
+
+
+function checkTag(tagName){
+  store.setTag(tagName)
+}
+
+getData()
 </script>
 
 <style lang="scss">
@@ -42,31 +49,26 @@ const data = reactive({
   0% {
     left: 0;
     top: 0;
-    background-color: #2adb94;
   }
 
   25% {
     left: calc(100% - 20px);
     top: 0;
-    background-color: #bbdb2a;
   }
 
   50% {
     top: calc(100% - 20px);
-    left: calc(100% - 20px);
-    background-color: #2a91db;
+    left: calc(100% - 20px)
   }
 
   75% {
     left: 0;
     top: calc(100% - 20px);
-    background-color: #e748a3;
   }
 
   to {
     left: 0;
-    top: 0;
-    background-color: #e87565;
+    top: 0
   }
 }
 
@@ -101,6 +103,28 @@ const data = reactive({
     align-items: center;
     justify-content: center;
     color: var(--h2);
+    cursor: pointer;
+
+    &:hover{
+      color: var(--active);
+    }
+    &.active{
+        color: var(--active);
+    }
+
+
+    i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      color: var(--card_bg);
+      background-color: var(--active);
+      border-radius: 50%;
+      margin-left: 5px;
+    }
   }
 
   li:nth-child(6n+1), li:nth-child(6n+2), li:nth-child(6n+3) {

@@ -7,9 +7,11 @@
         <div class="left">
           <GVBNews></GVBNews>
           <GVBArticleCalendar style="margin-top: 20px"></GVBArticleCalendar>
+          <GVBArticleList style="margin-top: 20px"></GVBArticleList>
         </div>
         <div class="right">
-          <GVBTagCard></GVBTagCard>
+          <GVBAdvertisCard></GVBAdvertisCard>
+          <GVBTagCard style="margin-top: 20px"></GVBTagCard>
           <GVBSiteCard style="margin-top: 20px"></GVBSiteCard>
           <GVBFadeBackCard style="margin-top: 20px"></GVBFadeBackCard>
           <GVBMyCard style="margin-top: 20px"></GVBMyCard>
@@ -30,6 +32,8 @@ import GVBSiteCard from "@/components/index/gvb_site_card.vue";
 import GVBFadeBackCard from "@/components/index/gvb_fade_back_card.vue";
 import GVBMyCard from "@/components/index/gvb_my_card.vue";
 import GVBFooter from "@/components/gvb_footer.vue";
+import GVBAdvertisCard from "@/components/index/gvb_advertis_card.vue";
+import GVBArticleList from "@/components/index/gvb_article_list.vue";
 
 </script>
 

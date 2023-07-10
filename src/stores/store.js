@@ -3,6 +3,7 @@ import {defineStore} from 'pinia'
 import {message} from "ant-design-vue";
 import {getMenuNameListApi} from "@/api/menu_api";
 
+
 const data = {
     token: "",
     nick_name: '',
@@ -26,7 +27,8 @@ export const useStore = defineStore('gvb', {
             },
             tabList: [],
             bread_crumb_list: [],
-            navList: []
+            navList: [],
+            tag: "", // 首页用户搜索的标签
         }
     },
     actions: {
@@ -41,6 +43,13 @@ export const useStore = defineStore('gvb', {
                 document.documentElement.classList.add("dark")
                 localStorage.setItem("theme", "dark")
             }
+        }, setTag(tagName) {
+            if (tagName === this.tag) {
+                // 取消
+                this.tag = ""
+                return
+            }
+            this.tag = tagName
         },
 
         // 加载主题
@@ -151,13 +160,13 @@ export const useStore = defineStore('gvb', {
 
         async loadNavList() {
             let value = sessionStorage.getItem("navList")
-            if (value !== null){
+            if (value !== null) {
                 this.navList = JSON.parse(value)
                 return
             }
-            let res  = await getMenuNameListApi()
-            this.navList =res.data
-            sessionStorage.setItem("navList",JSON.stringify(res.data))
-        }
+            let res = await getMenuNameListApi()
+            this.navList = res.data
+            sessionStorage.setItem("navList", JSON.stringify(res.data))
+        },
     }
 })
