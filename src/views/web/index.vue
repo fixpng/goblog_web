@@ -10,9 +10,9 @@
           <GVBArticleList style="margin-top: 20px"></GVBArticleList>
         </div>
         <div class="right">
-          <GVBTagCard></GVBTagCard>
+          <GVBMyCard></GVBMyCard>
+          <GVBTagCard style="margin-top: 20px"></GVBTagCard>
           <GVBSiteCard style="margin-top: 20px"></GVBSiteCard>
-          <GVBMyCard style="margin-top: 20px"></GVBMyCard>
           <GVBAdvertisCard style="margin-top: 20px"></GVBAdvertisCard>
           <GVBFadeBackCard style="margin-top: 20px"></GVBFadeBackCard>
 

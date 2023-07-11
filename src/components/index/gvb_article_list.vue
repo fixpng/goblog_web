@@ -285,7 +285,7 @@ getData()
     }
 
     .node_article_list {
-      background-color: white;
+      background-color: var(--card_bg);
       padding: 20px;
       border-radius: 0 0 5px 5px;
       margin-top: 1px;
