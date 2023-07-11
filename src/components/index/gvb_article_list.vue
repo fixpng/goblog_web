@@ -71,10 +71,10 @@ const data = reactive({
       "abstract": "我的信息\n\n\n\n<template>\n  <div class=\"gvb_user_info_bg\">\n    <div class=\"gvb_user_info_view\">\n      <div ",
       "banner_id": 14,
       "banner_url": "/uploads/file/235920pM89Q.jpg",
-      "category": "后台课程",
+      "category": "接收不到后台数据",
       "collects_count": 1,
       "comment_count": 0,
-      "created_at": "2023-03-11 00:45:16",
+      "created_at": "2023-07-11 00:45:16",
       "digg_count": 0,
       "id": "2iBpzIYBenTVo4BRkquV",
       "link": "",
@@ -84,7 +84,7 @@ const data = reactive({
         "前端"
       ],
       "title": "个人中心",
-      "updated_at": "2023-03-11 00:45:16",
+      "updated_at": "2023-07-11 00:45:16",
       "user_avatar": "/uploads/avatar/default.png",
       "user_id": 2,
       "user_nick_name": "zhangsan"
@@ -94,7 +94,7 @@ const data = reactive({
   search: {
     key: "",
     page: 1,
-    limit: 10,
+    limit: 8,
     sort: "",
     tag: "",
   },

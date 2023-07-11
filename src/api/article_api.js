@@ -26,6 +26,7 @@ export function getArticleCalendarApi() {
     return Service.get("/api/articles/calendar")
 }
 
-export function getArticleListApi(){
-    return Service.get("/api/article_id_title")
+// 文章列表
+export function getArticleListApi(params){
+    return Service.get("/api/articles",{params})
 }

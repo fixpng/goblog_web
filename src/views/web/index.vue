@@ -10,15 +10,16 @@
           <GVBArticleList style="margin-top: 20px"></GVBArticleList>
         </div>
         <div class="right">
-          <GVBAdvertisCard></GVBAdvertisCard>
-          <GVBTagCard style="margin-top: 20px"></GVBTagCard>
+          <GVBTagCard></GVBTagCard>
           <GVBSiteCard style="margin-top: 20px"></GVBSiteCard>
-          <GVBFadeBackCard style="margin-top: 20px"></GVBFadeBackCard>
           <GVBMyCard style="margin-top: 20px"></GVBMyCard>
+          <GVBAdvertisCard style="margin-top: 20px"></GVBAdvertisCard>
+          <GVBFadeBackCard style="margin-top: 20px"></GVBFadeBackCard>
+
         </div>
       </div>
     </div>
-    <GVBFooter></GVBFooter>
+    <GVBFooter style="margin-top: 20px"></GVBFooter>
   </div>
 </template>
 
