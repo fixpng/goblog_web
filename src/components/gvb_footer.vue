@@ -24,21 +24,20 @@
       <div class="my_info">
         <div class="qq" title="我的QQ">
           <a href="tencent://message/?uin=897491068&Site=&Menu=yes" title="向我咨询">
-            <img class="show_img" src="/static/footer/qq.png" alt="">
+            <img class="show_img" src="/static/footer/qq.jpg" alt="">
             <img class="img" src="/static/footer/qq_icon.svg" alt="">
           </a>
 
         </div>
         <div class="wechat" title="我的微信">
-          <img class="show_img" src="/static/footer/wechat.png" alt="">
+          <img class="show_img" src="/static/footer/wechat.jpg" alt="">
           <img class="img" src="/static/footer/wexin_icon.svg" alt="">
         </div>
-        <div title="我的哔哩哔哩">
-          <a href="https://space.bilibili.com/" target="_blank">
-            <img class="img" src="/static/footer/bilibili_icon.svg" alt="">
-          </a>
-
-        </div>
+<!--        <div title="我的哔哩哔哩">-->
+<!--          <a href="https://space.bilibili.com/" target="_blank">-->
+<!--            <img class="img" src="/static/footer/bilibili_icon.svg" alt="">-->
+<!--          </a>-->
+<!--        </div>-->
         <div title="gitee">
           <a href="https://gitee.com/fixpng" target="_blank">
             <img class="img" src="/static/footer/gitee_icon.svg" alt="">

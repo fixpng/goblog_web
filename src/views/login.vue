@@ -20,7 +20,7 @@
         </div>
         <div class="gvb_login_other">第三方登录</div>
         <div class="gvb_login_other_icons">
-          <img src="src/assets/icon/qq_logo.png" @click="getQQLogin" class="gvb_login_other_icon" alt="">
+          <img src="../../public/icon/qq_logo.png" @click="getQQLogin" class="gvb_login_other_icon" alt="">
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@ qqLogin()
 
 <style lang="scss">
 .gvb_login_bg {
-  background: url("@/assets/images/login_bg_light.jpg") 50%/cover no-repeat;
+  background: url("@/../../public/images/login_bg_light.jpg") 50%/cover no-repeat;
   width: 100%;
   height: 100vh;
 

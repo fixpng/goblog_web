@@ -2,7 +2,7 @@
   <div class="my_card">
     <div class="title">
       <h2>个人名片</h2>
-      <img src="src/assets/images/checken_logo.png" alt="照片是本人">
+      <img src="../../../public/images/checken_logo.png" alt="照片是本人">
     </div>
     <div class="footer">
       <p>NAME <span>修图工小倪</span></p>

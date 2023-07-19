@@ -8,6 +8,7 @@
     --slide_bg:#2e393d;
     --slider_bg: #c9c9c9;
     --h2: #333333;
+    --bg_darken: #eaeaea;
 }
 
 .dark{
@@ -20,6 +21,7 @@
     --slide_bg:#282828;
     --slider_bg: #313131;
     --h2: #b7b7b7;
+    --bg_darken: #262626;
 }
 
 

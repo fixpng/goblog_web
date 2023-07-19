@@ -5,12 +5,12 @@
     <div class="gvb_base_container">
       <div class="gvb_inner_container gvb_index_main">
         <div class="left">
-          <GVBNews></GVBNews>
-          <GVBArticleCalendar style="margin-top: 20px"></GVBArticleCalendar>
+          <GVBArticleCalendar></GVBArticleCalendar>
           <GVBArticleList style="margin-top: 20px"></GVBArticleList>
         </div>
         <div class="right">
-          <GVBMyCard></GVBMyCard>
+          <GVBNews></GVBNews>
+          <GVBMyCard style="margin-top: 20px"></GVBMyCard>
           <GVBTagCard style="margin-top: 20px"></GVBTagCard>
           <GVBSiteCard style="margin-top: 20px"></GVBSiteCard>
           <GVBAdvertisCard style="margin-top: 20px"></GVBAdvertisCard>

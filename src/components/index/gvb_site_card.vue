@@ -6,20 +6,19 @@
     <div><b>运行时间</b><span>106天15时1分24秒</span></div>
     <div><b>总访问量</b><span>856235</span></div>
     <div><b>博客文章</b><span>17</span></div>
-    <div>
-      <b>联系我</b>
-      <div class="my_image">
-        <div class="qq_image">
-          <img src="http://www.fixpng.com/static/my/img/footer/qq.png" alt="">
-          <span>我的QQ</span>
-        </div>
-        <div class="wechat_image">
-          <img src="http://www.fixpng.com/static/my/img/footer/wechat.png" alt="">
-          <span>我的微信</span>
-        </div>
-      </div>
-
-    </div>
+<!--    <div>-->
+<!--      <b>联系我</b>-->
+<!--      <div class="my_image">-->
+<!--        <div class="qq_image">-->
+<!--          <img src="/static/footer/qq.jpg" alt="">-->
+<!--          <span>我的QQ</span>-->
+<!--        </div>-->
+<!--        <div class="wechat_image">-->
+<!--          <img src="/static/footer/wechat.jpg" alt="">-->
+<!--          <span>我的微信</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </GVBCCard>
 </template>
 

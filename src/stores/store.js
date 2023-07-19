@@ -43,13 +43,6 @@ export const useStore = defineStore('gvb', {
                 document.documentElement.classList.add("dark")
                 localStorage.setItem("theme", "dark")
             }
-        }, setTag(tagName) {
-            if (tagName === this.tag) {
-                // 取消
-                this.tag = ""
-                return
-            }
-            this.tag = tagName
         },
 
         // 加载主题
@@ -158,6 +151,7 @@ export const useStore = defineStore('gvb', {
             localStorage.clear()
         },
 
+        // 加载顶部导航栏
         async loadNavList() {
             let value = sessionStorage.getItem("navList")
             if (value !== null) {
@@ -168,5 +162,13 @@ export const useStore = defineStore('gvb', {
             this.navList = res.data
             sessionStorage.setItem("navList", JSON.stringify(res.data))
         },
+        setTag(tagName) {
+            if (tagName === this.tag) {
+                // 取消
+                this.tag = ""
+                return
+            }
+            this.tag = tagName
+        }
     }
 })

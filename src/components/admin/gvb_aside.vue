@@ -2,7 +2,7 @@
   <aside class="gvb_aside">
     <div class="gvb_aside_header flex">
       <div class="gvb_aside_logo flex">
-        <img src="/src/assets/images/checken_logo.png">
+        <img src="/images/checken_logo.png">
       </div>
       <div class="gvb_aside_title flex">FIXPNG个人网站后台</div>
     </div>

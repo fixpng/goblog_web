@@ -24,7 +24,7 @@ store.loadUserInfo()
 
 :root{
  --active: #4480db;
-  --text: #6b6b6b;
+  --text: #7a7a7a;
 }
 
 </style>
