@@ -133,7 +133,7 @@ qqLogin()
 
 <style lang="scss">
 .gvb_login_bg {
-  background: url("@/../../public/images/login_bg_light.jpg") 50%/cover no-repeat;
+  background: url("/images/login_bg_light.jpg") 50%/cover no-repeat;
   width: 100%;
   height: 100vh;
 

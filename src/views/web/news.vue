@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="thank"><a href="https://go.itab.link/">
-            API来源于 itab
+            API来源于 iTab
           </a></div>
 
         </div>
@@ -141,6 +141,21 @@ get_new_data("Jb0vmloB1G", "百度", "/static/news/baidu.png")
 </script>
 
 <style lang="scss">
+
+.base_view{
+  background-color: var(--bg);
+
+  .gvb_base{
+    display: flex;
+    justify-content: center;
+
+    .gvb_inner_container{
+      width: 1200px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
 
 .news_main {
   width: 100%;
