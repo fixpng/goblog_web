@@ -1,7 +1,7 @@
 <template>
   <div :class="{
-gvb_nav:true,
-show: data.is_show,
+    gvb_nav:true,
+    show: data.is_show,
   }">
     <div class="gvb_nav_container">
       <div class="logo">
@@ -11,7 +11,7 @@ show: data.is_show,
       <div class="left">
         <span v-for="item in store.navList" :key="item.id">
           <template v-if="item.path.startsWith('http')">
-            <a :href="item.path">{{ item.title}}</a>
+            <a :href="item.path">{{ item.title }}</a>
           </template>
           <template v-else>
             <router-link :to="item.path">{{ item.title }}</router-link>
@@ -33,7 +33,7 @@ show: data.is_show,
 import GVBTheme from "@/components/gvb_theme.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
 import {useStore} from "@/stores/store";
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 
 
 const store = useStore()

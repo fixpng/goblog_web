@@ -1,6 +1,6 @@
 <template>
   <div class="base_view index_view">
-    <GVBNav></GVBNav>
+    <GVBNav is_show></GVBNav>
     <GVBBanner></GVBBanner>
     <div class="gvb_base_container">
       <div class="gvb_inner_container">
