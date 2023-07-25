@@ -1,6 +1,6 @@
 <template>
   <div class="base_view index_view">
-    <GVBNav is_show></GVBNav>
+    <GVBNav></GVBNav>
     <GVBBanner></GVBBanner>
     <div class="gvb_base_container">
       <div class="gvb_inner_container">
@@ -301,6 +301,23 @@ get_new_data("Jb0vmloB1G", "百度", "/static/news/baidu.png")
     a {
       font-size: 14px;
       color: var(--font_1);
+    }
+  }
+}
+
+
+.base_view {
+  background-color: var(--bg);
+
+  .gvb_base_container {
+    display: flex;
+    justify-content: center;
+
+    .gvb_inner_container {
+      //background-color: var(--card_bg);
+      min-height: 1000px;
+      width: 1200px;
+      margin-top: 20px;
     }
   }
 }

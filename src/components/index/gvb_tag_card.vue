@@ -49,26 +49,31 @@ getData()
   0% {
     left: 0;
     top: 0;
+    background-color: #8ca3ff;
   }
 
   25% {
     left: calc(100% - 20px);
     top: 0;
+    background-color: #ff8c8c;
   }
 
   50% {
     top: calc(100% - 20px);
-    left: calc(100% - 20px)
+    left: calc(100% - 20px);
+    background-color: #fff58c;
   }
 
   75% {
     left: 0;
     top: calc(100% - 20px);
+    background-color: #8cffea;
   }
 
   to {
     left: 0;
-    top: 0
+    top: 0;
+    background-color: #8ca3ff;
   }
 }
 
@@ -81,7 +86,6 @@ getData()
     content: "";
     width: 20px;
     height: 20px;
-    background-color: var(--active);
     -webkit-animation-name: move_box;
     animation-name: move_box;
     -webkit-animation-duration: 5s;

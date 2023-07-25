@@ -59,7 +59,6 @@ async function getInit() {
 
 
 getInit()
-scroll()
 
 // 页面滚动监控
 function scroll() {

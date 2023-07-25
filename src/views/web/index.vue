@@ -41,7 +41,6 @@ import GVBArticleList from "@/components/index/gvb_article_list.vue";
 
 <style lang="scss">
 
-
 .base_view {
   background-color: var(--bg);
 
@@ -73,8 +72,6 @@ import GVBArticleList from "@/components/index/gvb_article_list.vue";
       width: 396px;
     }
   }
-
-
 }
 
 

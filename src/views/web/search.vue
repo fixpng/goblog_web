@@ -1,12 +1,9 @@
 <template>
   <div class="base_view search_view">
     <GVBNav is_show></GVBNav>
-    <div class="gvb_base_container">
-      <div class="gvb_inner_container">
+    <div class="gvb_search_base_container">
+      <div class="gvb_search_inner_container">
         <div class="gvb_search_head">
-          <div class="gvb_search_slogn">
-            枫枫知道|搜索
-          </div>
           <div class="gvb_search_ipt">
             <a-input
                 placeholder="搜索你想要的内容"
@@ -37,7 +34,7 @@
           <div class="gvb_search_tags">
             <span :class="{active: data.query.tag ===''}" @click="checkTag('')">全部标签</span>
             <span
-                :class="{active: data.query.tag ===item.tag}"
+                :class="{active: data.query.tag === item.tag}"
                 @click="checkTag(item.tag)"
                 v-for="(item, index) in data.tag_list"
                 :key="index">{{ item.tag }}</span>
@@ -117,7 +114,7 @@ const data = reactive({
     "comment_count": 0,
     "created_at": "2023-07-11 00:45:16",
     "digg_count": 0,
-    "id": "2iBpzIYBenTVo4BRkquV",
+    "id": "2iBpzgrdgyhBRkquV",
     "link": "",
     "look_count": 0,
     "source": "",
@@ -175,9 +172,14 @@ getTagList()
 
 <style lang="scss">
 .search_view {
-  .gvb_base_container {
-    .gvb_inner_container {
-      margin-top: 100px;
+  background-color: var(--bg);
+  .gvb_search_base_container {
+    display: flex;
+    justify-content: center;
+    .gvb_search_inner_container {
+      min-height: 660px !important;
+      width: 1200px;
+      margin-top: 85px !important;
     }
   }
 
@@ -187,10 +189,6 @@ getTagList()
     align-items: center;
     margin-bottom: 20px;
 
-    .gvb_search_slogn {
-      width: 10%;
-      font-size: 16px;
-    }
 
     .gvb_search_ipt {
       width: 30%;
@@ -207,9 +205,9 @@ getTagList()
   }
 
   .gvb_search_action {
-    border-top: 1px solid #e2e2e2;
+    border-top: 1px solid var(--order);
     padding: 20px 0;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid var(--order);
 
     span {
       padding: 3px 6px;
@@ -300,7 +298,7 @@ getTagList()
   }
 
   .node_article_list {
-    min-height: 300px;
+    min-height: 100px ;
   }
 
   .gvb_search_page {
