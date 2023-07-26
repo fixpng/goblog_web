@@ -177,9 +177,9 @@ getTagList()
     display: flex;
     justify-content: center;
     .gvb_search_inner_container {
-      min-height: 660px !important;
+      min-height: 700px;
       width: 1200px;
-      margin-top: 85px !important;
+      margin-top: 90px ;
     }
   }
 
@@ -237,7 +237,7 @@ getTagList()
     margin-bottom: 20px;
 
     .gvb_search_result_item {
-      border: 1px solid var(--bg_darken);
+      border: 1px solid var(--order);
       border-radius: 5px;
       overflow: hidden;
       transition: all 0.3s;

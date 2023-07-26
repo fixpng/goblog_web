@@ -30,3 +30,15 @@ export function getArticleCalendarApi() {
 export function getArticleListApi(params){
     return Service.get("/api/articles",{params})
 }
+
+export function getArticleDetailApi(id){
+    return Service.get("/api/articles/"+id)
+}
+
+export function articleCollectApi(id){
+    return Service.post("/api/articles/collects",{"id":id})
+}
+
+export function articleDiggApi(id){
+    return Service.post("/api/article/digg",{"id":id})
+}
