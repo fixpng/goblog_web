@@ -5,7 +5,7 @@
       <div class="gvb_chat_inner_container">
         <div class="gvb_chat_head">
           <div class="title">【火★熱★勁★慡🔞】在线聊天室</div>
-          <div class="people_num">在线人数： 1</div>
+          <div class="people_num">在线人数： 25273🔥</div>
         </div>
         <div class="gvb_chat_body" ref="chatBody" :style="{height: data.setHeight}">
 
@@ -107,9 +107,6 @@ const data = reactive({
 
 
 async function getData() {
-  // console.log(document.documentElement.offsetHeight)
-  // console.log(document.documentElement.clientHeight)
-  // console.log(document.documentElement.scrollHeight)
   let allHeight = document.documentElement.scrollHeight
   data.allHeigh = allHeight + "px"
   let setHeight = allHeight - 340
@@ -120,7 +117,8 @@ async function getData() {
   data.message_list = res.data.list
   data.message_list.reverse()
   // 建立websocket连接
-  let websocketURL = import.meta.env.VITE_WEBSOCKET
+  // socket = new WebSocket("ws://127.0.0.1:8080/api/chat_groups")
+  let websocketURL = import.meta.env.VITE_WEBSOCKET // env.dev 配置文件
   socket = new WebSocket(websocketURL + "/api/chat_groups")
   // 接收消息
   socket.onmessage = messageApply
@@ -152,7 +150,6 @@ function messageApply(event) {
 }
 
 function pushMessage(jsonData) {
-  console.log(jsonData)
   if (jsonData.nick_name === data.user_info.nick_name) {
     jsonData.is_me = true
   }
@@ -174,17 +171,14 @@ function sendMessage() {
     timer = setInterval(() => {
       let newTop = chatBody.value.scrollTop
       if (top <= newTop + h) {
-        console.log("清除定时器")
+        // console.log("清除定时器")
         clearInterval(timer)
         return
       }
       chatBody.value.scrollTop += 20
     }, 5)
-
     // chatBody.value.scrollTop = chatBody.value.scrollHeight
   }, 100)
-
-
 }
 
 

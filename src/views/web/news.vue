@@ -315,7 +315,7 @@ get_new_data("Jb0vmloB1G", "百度", "/static/news/baidu.png")
 
     .gvb_inner_container {
       //background-color: var(--card_bg);
-      min-height: 1000px;
+      min-height: auto;
       width: 1200px;
       margin-top: 20px;
     }
