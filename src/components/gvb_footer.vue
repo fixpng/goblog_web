@@ -3,10 +3,10 @@
     <div class="left">
       <p class="thank">Thank For</p>
       <p class="info">
-        <img src="/static/footer/tencent.png" alt="">
-        <span>腾讯云服务器</span>
-        <img src="/static/footer/tencent.png" alt="">
-        <span>腾讯云SSL证书</span>
+        <img src="/static/footer/ali.png" alt="">
+        <span>阿里云服务器</span>
+        <img src="/static/footer/ali.png" alt="">
+        <span>阿里云SSL证书</span>
         <img src="/static/footer/qiniu.png" alt="">
         <span>七牛云存储</span>
       </p>
@@ -27,7 +27,6 @@
             <img class="show_img" src="/static/footer/qq.jpg" alt="">
             <img class="img" src="/static/footer/qq_icon.svg" alt="">
           </a>
-
         </div>
         <div class="wechat" title="我的微信">
           <img class="show_img" src="/static/footer/wechat.jpg" alt="">

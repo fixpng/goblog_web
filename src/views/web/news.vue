@@ -90,11 +90,6 @@ const data = reactive({
       url: '/static/news/github.png'
     },
     {
-      name: 'IT之家',
-      id: 'Jb0vmloB1G',
-      url: '/static/news/ithome.png'
-    },
-    {
       name: '什么值得买',
       id: 'K7GdagpoQy',
       url: '/static/news/zhidemai.png'

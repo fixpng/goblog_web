@@ -1,9 +1,11 @@
 <template>
+    <Fireworks/>
   <router-view/>
 </template>
 
 <script setup>
 import {useStore} from "@/stores/store";
+import Fireworks from "@/assets/js/fireworks";
 import { provide } from "vue";
 import * as echarts from "echarts";
 provide("echarts", echarts);

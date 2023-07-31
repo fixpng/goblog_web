@@ -1,6 +1,6 @@
 <template>
 
-  <GVBCCard title="标签云" top20 class="tags_cloud_card">
+  <GVBCCard title="标签" top20 class="tags_cloud_card">
     <ul class="tags_cloud_ul">
       <li
           :class="{active: item.tag === store.tag}"

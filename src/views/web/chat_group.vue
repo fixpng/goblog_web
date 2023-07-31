@@ -56,13 +56,13 @@
           <span><i class="fa fa-file-audio-o"></i></span>
         </div>
         <div class="gvb_chat_footer">
-          <a-textarea v-model:value="data.content" placeholder="今天，我们相约这里，敞开你的心扉，释放你的激情!"
+          <a-textarea v-model:value="data.content" placeholder="今日，我们相约在此，敞开你的心扉，释放你的激情!"
                       @keydown.ctrl.enter="sendMessage" :auto-size="{ minRows: 4, maxRows: 4 }"></a-textarea>
           <a-button @click="sendMessage" class="chat_btn">发送</a-button>
         </div>
       </div>
     </div>
-<!--        <GVBFooter></GVBFooter>-->
+    <!--        <GVBFooter></GVBFooter>-->
   </div>
 </template>
 
@@ -189,11 +189,13 @@ getData()
 <style lang="scss">
 .chat_group_view {
   background-color: var(--bg);
+
   .gvb_chat_base_container {
     height: 100vh;
 
     display: flex;
     justify-content: center;
+
     .gvb_chat_inner_container {
       min-height: 60%;
       width: 60%;
@@ -204,7 +206,7 @@ getData()
   .gvb_chat_head {
     height: 60px;
     width: 100%;
-    background-color: var(--card_bg);
+    background-color: var(--chat_bg);
     border-radius: 5px 5px 0 0;
     display: flex;
     flex-direction: column;
@@ -223,7 +225,7 @@ getData()
   .gvb_chat_body {
     margin-top: 1px;
     height: 597px;
-    background-color: var(--card_bg);
+    background-color: var(--chat_bg);
     overflow-y: auto;
     padding: 10px 20px;
 
@@ -289,7 +291,10 @@ getData()
               justify-content: left;
             }
 
+
+
             .txt-message {
+              color: rgb(66, 66, 66);
               background-color: #d2d2d2;
               padding: 10px;
               position: relative;
@@ -300,6 +305,7 @@ getData()
             }
 
             .txt-message::before {
+              color: rgba(65, 63, 63);
               content: "";
               display: block;
               position: absolute;
@@ -346,7 +352,7 @@ getData()
   .gvb_chat_menu {
     margin-top: 1px;
     height: 30px;
-    background-color: var(--card_bg);
+    background-color: var(--chat_bg);
     display: flex;
     align-items: center;
 
@@ -366,7 +372,7 @@ getData()
 
   .gvb_chat_footer {
     position: relative;
-    background-color: var(--card_bg);
+    background-color: var(--chat_bg);
     border-radius: 0 0 5px 5px;
     height: 148px;
 
@@ -388,7 +394,6 @@ getData()
     }
   }
 }
-
 
 
 </style>

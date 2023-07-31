@@ -13,7 +13,7 @@
 
     <div class="gvb_base_container">
       <div class="gvb_inner_container">
-        <div class="go_top_box" style="position:absolute; top: 540px; "></div>
+        <div class="go_top_box" style="position:absolute; top: 640px; "></div>
         <article>
           <div class="article_head">
             <h2>{{ data.title }}</h2>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="article_comment_to">
-            <div class="title">欢迎各路大佬交流学习</div>
+            <div class="title">分享您的伟论</div>
             <div class="body">
               <a-textarea
                   class="article_comment_ipt"
@@ -66,7 +66,7 @@
                 {{ data.user_nick_name }}
               </div>
               <div class="user_abstract">
-                一个艰苦朴素的打工仔
+                艰苦朴素的打工仔
               </div>
             </div>
             <div class="user_link">
@@ -85,7 +85,7 @@
                 文章目录
               </div>
               <div class="body">
-                <MdPreview
+                <MdCatalog
                     ref="articlePreview"
                     :editorId="data.id"
                     :scroll-element="scrollElement"
@@ -96,12 +96,26 @@
               </div>
             </div>
             <div class="article_action">
-              <div :class="{item:true,active: data.is_digg}" @click="goArticleDigg"><i
-                  class="iconfont icon-dianzan"></i></div>
-              <div :class="{item:true,active: data.is_collect}" @click="goArticleCollect"><i
-                  class="iconfont icon-shoucangxiao"></i></div>
-              <div class="item" @click="goTop"><i class="iconfont icon-huojian"></i></div>
-              <div class="item" @click="goComment"><i class="iconfont icon-pinglun"></i></div>
+              <div :class="{item:true,active: data.is_digg}" @click="goArticleDigg">
+                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                  <use xlink:href="#icon-dianzan"></use>
+                </svg>
+              </div>
+              <div :class="{item:true,active: data.is_collect}" @click="goArticleCollect">
+                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                  <use xlink:href="#icon-shoucang"></use>
+                </svg>
+              </div>
+              <div class="item" @click="goTop">
+                <svg class="icon" aria-hidden="true" style="font-size: 22px;color: #76bdbd">
+                  <use xlink:href="#icon-huidaodingbu"></use>
+                </svg>
+              </div>
+              <div class="item" @click="goComment">
+                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                  <use xlink:href="#icon-icon_pinglun"></use>
+                </svg>
+              </div>
             </div>
           </div>
         </aside>
@@ -120,7 +134,7 @@ import {useRoute} from "vue-router";
 import {reactive, ref, watch, onMounted} from "vue";
 import {message} from "ant-design-vue";
 import {getFormatDate} from "@/utils/date";
-import {MdPreview} from "md-editor-v3";
+import {MdCatalog, MdPreview} from "md-editor-v3";
 import "md-editor-v3/lib/style.css"
 import {useStore} from "@/stores/store";
 import {articleDiggApi, articleCollectApi, getArticleDetailApi} from "@/api/article_api";
@@ -304,14 +318,6 @@ getData()
   .gvb_base_container {
     display: flex;
     justify-content: center;
-
-    .gvb_inner_container {
-      //background-color: var(--card_bg);
-      min-height: auto;
-      width: 1400px;
-      margin-top: 120px;
-      margin-bottom: 20px;
-    }
   }
 }
 
@@ -319,6 +325,10 @@ getData()
   .gvb_inner_container {
     display: flex;
     justify-content: space-between;
+    min-height: auto;
+    width: 1400px;
+    margin-top: 120px;
+    margin-bottom: 20px;
 
     > article {
       width: calc(100% - 300px);

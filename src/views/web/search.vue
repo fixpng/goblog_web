@@ -1,8 +1,8 @@
 <template>
-  <div class="base_view search_view">
+  <div class="search_view">
     <GVBNav is_show></GVBNav>
-    <div class="gvb_search_base_container">
-      <div class="gvb_search_inner_container">
+    <div class="gvb_base_container">
+      <div class="gvb_inner_container">
         <div class="gvb_search_head">
           <div class="gvb_search_ipt">
             <a-input
@@ -173,10 +173,10 @@ getTagList()
 <style lang="scss">
 .search_view {
   background-color: var(--bg);
-  .gvb_search_base_container {
+  .gvb_base_container {
     display: flex;
     justify-content: center;
-    .gvb_search_inner_container {
+    .gvb_inner_container {
       min-height: 700px;
       width: 1200px;
       margin-top: 90px ;

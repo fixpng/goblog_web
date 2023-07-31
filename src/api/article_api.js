@@ -36,9 +36,9 @@ export function getArticleDetailApi(id){
 }
 
 export function articleCollectApi(id){
-    return Service.post("/api/articles/collects",{"id":id})
+    return Service.post("/api/articles/collects",{id})
 }
 
 export function articleDiggApi(id){
-    return Service.post("/api/article/digg",{"id":id})
+    return Service.post("/api/article/digg",{id})
 }

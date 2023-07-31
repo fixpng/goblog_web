@@ -36,6 +36,7 @@ import GVBFooter from "@/components/gvb_footer.vue";
 import GVBAdvertisCard from "@/components/index/gvb_advertis_card.vue";
 import GVBArticleList from "@/components/index/gvb_article_list.vue";
 
+
 </script>
 
 

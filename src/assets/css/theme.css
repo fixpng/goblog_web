@@ -7,19 +7,21 @@
     --slide_sub_bg: #393d3f;
     --slide_bg:#2e393d;
     --slider_bg: #c9c9c9;
+    --chat_bg: white;
     --h2: #333333;
     --bg_darken: #eaeaea;
 }
 
 .dark{
     --bg: #1a1a1a;
+    --card_bg: #151515FF;
     --order: #2c2c2c;
     --slide: #131313;
-    --card_bg: #151515FF;
     --card_boder: #393939;
     --slide_sub_bg: #2f2f2f2f;
     --slide_bg:#282828;
     --slider_bg: #313131;
+    --chat_bg: #171717;
     --h2: #b7b7b7;
     --bg_darken: #262626;
 }
