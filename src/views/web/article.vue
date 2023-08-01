@@ -101,7 +101,7 @@
                   <use xlink:href="#icon-dianzan"></use>
                 </svg>
               </div>
-              <div :class="{item:true,active: data.is_collect}" @click="goArticleCollect">
+              <div :class="{item:true,active: !data.is_collect}" @click="goArticleCollect">
                 <svg class="icon" aria-hidden="true" style="font-size: 22px">
                   <use xlink:href="#icon-shoucang"></use>
                 </svg>
@@ -585,10 +585,18 @@ getData()
       }
 
       .item.active {
-        color: var(--active);
+        color: gray;
       }
     }
   }
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
 }
 
 

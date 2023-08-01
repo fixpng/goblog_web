@@ -85,9 +85,29 @@ const data = reactive({
       url: '/static/news/36ker.png'
     },
     {
+      name: 'CSDN博客',
+      id: 'DgeyrgMoZq',
+      url: '/static/news/csdn.png'
+    },
+    {
+      name: '看雪论坛',
+      id: 'Kqndg1xoLl',
+      url: '/static/news/kanxue.png'
+    },
+    {
       name: 'GitHub',
       id: 'rYqoXQ8vOD',
       url: '/static/news/github.png'
+    },
+    {
+      name: '站酷',
+      id: 'VaobJ88oAj',
+      url: '/static/news/zcool.jpg'
+    },
+    {
+      name: 'Dribble',
+      id: 'nBe0WR5d37',
+      url: '/static/news/dribble.png'
     },
     {
       name: '什么值得买',
@@ -100,9 +120,9 @@ const data = reactive({
       url: '/static/news/taobao.png'
     },
     {
-      name: '拼多多',
-      id: 'ARe1QZ2e7n',
-      url: '/static/news/pingduoduo.png'
+      name: '汽车之家',
+      id: 'YqoXQGXvOD',
+      url: '/static/news/carhome.png'
     },
     {
       name: '历史上的今天',

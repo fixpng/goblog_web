@@ -90,7 +90,8 @@
   }
 
   .thank {
-    color: #26c6da;
+    //color: #ffac37;
+    color: #00c3e8;
     font-size: 20px;
   }
 
@@ -120,13 +121,14 @@
     }
 
     span:first-child {
-      background-color: #ff9800;
+      //background-color: #ffac37;
+      background-color: #00c3e8;
       border-bottom-left-radius: 5px;
       border-top-left-radius: 5px;
     }
 
     span:last-child {
-      background-color: #26c6da;
+      background-color: #00736e;
       border-bottom-right-radius: 5px;
       border-top-right-radius: 5px;
     }
