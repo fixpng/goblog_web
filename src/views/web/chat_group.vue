@@ -9,6 +9,7 @@
         </div>
         <div class="gvb_chat_body" ref="chatBody" :style="{height: data.setHeight}">
 
+
           <div class="message" v-for="(item,index) in data.message_list" :key="index">
             <template v-if="item.msg_type === inRoomMsg">
               <div class="in_room_msg">
@@ -51,15 +52,19 @@
 
         </div>
         <div class="gvb_chat_menu">
-          <span><i class="fa fa-cloud-upload"></i></span>
-          <span><i class="fa fa-file-image-o"></i></span>
-          <span><i class="fa fa-file-audio-o"></i></span>
+          <span @click="fileUpload"><i class="fa fa-cloud-upload"></i></span>
+          <span @click="imageUpload"><i class="fa fa-file-image-o"></i></span>
+          <span @click="voiceUpload"><i class="fa fa-file-audio-o"></i></span>
         </div>
         <div class="gvb_chat_footer">
+          <div class="gvb_chat_mask" v-if="data.mask">
+            <a-button type="primary" class="connect_chat_btn" @click="websocketConnect">进入聊天室</a-button>
+          </div>
           <a-textarea v-model:value="data.content" placeholder="今日，我们相约在此，敞开你的心扉，释放你的激情!"
                       @keydown.ctrl.enter="sendMessage" :auto-size="{ minRows: 4, maxRows: 4 }"></a-textarea>
           <a-button @click="sendMessage" class="chat_btn">发送</a-button>
         </div>
+
       </div>
     </div>
     <!--        <GVBFooter></GVBFooter>-->
@@ -73,6 +78,8 @@ import GVBFooter from "@/components/gvb_footer.vue"
 import {reactive, ref} from "vue";
 import {chatGroupApi} from "@/api/chat_group_api";
 import {getFormatDateTime} from "@/utils/date";
+import {onBeforeRouteLeave} from "vue-router";
+import {message} from "ant-design-vue";
 
 let socket = null
 let index = 0
@@ -102,7 +109,9 @@ const data = reactive({
     nick_name: "",
     avatar: "",
   },
-  content: ""
+  content: "",
+  online: 1,
+  mask: true
 })
 
 
@@ -116,6 +125,9 @@ async function getData() {
   let res = await chatGroupApi({limit: 50})
   data.message_list = res.data.list
   data.message_list.reverse()
+}
+
+function websocketConnect() {
   // 建立websocket连接
   // socket = new WebSocket("ws://127.0.0.1:8080/api/chat_groups")
   let websocketURL = import.meta.env.VITE_WEBSOCKET // env.dev 配置文件
@@ -126,6 +138,8 @@ async function getData() {
   // 连接成功之后的回调
   socket.onopen = function (ev) {
     console.log("onopen: ", ev)
+    data.mask = false
+    setTimeout(rollBootom, 100)
   }
   // 错误
   socket.onerror = function (ev) {
@@ -164,25 +178,43 @@ function sendMessage() {
   socket.send(JSON.stringify(_data))
   data.content = ""
 
-  setTimeout(() => {
-    let top = chatBody.value.scrollHeight  // 10000
-    let h = chatBody.value.clientHeight
-    let timer = null
-    timer = setInterval(() => {
-      let newTop = chatBody.value.scrollTop
-      if (top <= newTop + h) {
-        // console.log("清除定时器")
-        clearInterval(timer)
-        return
-      }
-      chatBody.value.scrollTop += 20
-    }, 5)
-    // chatBody.value.scrollTop = chatBody.value.scrollHeight
-  }, 100)
+  setTimeout(rollBootom, 100)
 }
 
 
+function rollBootom() {
+  let top = chatBody.value.scrollHeight  // 10000
+  let h = chatBody.value.clientHeight
+  let timer = null
+  timer = setInterval(() => {
+    let newTop = chatBody.value.scrollTop
+    if (top <= newTop + h) {
+      // console.log("清除定时器")
+      clearInterval(timer)
+      return
+    }
+    chatBody.value.scrollTop += 20
+  }, 5)
+}
+
+onBeforeRouteLeave(() => {
+  if (socket === null) {
+    return
+  }
+  socket.close()
+})
 getData()
+
+
+function imageUpload(){
+  message.warn("暂未开发图片上传功能")
+}
+function voiceUpload(){
+  message.warn("暂未开发语音上传功能")
+}
+function fileUpload(){
+  message.warn("暂未开发文件上传功能")
+}
 
 </script>
 
@@ -228,6 +260,7 @@ getData()
     background-color: var(--chat_bg);
     overflow-y: auto;
     padding: 10px 20px;
+    position: relative;
 
     &::-webkit-scrollbar {
       width: 8px
@@ -290,7 +323,6 @@ getData()
               margin-left: 10px;
               justify-content: left;
             }
-
 
 
             .txt-message {
@@ -371,10 +403,28 @@ getData()
   }
 
   .gvb_chat_footer {
+
     position: relative;
     background-color: var(--chat_bg);
     border-radius: 0 0 5px 5px;
     height: 148px;
+
+    .gvb_chat_mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .connect_chat_btn {
+        border-radius: 20px;
+      }
+    }
 
     .ant-input {
       border: none;
