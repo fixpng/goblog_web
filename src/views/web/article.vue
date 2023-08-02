@@ -46,15 +46,18 @@
             <div class="body">
               <a-textarea
                   class="article_comment_ipt"
+                  v-model:value="commentData.content"
                   :auto-size="{ minRows: 6, maxRows: 6 }"
+                  @keydown.ctrl.enter="addComment"
                   placeholder="请输入文章评论"></a-textarea>
-              <a-button class="add_comment_btn" type="primary">发布</a-button>
+              <a-button class="add_comment_btn" @click="addComment" type="primary">发布</a-button>
             </div>
             <div class="comment_footer">
               <span>{{ data.look_count }}</span> 人参与，
               <span>{{ data.comment_count }}</span> 条评论
             </div>
           </div>
+          <GVBArticleCommentList style='margin-top: 20px'></GVBArticleCommentList>
         </article>
         <aside>
           <div class="article_user_info">
@@ -138,6 +141,8 @@ import {MdCatalog, MdPreview} from "md-editor-v3";
 import "md-editor-v3/lib/style.css"
 import {useStore} from "@/stores/store";
 import {articleDiggApi, articleCollectApi, getArticleDetailApi} from "@/api/article_api";
+import {commentCreateApi} from "@/api/comment_api";
+import GVBArticleCommentList from "@/components/gvb_article_comment_list.vue";
 
 const scrollElement = document.documentElement;
 const article_directory = ref(null)
@@ -179,6 +184,27 @@ const data = reactive({
   is_digg: false
 })
 
+// 发布评论的参数
+const commentData = reactive({
+  article_id: route.params.id,
+  content: "",
+  parent_comment_id: null
+})
+
+
+async function addComment() {
+  if (commentData.content.trim() === "") {
+    message.warn("评论内容不可为空")
+    return
+  }
+  let res = await commentCreateApi(commentData)
+  if (res.code) {
+    message.error(res.msg)
+    return
+  }
+  message.success(res.msg)
+  commentData.content = ""
+}
 
 async function getData() {
   let res = await getArticleDetailApi(route.params.id)
@@ -246,7 +272,7 @@ onMounted(() => {
   setTimeout(() => {
     let mh = articlePreview.scrollHeight
     let ah = document.documentElement.offsetHeight
-    let rh = ah - 470  // 470 就是总高度减去不可显示的高度
+    let rh = ah - 500  // 500 就是总高度减去不可显示的高度
     if (mh >= rh) {
 
     }
@@ -592,12 +618,15 @@ getData()
 }
 
 .icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 
+.md-editor-catalog-active > span {
+  color: #d1ca3d;
+}
 
 </style>

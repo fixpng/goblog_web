@@ -232,6 +232,8 @@ const route = useRoute()
 function goto(item, parentItem) {
   if (parentItem !== undefined) {
     store.setCrumb([parentItem.title, item.title])
+  } else {
+    store.setCrumb([item.title])
   }
 
   store.addTab({

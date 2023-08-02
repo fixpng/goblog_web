@@ -17,7 +17,9 @@
             <router-link :to="item.path">{{ item.title }}</router-link>
           </template>
         </span>
-        <span class="search"><i class="fa fa-search"></i></span>
+        <span class="search">
+          <GVBTextSearch/>
+        </span>
       </div>
       <div class="right">
         <GVBTheme class="gvb_theme"></GVBTheme>
@@ -34,6 +36,7 @@ import GVBTheme from "@/components/gvb_theme.vue";
 import GVBUserInfo from "@/components/gvb_user_info.vue";
 import {useStore} from "@/stores/store";
 import {reactive} from "vue";
+import GVBTextSearch from "@/components/gvb_text_search.vue";
 
 
 const store = useStore()
