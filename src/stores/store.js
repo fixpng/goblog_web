@@ -2,6 +2,7 @@
 import {defineStore} from 'pinia'
 import {message} from "ant-design-vue";
 import {getMenuNameListApi} from "@/api/menu_api";
+import {getSiteInfoApi} from "@/api/system_api";
 
 
 const data = {
@@ -29,8 +30,27 @@ export const useStore = defineStore('gvb', {
             bread_crumb_list: [],
             navList: [],
             tag: "", // 首页用户搜索的标签
+            siteInfo: {
+                created_at: "2023-02-15",
+                bei_an: "",
+                title: "",
+                qq_image: "",
+                version: "",
+                email: "",
+                wechat_image: "",
+                name: "",
+                job: "",
+                addr: "",
+                slogan: "",
+                slogan_en: "",
+                web: "",
+                bilibili_url: "",
+                gitee_url: "",
+                github_url: ""
+            },
         }
     },
+
     actions: {
         // 切换主题
         setTheme() {
@@ -55,7 +75,26 @@ export const useStore = defineStore('gvb', {
             }
             this.theme = true
         },
-
+        loadSiteInfo() {
+            let sites = sessionStorage.getItem("site_info")
+            if (sites === null) {
+                // 没有
+                this.setSiteInfo()
+                return
+            }
+            let siteInfo = JSON.parse(sites)
+            this.$patch({
+                siteInfo: siteInfo
+            })
+        },
+        async setSiteInfo() {
+            let res = await getSiteInfoApi()
+            let siteInfo = res.data
+            this.$patch({
+                siteInfo: siteInfo
+            })
+            sessionStorage.setItem("site_info", JSON.stringify(siteInfo))
+        },
         // 修改userInfo
         serUserInfo(info) {
             this.$patch({
@@ -145,7 +184,7 @@ export const useStore = defineStore('gvb', {
             this.bread_crumb_list = list
         },
 
-        // 清空store
+        //清空storage
         clear() {
             this.userInfo = data
             this.tabList = []

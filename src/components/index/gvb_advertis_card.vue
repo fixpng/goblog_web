@@ -21,6 +21,7 @@
 <script setup>
 import GVBCCard from "@/components/gvb_card.vue"
 import {reactive} from "vue";
+import {getAdvertListApi} from "@/api/advert_api";
 
 const data = reactive({
   advert_list: [
@@ -31,6 +32,12 @@ const data = reactive({
     }
   ]
 })
+
+async function getData(){
+  let res = await getAdvertListApi({limit:4})
+  data.advert_list = res.data.list
+}
+getData()
 
 </script>
 

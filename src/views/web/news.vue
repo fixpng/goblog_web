@@ -148,7 +148,6 @@ async function get_new_data(id, name, url) {
   }
   let res = await getNewsApi(id, 30, header)
   data.news_list = res.data
-
 }
 
 get_new_data("Jb0vmloB1G", "百度", "/static/news/baidu.png")

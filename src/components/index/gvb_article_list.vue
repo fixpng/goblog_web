@@ -94,7 +94,7 @@ const data = reactive({
   search: {
     key: "",
     page: 1,
-    limit: 7,
+    limit: 8,
     sort: "",
     tag: "",
   },

@@ -2,19 +2,23 @@
   <div class="my_card">
     <div class="title">
       <h2>个人名片</h2>
-      <img src="../../../public/images/checken_logo.png" alt="照片是本人">
+      <img src="images/checken_logo.png" alt="照片是本人">
     </div>
     <div class="footer">
-      <p>NAME <span>修图工小倪</span></p>
-      <p>JOB <span>打杂</span></p>
-      <p>ADDR <span>新日暮里</span></p>
-      <p>WEB <a target="_blank" href="http://www.fixpng.com">www.fixpng.com</a></p>
+      <p>NAME <span>{{ store.siteInfo.name }}</span></p>
+      <p>JOB <span>{{ store.siteInfo.job }}</span></p>
+      <p>ADDR <span>{{ store.siteInfo.addr }}</span></p>
+      <p>WEB <a target="_blank" :href="store.siteInfo.web">{{ store.siteInfo.web }}</a></p>
     </div>
   </div>
 </template>
 
 <script setup>
+import {useStore} from "@/stores/store";
+import {reactive} from "vue";
 
+const store = useStore()
+store.loadSiteInfo()
 </script>
 
 <style lang="scss">

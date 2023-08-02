@@ -1,5 +1,6 @@
 import {Service} from "@/services/service";
 
+// 网站信息数据
 export function getSiteInfoApi(){
     return Service.get("/api/settings/site")
 }
