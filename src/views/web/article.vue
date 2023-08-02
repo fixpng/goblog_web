@@ -16,7 +16,7 @@
         <div class="go_top_box" style="position:absolute; top: 640px; "></div>
         <article>
           <div class="article_head">
-            <h2>{{ data.title }}</h2>
+            <h2>{{ data.title }} <i v-if="store.userInfo.role === 1" class="fa fa-edit" @click="goEditArticle"></i></h2>
             <div class="info">
               <span class="date">发布时间：{{ getFormatDate(data.created_at) }}</span>
               <span>作者：{{ data.user_nick_name }}</span>
@@ -133,7 +133,7 @@
 import GVBNav from "@/components/gvb_nav.vue"
 import GVBBanner from "@/components/gvb_banner.vue"
 import GVBFooter from "@/components/gvb_footer.vue"
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {reactive, ref, watch, onMounted} from "vue";
 import {message} from "ant-design-vue";
 import {getFormatDate} from "@/utils/date";
@@ -148,6 +148,7 @@ import {roll} from "@/utils/roll";
 const scrollElement = document.documentElement;
 const article_directory = ref(null)
 const route = useRoute()
+const router = useRouter()
 const store = useStore()
 const slide_top = ref()
 const slideStyle = reactive({
@@ -185,6 +186,20 @@ const data = reactive({
   is_digg: false
 })
 
+// 去编辑文章
+function goEditArticle() {
+  router.push({
+    name: "edit_article",
+    params: {
+      id: route.params.id
+    },
+    query: {
+      redirect_url: "/article/" + route.params.id
+    }
+  })
+}
+
+
 // 发布评论的参数
 const commentData = reactive({
   article_id: route.params.id,
@@ -194,6 +209,11 @@ const commentData = reactive({
 
 
 async function addComment() {
+  if (store.userInfo.role === 0) {
+    message.warn("请登陆后发布评论")
+    return
+  }
+
   if (commentData.content.trim() === "") {
     message.warn("评论内容不可为空")
     return
@@ -247,6 +267,11 @@ async function goArticleDigg() {
 
 // 文章收藏
 async function goArticleCollect() {
+  if (store.userInfo.role === 0) {
+    message.warn("请登陆后收藏文章")
+    return
+  }
+
   let res = await articleCollectApi(data.id)
   if (res.code) {
     message.error(res.msg)

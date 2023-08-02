@@ -44,12 +44,12 @@
           <div class="gvb_search_result_item"
                v-for="(item, index) in data.article_list"
                :key="index">
-            <a :href="item.id" target="_blank" class="img">
+            <a :href="'article/'+item.id" target="_blank" class="img">
               <img :src="item.banner_url" alt="">
             </a>
             <div class="info">
               <div class="title">
-                <a :href="item.id" target="_blank" v-html="item.title"></a>
+                <a :href="'article/'+item.id" target="_blank" v-html="item.title"></a>
               </div>
               <div class="icon">
                 <span v-if="data.query.sort === 'digg_count desc'"><i class="fa fa-thumbs-up"></i>{{ item.digg_count }}</span>

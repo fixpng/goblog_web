@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GVBEditor  v-model:content="content" @onSave="onSave"></GVBEditor>
+    <GVBEditor v-model:content="content" @onSave="onSave"></GVBEditor>
   </div>
 </template>
 
@@ -37,11 +37,18 @@ async function onSave() {
     return
   }
   message.success(res.msg)
-  // 先切换到文章列表
-  router.push({
-    name: "article_list"
-  })
-  // 删除当前文章的tab
+
+  let url = route.query.redirect_url
+  if (url === undefined) {
+    // 先切换到文章列表
+    router.push({
+      name: "article_list"
+    })
+  }else {
+     router.push(url)
+  }
+
+  // 删除编辑文章的tab
   store.removeTab({name: "edit_article"})
   return
 

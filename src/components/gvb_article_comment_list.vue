@@ -121,6 +121,11 @@ async function getData() {
 }
 
 function showApply(parentID, nick_name) {
+  if (store.userInfo.role ===0){
+    message.warn("请登陆后回复")
+    return
+  }
+
   state.content = ""
   state.parent_comment_id = parentID
   state.nick_name = nick_name

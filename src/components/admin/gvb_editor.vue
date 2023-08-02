@@ -1,5 +1,5 @@
 <template>
-  <MdEditor ref="editorRef" v-model="content" :theme="theme" @onUploadImg="onUploadImg" @on-save="onSave"/>
+  <MdEditor class="gvb_md_edit" ref="editorRef" v-model="content" :theme="theme" @onUploadImg="onUploadImg" @on-save="onSave"/>
 
 </template>
 
@@ -91,7 +91,7 @@ onMounted(() => {
   --md-scrollbar-thumb-active-color: #3a3a3a;
 }
 
-.md-editor {
+.gvb_md_edit {
   height: calc(100vh - 130px);
 }
 </style>
