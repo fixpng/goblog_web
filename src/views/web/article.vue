@@ -53,7 +53,7 @@
               <a-button class="add_comment_btn" @click="addComment" type="primary">发布</a-button>
             </div>
             <div class="comment_footer">
-              <span>{{ data.look_count }}</span> 人参与，
+              <span>{{ data.look_count }}</span> 次浏览，
               <span>{{ data.comment_count }}</span> 条评论
             </div>
           </div>
@@ -100,22 +100,22 @@
             </div>
             <div class="article_action">
               <div :class="{item:true,active: data.is_digg}" @click="goArticleDigg">
-                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px">
                   <use xlink:href="#icon-dianzan"></use>
                 </svg>
               </div>
               <div :class="{item:true,active: !data.is_collect}" @click="goArticleCollect">
-                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px">
                   <use xlink:href="#icon-shoucang"></use>
                 </svg>
               </div>
               <div class="item" @click="goTop">
-                <svg class="icon" aria-hidden="true" style="font-size: 22px;color: #76bdbd">
+                <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px;color: #76bdbd">
                   <use xlink:href="#icon-huidaodingbu"></use>
                 </svg>
               </div>
               <div class="item" @click="goComment">
-                <svg class="icon" aria-hidden="true" style="font-size: 22px">
+                <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px">
                   <use xlink:href="#icon-icon_pinglun"></use>
                 </svg>
               </div>
@@ -620,6 +620,16 @@ getData()
         }
 
       }
+
+      .gvb_icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+
+
     }
 
     .article_action {
@@ -656,13 +666,6 @@ getData()
   }
 }
 
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
 
 .md-editor-catalog-active > span {
   color: #d1ca3d;
