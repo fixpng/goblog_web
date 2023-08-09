@@ -25,7 +25,8 @@ function goHome() {
         </div>
       </header>
       <NButton type="primary" @click="goHome">
-        Go to Home
+
+
       </NButton>
     </div>
   </div>

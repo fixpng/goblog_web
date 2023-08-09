@@ -111,19 +111,19 @@
       </div>
       <div class="body daily_reward">
         <div>
-          <img src="../../../../public/icon/ok.svg" alt="">
+          <img src="../../../../public/icon/ok.gif" alt="">
           每日登陆 +2
         </div>
         <div>
-          <img src="../../../../public/icon/ok.svg" alt="">
+          <img src="../../../../public/icon/ok.gif" alt="">
           发文 +3
         </div>
         <div>
-          <img src="../../../../public/icon/ok.svg" alt="">
+          <img src="../../../../public/icon/ok.gif" alt="">
           发评论 +1
         </div>
         <div>
-          <img src="../../../../public/icon/error.svg" alt="">
+          <img src="../../../../public/icon/restart.gif" alt="">
           群聊 +0.5
         </div>
       </div>

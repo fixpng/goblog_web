@@ -3,7 +3,11 @@
     <div class="gvb_data_preview">
       <div class="preview_item" v-for="(item,key) in data.sum_data_dict" :key="key">
         <div class="icon">
-          <i :class="'iconfont '+ item.icon"></i>
+          <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px">
+            <use :xlink:href="'#'+item.icon"></use>
+<!--          <use xlink:href="#icon-shoucang"></use>-->
+          </svg>
+<!--          <i :class="'iconfont '+ item.icon"></i>-->
         </div>
         <div class="text">
           <div class="data_title">{{ item.label }}</div>
@@ -43,32 +47,32 @@ const data = reactive({
     user_count: {
       label: "消息总数",
       value: 0,
-      icon: "icon-yonghutongji",
+      icon: "icon-a-Group792",
     },
     article_count: {
       label: "文章总数",
       value: 0,
-      icon: "icon-wenzhang",
+      icon: "icon-zhengli",
     },
     message_count: {
       label: "用户总数",
       value: 0,
-      icon: "icon-yonghu",
+      icon: "icon-a-Group798",
     },
     chat_group_count: {
       label: "群聊消息",
       value: 0,
-      icon: "icon-shuyi_qunliao",
+      icon: "icon-a-Group808",
     },
     now_login_count: {
       label: "今日登录",
       value: 0,
-      icon: "icon-sinandengluyonghu",
+      icon: "icon-kuangjia",
     },
     now_sign_count: {
       label: "今日注册",
       value: 0,
-      icon: "icon-zhuce",
+      icon: "icon-a-Group796",
     },
   }
 })
@@ -95,7 +99,7 @@ getData()
   background-color: var(--card_bg);
   border-radius: 5px;
   border: 1px solid var(--card_boder);
-  padding: 20px;
+  padding: 17px;
 
 
   .icon {
@@ -104,10 +108,12 @@ getData()
     align-items: center;
     margin-left: 30px;
 
-
-    i {
-      font-size: 40px;
-      color: var(--active);
+    .gvb_icon {
+      width: 1.8em;
+      height: 1.8em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
     }
   }
 
@@ -159,4 +165,6 @@ getData()
     border-radius: 5px;
   }
 }
+
+
 </style>

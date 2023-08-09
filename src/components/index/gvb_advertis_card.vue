@@ -1,5 +1,5 @@
 <template>
-  <GVBCCard title="独家广告" class="advert_card">
+  <GVBCCard title="牛皮藓" class="advert_card">
     <a-carousel arrows autoplay :autoplaySpeed="3000" class="advert_carousel">
       <div class="advert_image" v-for="item in data.advert_list" :key="item.id">
         <a :href="item.href" target="_blank"><img :src="item.images" alt=""></a>
