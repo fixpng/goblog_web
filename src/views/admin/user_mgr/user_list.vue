@@ -235,7 +235,7 @@ async function handleOk() {
 
 // 更新用户
 async function update() {
-  console.log(formUpdateState)
+  // console.log(formUpdateState)
   let res = await userUpdateUserRoleApi(formUpdateState)
   if (res.code) {
     message.error(res.msg)

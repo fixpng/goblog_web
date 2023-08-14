@@ -2,12 +2,12 @@
   <div class="base_view article_view">
     <GVBNav></GVBNav>
     <div style="height: 600px">
-      <GVBBanner
-          :url="data.banner_url"
-          :slogan="data.title"
-          :abstract="data.abstract"
-          is-article
-          v-if="data.title !== ''"
+      <GVBBanner class="gvb_article_title"
+                 :url="data.banner_url"
+                 :slogan="data.title"
+                 :abstract="data.abstract"
+                 is-article
+                 v-if="data.title !== ''"
       ></GVBBanner>
     </div>
 
@@ -385,8 +385,17 @@ getData()
     justify-content: center;
   }
 }
-
+// 怕背景色太浅，看不清字加的阴影
 .article_view {
+  .gvb_article_title {
+    h1 {
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    }
+    p {
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+
   .gvb_inner_container {
     display: flex;
     justify-content: space-between;
@@ -405,6 +414,7 @@ getData()
         display: flex;
         flex-direction: column;
         align-items: center;
+
 
         h2 {
           font-weight: 700;

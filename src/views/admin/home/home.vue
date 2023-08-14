@@ -5,7 +5,6 @@
         <div class="icon">
           <svg class="gvb_icon" aria-hidden="true" style="font-size: 22px">
             <use :xlink:href="'#'+item.icon"></use>
-<!--          <use xlink:href="#icon-shoucang"></use>-->
           </svg>
 <!--          <i :class="'iconfont '+ item.icon"></i>-->
         </div>
@@ -44,7 +43,7 @@ const store = useStore()
 
 const data = reactive({
   sum_data_dict: {
-    user_count: {
+    message_count: {
       label: "消息总数",
       value: 0,
       icon: "icon-a-Group792",
@@ -54,7 +53,7 @@ const data = reactive({
       value: 0,
       icon: "icon-zhengli",
     },
-    message_count: {
+    user_count: {
       label: "用户总数",
       value: 0,
       icon: "icon-a-Group798",

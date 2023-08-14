@@ -38,3 +38,8 @@ export function getQQLoginLinkApi(){
 export function qqLoginApi(code){
     return Service.post("/api/login?code="+code)
 }
+
+// 用户注册
+export function userRegisterApi(data){
+    return Service.post("/api/user_register",data)
+}

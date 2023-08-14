@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue'
 export default ({mode})=>{
   const env = loadEnv(mode,process.cwd())
   const baseUrl = env.VITE_API
+  const baseUrlWs = env.VITE_WEBSOCKET
   console.log(env)
   return defineConfig({
   envPrefix:["VITE_"],
