@@ -11,7 +11,7 @@
       <div class="left">
         <span v-for="item in store.navList" :key="item.id">
           <template v-if="item.path.startsWith('http')">
-            <a :href="item.path">{{ item.title }}</a>
+            <a :href="item.path"  target="_blank">{{ item.title }}</a>
           </template>
           <template v-else>
             <router-link :to="item.path">{{ item.title }}</router-link>

@@ -23,6 +23,12 @@ export default ({mode})=>{
       "/uploads":{
         target: baseUrl
       },
+      "/wsUrl":{
+        target: baseUrlWs, //这里是后台ws访问地址
+        changeOrigin: true, //允许跨域设置
+        ws: true, //websocket代理设置
+        rewrite: (path)=> path.replace(/^\/wsUrl/,""), //拦截路径去除
+      },
       "/api":{
         target: baseUrl
       }

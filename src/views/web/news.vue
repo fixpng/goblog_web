@@ -18,7 +18,7 @@
             <div class="right">
               <div class="title">
                 <img :src="data.news_active_url" alt="">
-                <h2 class="news_title">{{ data.news_active }} · 热搜榜</h2>
+                <h2 class="news_title">{{ data.news_active }} · 热榜</h2>
               </div>
               <div class="body">
                 <ul>
@@ -80,6 +80,11 @@ const data = reactive({
       url: '/static/news/bilibili.png'
     },
     {
+      name: '抖音',
+      id: 'DpQvNABoNE',
+      url: '/static/news/douyin.png'
+    },
+    {
       name: '36氪',
       id: 'Q1Vd5Ko85R',
       url: '/static/news/36ker.png'
@@ -88,6 +93,11 @@ const data = reactive({
       name: 'CSDN博客',
       id: 'DgeyrgMoZq',
       url: '/static/news/csdn.png'
+    },
+    {
+      name: '掘金',
+      id: 'QaqeEaVe9R',
+      url: '/static/news/juejin.png'
     },
     {
       name: '看雪论坛',
@@ -120,9 +130,24 @@ const data = reactive({
       url: '/static/news/taobao.png'
     },
     {
+      name: '懂车帝',
+      id: 'RrvW7XDv5z',
+      url: '/static/news/dongchedi.png'
+    },
+    {
       name: '汽车之家',
       id: 'YqoXQGXvOD',
       url: '/static/news/carhome.png'
+    },
+    {
+      name: '虎扑社区',
+      id: '6ARe1YLe7n',
+      url: '/static/news/hupu.png'
+    },
+    {
+      name: '新浪体育新闻',
+      id: 'wWmoOqYd4E',
+      url: '/static/news/sina.png'
     },
     {
       name: '历史上的今天',

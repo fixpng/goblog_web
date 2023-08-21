@@ -8,7 +8,7 @@
         </div>
         <div class="right">
           <div class="icon_actions">
-            <i class="fa fa-home"></i>
+            <i class="fa fa-home" @click="goIndex"></i>
             <GVBTheme></GVBTheme>
             <GVBFullScreen></GVBFullScreen>
           </div>
@@ -29,6 +29,7 @@
   </div>
 </template>
 
+
 <script setup>
 import GVBTheme from "@/components/gvb_theme.vue";
 import GVBAside from "@/components/admin/gvb_aside.vue";
@@ -37,10 +38,17 @@ import GVBFullScreen from "@/components/gvb_full_screen.vue";
 import GVBTabs from "@/components/admin/gvb_tabs.vue";
 import GVBBreadCrumb from "@/components/admin/gvb_bread_crumb.vue"
 import {useStore} from "@/stores/store";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
 const store = useStore()
 // 加载路由
 store.loadTabs()
+
+function goIndex(){
+  router.push({name: "index"})
+}
+
 
 </script>
 

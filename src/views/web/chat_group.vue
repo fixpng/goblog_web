@@ -130,8 +130,9 @@ async function getData() {
 function websocketConnect() {
   // 建立websocket连接
   // socket = new WebSocket("ws://127.0.0.1:8080/api/chat_groups")
-  let websocketURL = import.meta.env.VITE_WEBSOCKET // env.dev 配置文件
-  socket = new WebSocket(websocketURL + "/api/chat_groups")
+  // let websocketURL = import.meta.env.VITE_WEBSOCKET // env.dev 配置文件,
+  let wsUrl = `ws://${location.host}/wsUrl` // 需要代理，动态获取地址
+  socket = new WebSocket(wsUrl + "/api/chat_groups")
   // 接收消息
   socket.onmessage = messageApply
 

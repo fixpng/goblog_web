@@ -111,7 +111,7 @@ const data = reactive({
 async function handleOK() {
   let res
   console.log(editID)
-  if (editID){
+  if (editID.value !== 0){
     res = await updateAdvertApi(editID.value, state)
   }else {
     res = await createAdvertApi(state)
