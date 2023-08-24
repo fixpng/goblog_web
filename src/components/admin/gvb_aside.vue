@@ -4,7 +4,7 @@
       <div class="gvb_aside_logo flex">
         <img src="/images/checken_logo.png">
       </div>
-      <div class="gvb_aside_title flex">FIXPNG个人网站后台</div>
+      <div class="gvb_aside_title flex">FIXPNG Base Admin</div>
     </div>
     <div class="gvb_aside_body;margin-bottom: 20px">
       <GVBAsideMenu></GVBAsideMenu>
